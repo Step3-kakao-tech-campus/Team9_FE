@@ -1,11 +1,17 @@
 import SubCategoryItem from "./SubCategoryItem";
 
-const SubCategoryContainer = ({ parentCategory }) => {
+const SubCategoryContainer = ({ parentCategory, categories }) => {
   return (
     <div className="ml-3 border-l-2 border-[#d9d9d9]">
-      <SubCategoryItem title={`${parentCategory}-1`} />
-      <SubCategoryItem title={`${parentCategory}-2`} />
-      <SubCategoryItem title={`${parentCategory}-3`} />
+      {categories.map((category, index) => {
+        return (
+          <SubCategoryItem
+            key={index}
+            title={category.title}
+            subCategories={category.subCategories}
+          />
+        );
+      })}
     </div>
   );
 };
