@@ -1,7 +1,54 @@
-# Team9
-9조
-## 카카오 테크 캠퍼스 3단계 진행 보드
+# Team9_FE
 
+링크 통합 관리 서비스 링크나무의 프론트엔드 파트입니다.
+
+> 카카오 테크 캠퍼스 1기 부산대 9조 링크나무 프로젝트입니다.
+
+[데모 버전 예정](https://github.com/)
+
+<br>
+
+## How to Start
+
+```bash
+cd ../link-namu
+npm install
+npm start
+```
+
+<br>
+
+## Features
+
+```json
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"react-icons": "^4.11.0",
+"react-query": "^3.39.3",
+"react-redux": "^8.1.2",
+"react-scripts": "5.0.1",
+"redux": "^4.2.1",
+"tailwindcss": "^3.3.3",
+"axios": "^1.5.0"
+```
+
+<br>
+
+## Collaborators
+
+카카오 테크 캠퍼스 1기 부산대 9조 프론트엔드
+<br>
+
+|테크 리더|리마인더|
+|:-----:|:------:|
+| [김성현](https://github.com/SeonghyeonKim) | [이다빈](https://github.com/dabinchiii)|
+| <img src="https://github.com/SeonghyeonKim.png" width="100"> | <img src="https://github.com/dabinchiii.png" width="100"> |
+
+<br>
+
+<details>
+<summary> 카카오 테크 캠퍼스 3단계 진행 보드</summary>
+<div>
 </br>
 
 ## 배포와 관련하여
@@ -247,7 +294,7 @@ UI 컴포넌트의 명칭과 이를 구현하는 능력은 필수적인 커뮤�
 > 
 
 </br>
-
 </div>
 
----
+</div>
+</details>
