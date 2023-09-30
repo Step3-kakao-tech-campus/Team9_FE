@@ -4,7 +4,7 @@ import { useState } from "react";
 import Sidebar from "../components/atoms/Sidebar";
 import Menubar from "../components/molecules/Menubar";
 
-// import dehaze from "../assets/Dehaze.png";
+import dehaze from "../assets/Dehaze.png";
 
 const MainLayout = () => {
   const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ const MainLayout = () => {
             setOpen(true);
           }}
         >
-          {/* <img src={dehaze} alt="open menubar" className="w-full h-full" /> */}
+          <img src={dehaze} alt="open menubar" className="w-full h-full" />
         </button>
       </div>
 

@@ -6,7 +6,11 @@ import homeIcon from "../../assets/Home.png";
 import chevron_up from "../../assets/Chevron_up.png";
 // import chevron_down from "../../assets/Chevron_down.png";
 
-const MainCategoryItem = ({ title = "카테고리", icon }) => {
+const MainCategoryItem = ({
+  title = "카테고리",
+  icon = { homeIcon },
+  subCategories, // 배열
+}) => {
   const [opened, setOpened] = useState(false);
 
   return (
@@ -21,12 +25,17 @@ const MainCategoryItem = ({ title = "카테고리", icon }) => {
       >
         <img className="w-[20px] h-[20px]" src={homeIcon} alt="" />
         <span className="text-[#5c5e64] text-sm leading-5">{title}</span>
-        {opened && (
+        {opened && subCategories && (
           <img className="w-[16px] h-[16px]" src={chevron_up} alt="" />
         )}
       </div>
       <div className="px-[12px] py-0">
-        {opened && <SubCategoryContainer parentCategory={title} />}
+        {opened && subCategories && (
+          <SubCategoryContainer
+            parentCategory={title}
+            categories={subCategories}
+          />
+        )}
       </div>
     </div>
   );
