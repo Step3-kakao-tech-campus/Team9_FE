@@ -2,17 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 import cookies from "react-cookies";
 
 const initialState = {
-  googleToken: cookies.load("token"),
+  token: cookies.load("token"),
 };
+
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
-      state.googleToken = action.payload.googleToken;
+    setToken: (state, action) => {
+      state.token = action.payload.token;
+      cookies.save("token", state.token, {
+        path: "/",
+      });
     },
   },
 });
 
-export const { login } = userSlice.actions;
+export const { setToken } = userSlice.actions;
+
 export default userSlice.reducer;
