@@ -5,7 +5,7 @@ import { instance } from "./api";
  * @param {string} param0
  * @returns
  */
-export const googleLogin = ({ google_token }) => {
+export const login = ({ google_token }) => {
   return instance.post(
     "/api/auth/google/login",
     {},
