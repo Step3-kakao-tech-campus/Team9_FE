@@ -31,7 +31,8 @@ export const logout = () => {
  * @param {string} param0
  * @returns
  */
-export const reissue = ({ refreshToken }) => {
+export const reissue = () => {
+  const refreshToken = cookies.load("refreshToken");
   return instance.post("/api/auth/reissue", { refreshToken: refreshToken });
 };
 
