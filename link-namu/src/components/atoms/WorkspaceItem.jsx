@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-import SubCategoryContainer from "./SubCategoryContainer";
+import CategoryContainer from "./CategoryContainer";
 
-import homeIcon from "../../assets/Home.png";
-import chevron_up from "../../assets/Chevron_up.png";
-// import chevron_down from "../../assets/Chevron_down.png";
+import homeIcon from "../../assets/home.png";
+import chevron_up from "../../assets/chevron_up.png";
 
-const MainCategoryItem = ({
-  title = "카테고리",
+const WorkspaceItem = ({
+  workspaceId,
+  workspaceName = "워크스페이스",
+  categories, // 배열
   icon = { homeIcon },
-  subCategories, // 배열
 }) => {
   const [opened, setOpened] = useState(false);
 
@@ -24,16 +24,18 @@ const MainCategoryItem = ({
         }}
       >
         <img className="w-[20px] h-[20px]" src={homeIcon} alt="" />
-        <span className="text-[#5c5e64] text-sm leading-5">{title}</span>
-        {opened && subCategories && (
+        <span className="text-[#5c5e64] text-sm leading-5">
+          {workspaceName}
+        </span>
+        {opened && categories && (
           <img className="w-[16px] h-[16px]" src={chevron_up} alt="" />
         )}
       </div>
       <div className="px-[12px] py-0">
-        {opened && subCategories && (
-          <SubCategoryContainer
-            parentCategory={title}
-            categories={subCategories}
+        {opened && categories && (
+          <CategoryContainer
+            workspaceId={workspaceId}
+            categories={categories}
           />
         )}
       </div>
@@ -41,4 +43,4 @@ const MainCategoryItem = ({
   );
 };
 
-export default MainCategoryItem;
+export default WorkspaceItem;

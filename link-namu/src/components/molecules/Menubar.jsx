@@ -1,29 +1,35 @@
-import MainCategoryItem from "../atoms/MainCategoryItem";
+import WorkspaceItem from "../atoms/WorkspaceItem";
 
 const Menubar = () => {
-  const MainCategories = [
+  const data = [
     {
-      title: "카테고리1",
-      subCategories: [{ title: "카테고리1-1" }, { title: "카테고리1-2" }],
-    },
-    { title: "카테고리2", subCategories: [{ title: "카테고리2-1" }] },
-    {
-      title: "카테고리3",
-      subCategories: [
+      workspaceId: 1,
+      workspaceName: "나의 워크스페이스",
+      categoryList: [
         {
-          title: "카테고리3-1",
-          subCategories: [
-            { title: "카테고리3-1-1" },
-            { title: "카테고리3-1-2" },
-            { title: "카테고리3-1-3" },
-          ],
+          categoryId: 1,
+          categoryName: "카테고리 1",
         },
-        { title: "카테고리3-2" },
-        { title: "카테고리3-3" },
-        { title: "카테고리3-4" },
+        {
+          categoryId: 2,
+          categoryName: "카테고리 2",
+        },
       ],
     },
-    { title: "카테고리4" },
+    {
+      workspaceId: 2,
+      workspaceName: "나의 워크스페이스2",
+      categoryList: [
+        {
+          categoryId: 3,
+          categoryName: "카테고리 3",
+        },
+        {
+          categoryId: 4,
+          categoryName: "카테고리 4",
+        },
+      ],
+    },
   ];
 
   return (
@@ -39,12 +45,13 @@ const Menubar = () => {
             MAIN
           </span>
           <div>
-            {MainCategories.map((category, index) => {
+            {data.map((workspace, index) => {
               return (
-                <MainCategoryItem
+                <WorkspaceItem
                   key={index}
-                  title={category.title}
-                  subCategories={category.subCategories}
+                  workspaceId={workspace.workspaceId}
+                  workspaceName={workspace.workspaceName}
+                  categories={workspace.categoryList}
                 />
               );
             })}

@@ -1,9 +1,9 @@
 import SidebarTile from "./SidebarTile";
 // images
-import logoShare from "../../assets/Share.png";
-import logoGoogle from "../../assets/google logo.png";
-import logoKakao from "../../assets/kakaotalk logo.png";
-import addBookmark from "../../assets/Add bookmark with link.png";
+import logoShare from "../../assets/share.png";
+import logoGoogle from "../../assets/google_logo.png";
+import logoKakao from "../../assets/kakaotalk_logo.png";
+import addBookmark from "../../assets/add_bookmark_with_link.png";
 
 const Sidebar = () => {
   return (
