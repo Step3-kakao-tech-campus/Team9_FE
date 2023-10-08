@@ -12,15 +12,19 @@ const SignIn = () => {
     onSuccess: (tokenResponse) => {
       // console.log(tokenResponse);
       const google_token = tokenResponse.access_token;
+
       login({ google_token }).then((res) => {
         console.log(res);
-        const token = res.data?.response?.accessToken.split(" ")[1];
+        const accessToken = res.data?.response?.accessToken.split(" ")[1];
+        const refreshToken = res.data?.response?.refreshToken;
         dispatch(
           setToken({
-            token: token,
+            accessToken: accessToken,
+            refreshToken: refreshToken,
           })
         );
-        console.log("token", token);
+        console.log("access token:", accessToken);
+        console.log("refresh token:", refreshToken);
         navigate("/");
       });
     },
