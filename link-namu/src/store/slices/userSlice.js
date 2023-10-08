@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import cookies from "react-cookies";
 
 const initialState = {
-  token: cookies.load("token"),
+  accessToken: cookies.load("accessToken"),
+  refreshToken: cookies.load("refreshToken"),
 };
 
 const userSlice = createSlice({
@@ -10,8 +11,12 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
-      state.token = action.payload.token;
-      cookies.save("token", state.token, {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      cookies.save("accessToken", state.accessToken, {
+        path: "/",
+      });
+      cookies.save("refreshToken", state.refreshToken, {
         path: "/",
       });
     },
