@@ -4,7 +4,7 @@ import { useState } from "react";
 import Sidebar from "../components/atoms/Sidebar";
 import Menubar from "../components/molecules/Menubar";
 
-import dehaze from "../assets/Dehaze.png";
+import dehaze from "../assets/dehaze.png";
 
 const MainLayout = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ const MainLayout = () => {
       {open && (
         <>
           <div
-            className="w-screen h-screen bg-black opacity-25 fixed top-0 left-0"
+            className="fixed top-0 left-0 w-screen h-screen bg-black opacity-25"
             onClick={() => {
               setOpen(false);
             }}

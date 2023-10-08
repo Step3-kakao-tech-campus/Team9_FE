@@ -1,4 +1,4 @@
-import logoGoogle from "../../assets/google logo.png";
+import logoGoogle from "../../assets/google_logo.png";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { login } from "../../apis/user";
