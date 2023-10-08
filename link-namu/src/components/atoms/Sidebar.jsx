@@ -5,6 +5,10 @@ import logoGoogle from "../../assets/google_logo.png";
 import logoKakao from "../../assets/kakaotalk_logo.png";
 import addBookmark from "../../assets/add_bookmark_with_link.png";
 
+/**
+ * 우측 고정 위치의 사이드바
+ * @returns
+ */
 const Sidebar = () => {
   return (
     <>

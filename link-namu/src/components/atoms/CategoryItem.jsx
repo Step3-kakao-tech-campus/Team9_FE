@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+/**
+ * 개별 카테고리 아이템을 나타내는 컴포넌트
+ * @param {number, string} param0
+ * @returns
+ */
 const CategoryItem = ({ categoryId, categoryName = "하위 카테고리" }) => {
   const [opened, setOpened] = useState(false);
 

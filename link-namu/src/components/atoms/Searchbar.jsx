@@ -1,6 +1,11 @@
 import { useState } from "react";
 import magnifier from "../../assets/Magnifier.png";
 
+/**
+ * 검색창 컴포넌트
+ * @param {string} param0
+ * @returns
+ */
 const Searchbar = ({ width = "700px" }) => {
   const [isFocused, setIsFocus] = useState(false);
 

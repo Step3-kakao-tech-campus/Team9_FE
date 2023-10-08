@@ -1,3 +1,8 @@
+/**
+ * 사이드바에서 사용되는 타일 컴포넌트
+ * @param {string, object, string, bool} param0
+ * @returns
+ */
 const SidebarTile = ({ className, src, alt, padding = true }) => {
   return (
     <div
