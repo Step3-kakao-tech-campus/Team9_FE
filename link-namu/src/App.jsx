@@ -8,7 +8,7 @@ import MainLayout from "./layouts/MainLayout";
 import MainPage from "./pages/MainPage";
 import SignInPage from "./pages/SignInPage";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>

@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import CategoryContainer from "./CategoryContainer";
 
-import homeIcon from "../../assets/Home.png";
-import chevron_up from "../../assets/Chevron_up.png";
+import homeIcon from "../../assets/home.png";
+import chevron_up from "../../assets/chevron_up.png";
 
 const WorkspaceItem = ({
   workspaceId,
