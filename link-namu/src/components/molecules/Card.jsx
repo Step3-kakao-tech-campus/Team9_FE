@@ -1,4 +1,4 @@
-import Tag from "../atoms/Tag";
+import Tag from '../atoms/Tag'
 
 /**
  * 카드 컴포넌트
@@ -10,31 +10,37 @@ import Tag from "../atoms/Tag";
  */
 const Card = ({ imageUrl, imageAlt, title, description, tags }) => {
   return (
-    <div className="w-72 h-80 border-2 bg-white shadow-md rounded-md">
-        {/* 이미지 영역 */}
-        <img src={imageUrl} alt={imageAlt} className="w-64 h-40 object-cover mx-auto my-1 rounded-sm" />
+    <div className="bg-white border-2 rounded-md shadow-md w-72 h-80">
+      {/* 이미지 영역 */}
+      <img
+        src={imageUrl}
+        alt={imageAlt}
+        className="object-cover w-64 h-40 mx-auto my-1 rounded-sm"
+      />
 
-        {/* 내용 영역 */}
-        <div className="px-4 py-4">
-            <div className="font-bold text-xl mb-2 text-ellipsis overflow-hidden">{title}</div>
-            <p className="text-gray-700 text-base text-ellipsis overflow-hidden">{description}</p>
+      {/* 내용 영역 */}
+      <div className="px-4 py-4">
+        <div className="mb-2 overflow-hidden text-xl font-bold text-ellipsis">
+          {title}
         </div>
+        <p className="overflow-hidden text-base text-gray-700 text-ellipsis">
+          {description}
+        </p>
+      </div>
 
-        {/* 꼬리 영역 */}
-        <div className="px-2 py-2">
-            {/* 태그 영역 */}
-            <span className="inline-block w-[80%]">
-                {tags.map((tag, index) => (
-                    <Tag key={index} name={tag} />
-                ))}
-            </span>
-            {/* 버튼 영역 */}
-            <span className="inline-block w-[20%]">
-                
-            </span>
-        </div>
+      {/* 꼬리 영역 */}
+      <div className="px-2 py-2">
+        {/* 태그 영역 */}
+        <span className="inline-block w-[80%]">
+          {tags.map((tag, index) => (
+            <Tag key={index} name={tag} />
+          ))}
+        </span>
+        {/* 버튼 영역 */}
+        <span className="inline-block w-[20%]"></span>
+      </div>
     </div>
-  );
+  )
 }
 
-export default Card;
+export default Card
