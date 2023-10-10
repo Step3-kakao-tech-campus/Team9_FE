@@ -1,36 +1,14 @@
+import { useState, useEffect } from "react";
 import WorkspaceItem from "../atoms/WorkspaceItem";
-
+import { getWorkspaceList } from "../../apis/workspace";
 const Menubar = () => {
-  const data = [
-    {
-      workspaceId: 1,
-      workspaceName: "나의 워크스페이스",
-      categoryList: [
-        {
-          categoryId: 1,
-          categoryName: "카테고리 1",
-        },
-        {
-          categoryId: 2,
-          categoryName: "카테고리 2",
-        },
-      ],
-    },
-    {
-      workspaceId: 2,
-      workspaceName: "나의 워크스페이스2",
-      categoryList: [
-        {
-          categoryId: 3,
-          categoryName: "카테고리 3",
-        },
-        {
-          categoryId: 4,
-          categoryName: "카테고리 4",
-        },
-      ],
-    },
-  ];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getWorkspaceList().then((res) => {
+      console.log(res);
+      setData(res.data?.response);
+    });
+  }, []);
 
   return (
     <>
