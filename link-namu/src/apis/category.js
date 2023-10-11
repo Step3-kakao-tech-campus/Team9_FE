@@ -17,8 +17,8 @@ export const createCategory = ({ workspaceId, categoryName }) => {
  * @param {number} param0
  * @returns
  */
-export const getCategoryList = ({ categoryId }) => {
-  return instance.get(`/api/category/${categoryId}`);
+export const getCategoryList = ({ categoryId, page = 0 }) => {
+  return instance.get(`/api/category/${categoryId}?page=${page}`);
 };
 
 /**
@@ -40,3 +40,15 @@ export const updateCategory = ({ categoryId, categoryName }) => {
     categoryName: categoryName,
   });
 };
+
+/**
+ * 카테고리 이동
+ * @param {number, number} param0
+ * @returns
+ */
+// export const moveCategory = ({ fromCategoryId, toCategoryId }) => {
+//   return instance.post("/api/category/move", {
+//     fromCategoryId: fromCategoryId,
+//     toCategoryId: toCategoryId,
+//   });
+// };
