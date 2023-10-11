@@ -8,7 +8,13 @@ import Tag from "../atoms/Tag";
  * @param {string} description - 북마크 설명
  * @param {array<string>} tags - 태그 명 배열
  */
-const Card = ({ imageUrl, imageAlt, title, description, tags }) => {
+const Card = ({
+  imageUrl = "",
+  imageAlt = "",
+  title = "",
+  description = "",
+  tags = [],
+}) => {
   return (
     <div className="bg-white border-2 rounded-md shadow-md w-72 h-80">
       {/* 이미지 영역 */}
