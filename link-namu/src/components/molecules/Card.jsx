@@ -1,4 +1,4 @@
-import Tag from '../atoms/Tag'
+import Tag from "../atoms/Tag";
 
 /**
  * 카드 컴포넌트
@@ -33,14 +33,14 @@ const Card = ({ imageUrl, imageAlt, title, description, tags }) => {
         {/* 태그 영역 */}
         <span className="inline-block w-[80%]">
           {tags.map((tag, index) => (
-            <Tag key={index} name={tag} />
+            <Tag key={index} name={tag.tagName} />
           ))}
         </span>
         {/* 버튼 영역 */}
         <span className="inline-block w-[20%]"></span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
