@@ -23,16 +23,17 @@ const Menubar = () => {
             MAIN
           </span>
           <div>
-            {data.map((workspace, index) => {
-              return (
-                <WorkspaceItem
-                  key={index}
-                  workspaceId={workspace.workspaceId}
-                  workspaceName={workspace.workspaceName}
-                  categories={workspace.categoryList}
-                />
-              );
-            })}
+            {data &&
+              data.map((workspace, index) => {
+                return (
+                  <WorkspaceItem
+                    key={index}
+                    workspaceId={workspace.workspaceId}
+                    workspaceName={workspace.workspaceName}
+                    categories={workspace.categoryList}
+                  />
+                );
+              })}
           </div>
         </div>
         <div className="">
