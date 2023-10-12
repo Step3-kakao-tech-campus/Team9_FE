@@ -1,4 +1,5 @@
 import cookies from "react-cookies";
+import BookmarkGridTemplate from "../components/templates/BookmarkGridTemplate";
 
 const MainPage = () => {
   if (!cookies.load("accessToken")) {
@@ -6,7 +7,11 @@ const MainPage = () => {
     return;
   }
 
-  return <div>main page</div>;
+  return (
+    <div>
+      <BookmarkGridTemplate />
+    </div>
+  );
 };
 
 export default MainPage;
