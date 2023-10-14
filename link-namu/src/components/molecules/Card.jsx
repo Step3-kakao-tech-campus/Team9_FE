@@ -1,4 +1,4 @@
-import Tag from '../atoms/Tag'
+import Tag from "../atoms/Tag";
 
 /**
  * 카드 컴포넌트
@@ -8,7 +8,13 @@ import Tag from '../atoms/Tag'
  * @param {string} description - 북마크 설명
  * @param {array<string>} tags - 태그 명 배열
  */
-const Card = ({ imageUrl, imageAlt, title, description, tags }) => {
+const Card = ({
+  imageUrl = "",
+  imageAlt = "",
+  title = "",
+  description = "",
+  tags = [],
+}) => {
   return (
     <div className="bg-white border-2 rounded-md shadow-md w-72 h-80">
       {/* 이미지 영역 */}
@@ -33,14 +39,14 @@ const Card = ({ imageUrl, imageAlt, title, description, tags }) => {
         {/* 태그 영역 */}
         <span className="inline-block w-[80%]">
           {tags.map((tag, index) => (
-            <Tag key={index} name={tag} />
+            <Tag key={index} name={tag.tagName} />
           ))}
         </span>
         {/* 버튼 영역 */}
         <span className="inline-block w-[20%]"></span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

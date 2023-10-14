@@ -27,9 +27,9 @@ export const createBookmark = ({
  * @param {number} param0
  * @returns
  */
-// export const deleteBookmark = ({ bookmarkId }) => {
-//   return instance.post(`api/bookmark/delete/${bookmarkId}`);
-// };
+export const deleteBookmark = ({ bookmarkId }) => {
+  return instance.post(`api/bookmark/delete/${bookmarkId}`);
+};
 
 /**
  * 북마크 수정

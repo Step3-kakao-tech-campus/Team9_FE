@@ -17,8 +17,9 @@ export const createCategory = ({ workspaceId, categoryName }) => {
  * @param {number} param0
  * @returns
  */
-export const getCategoryList = ({ categoryId }) => {
-  return instance.get(`/api/category/${categoryId}`);
+export const getCategoryList = ({ categoryId, page = 0 }) => {
+  if (!categoryId) return;
+  return instance.get(`/api/category/${categoryId}?page=${page}`);
 };
 
 /**
