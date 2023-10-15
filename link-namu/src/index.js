@@ -8,8 +8,8 @@ import store from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Toast from "./components/molecules/Toast";
 
-const queryErrorHandler = (error) => {
-  alert("queryErrorHandler"); //TODO: 토스트로 변경하기
+const queryErrorHandler = error => {
+  <Toast message="queryErrorHandler" type="error" />;
   console.log("queryErrorHandler", error);
 };
 
