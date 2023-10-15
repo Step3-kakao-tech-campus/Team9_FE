@@ -1,5 +1,5 @@
 import axios from "axios";
-import cookies from "react-cookies";
+import { getToken } from "../store";
 import Toast from "../components/molecules/Toast";
 
 export const instance = axios.create({
@@ -10,8 +10,8 @@ export const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use(config => {
-  const accessToken = cookies.load("accessToken");
+instance.interceptors.request.use((config) => {
+  const accessToken = getToken();
   if (accessToken) {
     config.headers["Authorization"] = "Bearer " + accessToken;
   }

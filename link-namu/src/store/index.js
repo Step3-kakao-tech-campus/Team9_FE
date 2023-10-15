@@ -9,4 +9,9 @@ const store = configureStore({
   },
 });
 
+const getToken = () => {
+  return store.getState().user.accessToken;
+};
+
 export default store;
+export { getToken };
