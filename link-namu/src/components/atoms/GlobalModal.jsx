@@ -7,11 +7,26 @@ import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
 
 const MODAL_TYPES = {
   KakaoModal: "KakaoModal",
+  NotionModal: "NotionModal",
+  GoogleModal: "GoogleModal",
+  BookmarkAddModal: "BookmarkAddModal",
 };
 const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.KakaoModal,
     component: <KakaoFileUploadModal />,
+  },
+  {
+    type: MODAL_TYPES.NotionModal,
+    component: null,
+  },
+  {
+    type: MODAL_TYPES.GoogleModal,
+    component: null,
+  },
+  {
+    type: MODAL_TYPES.BookmarkAddModal,
+    component: null,
   },
 ];
 
