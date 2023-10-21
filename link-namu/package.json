@@ -1,7 +1,9 @@
 {
   "name": "link-namu",
   "version": "0.1.0",
-  "engines": {"node": ">=18.16.0"},
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.11.1",
@@ -11,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
