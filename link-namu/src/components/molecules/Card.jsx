@@ -16,7 +16,7 @@ const Card = ({
   tags = [],
 }) => {
   return (
-    <div className="bg-white border-2 rounded-md shadow-md w-72 h-80">
+    <div className="transform bg-white border-2 rounded-md shadow-md w-72 h-80 hover:transition-transform hover:scale-105 hover:border hover:border-gray-300 hover:shadow-lg">
       {/* 이미지 영역 */}
       <img
         src={imageUrl}
