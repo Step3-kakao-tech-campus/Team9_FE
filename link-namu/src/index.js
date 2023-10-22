@@ -7,8 +7,9 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Toast from "./components/molecules/Toast";
+import GlobalModal from "./components/atoms/GlobalModal";
 
-const queryErrorHandler = error => {
+const queryErrorHandler = (error) => {
   <Toast message="queryErrorHandler" type="error" />;
   console.log("queryErrorHandler", error);
 };
@@ -29,6 +30,7 @@ root.render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <App />
+        <GlobalModal />
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>
