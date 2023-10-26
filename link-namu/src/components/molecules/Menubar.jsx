@@ -1,12 +1,20 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import WorkspaceItem from "../atoms/WorkspaceItem";
 import { getWorkspaceList } from "../../apis/workspace";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setWorkspaceList,
+  selectWorkspaceList,
+} from "../../store/slices/workspaceSlice";
+
 const Menubar = () => {
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const { workspaceList } = useSelector(selectWorkspaceList);
+
   useEffect(() => {
     getWorkspaceList().then((res) => {
       console.log(res);
-      setData(res.data?.response);
+      dispatch(setWorkspaceList({ workspaceList: res.data?.response }));
     });
   }, []);
 
@@ -23,8 +31,8 @@ const Menubar = () => {
             MAIN
           </span>
           <div>
-            {data &&
-              data.map((workspace, index) => {
+            {workspaceList &&
+              workspaceList.map((workspace, index) => {
                 return (
                   <WorkspaceItem
                     key={index}
