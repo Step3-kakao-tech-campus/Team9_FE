@@ -7,26 +7,39 @@ import { useEffect, useState } from "react";
  * @param {number} workspaceId - 카테고리를 옵션으로 표시할 워크스페이스의 ID
  * @returns
  */
-const CategorySelectBox = ({ workspaceId }) => {
+const CategorySelectBox = ({ workspaceId, changeHandler }) => {
   const workspaceList = useSelector(selectWorkspaceList).workspaceList;
   const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     if (!workspaceId || !workspaceList) return;
-
     workspaceList.forEach((workspace) => {
       if (workspace.workspaceId === workspaceId) {
         setCategoryList(workspace.categoryList);
       }
     });
-  }, [workspaceList]);
+  }, [workspaceList, workspaceId]);
+
+  const handleChange = (e) => {
+    if (e.target.value) changeHandler(e.target.value);
+  };
 
   return (
-    <select>
+    <select
+      onChange={handleChange}
+      className="w-full p-3 rounded-lg bg-white border border-[#56678942]"
+    >
+      <option key={0} value="" selected disabled>
+        == 카테고리 선택 ==
+      </option>
       {categoryList &&
         categoryList.map((category) => {
           return (
-            <option key={category.categoryId} value={category.categoryId}>
+            <option
+              key={category.categoryId}
+              value={category.categoryId}
+              className=""
+            >
               {category.categoryName}
             </option>
           );
