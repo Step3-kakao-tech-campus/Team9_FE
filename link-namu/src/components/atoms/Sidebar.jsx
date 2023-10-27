@@ -22,6 +22,14 @@ const Sidebar = () => {
       })
     );
   };
+  const openBookmarkAddModal = () => {
+    dispatch(
+      openModal({
+        modalType: "BookmarkAddModal",
+        isOpen: true,
+      })
+    );
+  };
 
   return (
     <>
@@ -40,6 +48,7 @@ const Sidebar = () => {
           src={addBookmark}
           alt="add bookmark with link"
           padding={false}
+          onClick={openBookmarkAddModal}
         />
       </div>
     </>
