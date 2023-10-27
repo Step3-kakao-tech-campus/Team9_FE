@@ -4,6 +4,7 @@ import { closeModal, selectModal } from "../../store/slices/modalSlice";
 import Container from "./Container";
 import Overlay from "./Overlay";
 import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
+import BookmarkAddModal from "../organisms/BookmarkAddModal";
 
 const MODAL_TYPES = {
   KakaoModal: "KakaoModal",
@@ -26,7 +27,7 @@ const MODAL_COMPONENTS = [
   },
   {
     type: MODAL_TYPES.BookmarkAddModal,
-    component: null,
+    component: <BookmarkAddModal />,
   },
 ];
 
