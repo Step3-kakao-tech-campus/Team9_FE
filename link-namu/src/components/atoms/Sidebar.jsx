@@ -7,6 +7,7 @@ import logoKakao from "../../assets/kakaotalk_logo.png";
 import addBookmark from "../../assets/add_bookmark_with_link.png";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/slices/modalSlice";
+import MODAL_TYPES from "../../constants/modal_types";
 
 /**
  * 우측 고정 위치의 사이드바
@@ -15,18 +16,10 @@ import { openModal } from "../../store/slices/modalSlice";
 const Sidebar = () => {
   const dispatch = useDispatch();
 
-  const handleOpenKakaoModal = () => {
+  const handleOpenModal = ({ modalType }) => {
     dispatch(
       openModal({
-        modalType: "KakaoModal",
-        isOpen: true,
-      })
-    );
-  };
-  const openBookmarkAddModal = () => {
-    dispatch(
-      openModal({
-        modalType: "BookmarkAddModal",
+        modalType: modalType,
         isOpen: true,
       })
     );
@@ -44,13 +37,15 @@ const Sidebar = () => {
         <SidebarTile
           src={logoKakao}
           alt="kakaotalk import "
-          onClick={handleOpenKakaoModal}
+          onClick={() => handleOpenModal({ modalType: MODAL_TYPES.KakaoModal })}
         />
         <SidebarTile
           src={addBookmark}
           alt="add bookmark with link"
           padding={false}
-          onClick={openBookmarkAddModal}
+          onClick={() =>
+            handleOpenModal({ modalType: MODAL_TYPES.BookmarkAddModal })
+          }
         />
       </div>
     </>
