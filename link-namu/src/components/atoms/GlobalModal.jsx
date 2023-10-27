@@ -5,13 +5,8 @@ import Container from "./Container";
 import Overlay from "./Overlay";
 import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
 import BookmarkAddModal from "../organisms/BookmarkAddModal";
+import MODAL_TYPES from "../../constants/modal_types";
 
-const MODAL_TYPES = {
-  KakaoModal: "KakaoModal",
-  NotionModal: "NotionModal",
-  GoogleModal: "GoogleModal",
-  BookmarkAddModal: "BookmarkAddModal",
-};
 const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.KakaoModal,
