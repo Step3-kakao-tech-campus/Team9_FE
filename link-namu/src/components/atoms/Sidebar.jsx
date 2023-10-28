@@ -8,7 +8,6 @@ import logoShare from "../../assets/share.png";
 import logoGoogle from "../../assets/google_logo.png";
 import logoKakao from "../../assets/kakaotalk_logo.png";
 import addBookmark from "../../assets/add_bookmark_with_link.png";
-
 import MODAL_TYPES from "../../constants/modal_types";
 
 /**
@@ -25,7 +24,11 @@ const Sidebar = () => {
         className={`w-[60px] h-screen border-l bg-white fixed right-0 top-0 flex flex-col justify-end`}
       >
         <SidebarTile src={logoShare} alt="share" />
-        <SidebarTile src={logoNotion} alt="notion import" />
+        <SidebarTile
+          src={logoNotion}
+          alt="notion import"
+          onClick={() => openModal({ modalType: MODAL_TYPES.NotionModal })}
+        />
         <SidebarTile src={logoGoogle} alt="google import " />
         <SidebarTile
           src={logoKakao}

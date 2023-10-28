@@ -6,6 +6,7 @@ import Overlay from "./Overlay";
 import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
 import BookmarkAddModal from "../organisms/BookmarkAddModal";
 import CategoryAddModal from "../organisms/CategoryAddModal";
+import NotionModal from "../organisms/NotionModal";
 import MODAL_TYPES from "../../constants/modal_types";
 import { useCloseModal } from "../../hooks/useCloseModal";
 
@@ -16,7 +17,7 @@ const MODAL_COMPONENTS = [
   },
   {
     type: MODAL_TYPES.NotionModal,
-    component: null,
+    component: <NotionModal />,
   },
   {
     type: MODAL_TYPES.GoogleModal,
