@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal, selectModal } from "../../store/slices/modalSlice";
+import { useSelector } from "react-redux";
+import { selectModal } from "../../store/slices/modalSlice";
 
 import Container from "./Container";
 import Overlay from "./Overlay";
 import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
 import BookmarkAddModal from "../organisms/BookmarkAddModal";
 import MODAL_TYPES from "../../constants/modal_types";
+import { useCloseModal } from "../../hooks/useCloseModal";
 
 const MODAL_COMPONENTS = [
   {
@@ -28,7 +29,7 @@ const MODAL_COMPONENTS = [
 
 function GlobalModal() {
   const { modalType, isOpen } = useSelector(selectModal);
-  const dispatch = useDispatch();
+  const closeModal = useCloseModal();
   if (!isOpen) return;
 
   const findModal = MODAL_COMPONENTS.find((modal) => {
@@ -40,7 +41,7 @@ function GlobalModal() {
 
   return (
     <Container>
-      <Overlay onClick={() => dispatch(closeModal())} />
+      <Overlay onClick={closeModal} />
       {renderModal()}
     </Container>
   );
