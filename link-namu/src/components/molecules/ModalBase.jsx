@@ -1,3 +1,9 @@
+import ModalTitle from "../atoms/ModalTitle";
+import ModalBox from "../atoms/ModalBox";
+import ModalButtonBox from "../atoms/ModalButtonBox";
+import ModalNextButton from "../atoms/ModalNextButton";
+import ModalPrevButton from "../atoms/ModalPrevButton";
+
 const modalSize = {
   sm: "w-[15rem]",
   md: "w-[30rem]",
@@ -15,30 +21,12 @@ const fixedPositionCenter =
  * @param {string} nextName - 모달 창 다음 버튼 이름
  * @param {React.JSX.Element} children - 모달 창 내부 컴포넌트
  */
-const ModalBase = ({
-  size = "md",
-  titleName = "제목",
-  prevName = "이전",
-  nextName = "다음",
-  children,
-}) => {
+const ModalBase = ({ size = "md", titleName = "제목", children }) => {
   return (
     <div
       className={`${fixedPositionCenter} ${modalSize[size]} z-50 mx-auto overflow-y-auto bg-white rounded shadow-lg`}
     >
-      {/* 모달창 내부 */}
-      <div className="relative px-6 py-4 text-xl font-bold text-left">
-        {titleName}
-      </div>
-      <div className="relative px-6 py-4 text-left">{children}</div>
-      <div className="flex justify-between mt-4">
-        <button className="m-4 text-gray-600 hover:text-gray-800">
-          &#xE000; {prevName}
-        </button>
-        <button className="px-4 py-2 m-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-          {nextName} &#xE001;
-        </button>
-      </div>
+      <ModalBox>{children}</ModalBox>
     </div>
   );
 };
