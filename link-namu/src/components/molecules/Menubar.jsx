@@ -1,22 +1,13 @@
-import { useEffect } from "react";
 import WorkspaceItem from "../atoms/WorkspaceItem";
-import { getWorkspaceList } from "../../apis/workspace";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setWorkspaceList,
-  selectWorkspaceList,
-} from "../../store/slices/workspaceSlice";
+import { useSelector } from "react-redux";
+import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
+import { useOpenModal } from "../../hooks/useOpenModal";
+
+import MODAL_TYPES from "../../constants/modal_types";
 
 const Menubar = () => {
-  const dispatch = useDispatch();
+  const openModal = useOpenModal();
   const { workspaceList } = useSelector(selectWorkspaceList);
-
-  useEffect(() => {
-    getWorkspaceList().then((res) => {
-      console.log(res);
-      dispatch(setWorkspaceList({ workspaceList: res.data?.response }));
-    });
-  }, []);
 
   return (
     <>
@@ -45,7 +36,12 @@ const Menubar = () => {
           </div>
         </div>
         <div className="">
-          <button className="block w-[190px] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md">
+          <button
+            onClick={() =>
+              openModal({ modalType: MODAL_TYPES.CategoryAddModal })
+            }
+            className="block w-[190px] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md"
+          >
             카테고리 추가
           </button>
         </div>
