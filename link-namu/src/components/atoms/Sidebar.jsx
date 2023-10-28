@@ -1,12 +1,14 @@
+import { useOpenModal } from "../../hooks/useOpenModal";
+
 import SidebarTile from "./SidebarTile";
+
 // images
 import logoNotion from "../../assets/notion_logo.png";
 import logoShare from "../../assets/share.png";
 import logoGoogle from "../../assets/google_logo.png";
 import logoKakao from "../../assets/kakaotalk_logo.png";
 import addBookmark from "../../assets/add_bookmark_with_link.png";
-import { useDispatch } from "react-redux";
-import { openModal } from "../../store/slices/modalSlice";
+
 import MODAL_TYPES from "../../constants/modal_types";
 
 /**
@@ -14,16 +16,7 @@ import MODAL_TYPES from "../../constants/modal_types";
  * @returns
  */
 const Sidebar = () => {
-  const dispatch = useDispatch();
-
-  const handleOpenModal = ({ modalType }) => {
-    dispatch(
-      openModal({
-        modalType: modalType,
-        isOpen: true,
-      })
-    );
-  };
+  const openModal = useOpenModal();
 
   return (
     <>
@@ -37,15 +30,13 @@ const Sidebar = () => {
         <SidebarTile
           src={logoKakao}
           alt="kakaotalk import "
-          onClick={() => handleOpenModal({ modalType: MODAL_TYPES.KakaoModal })}
+          onClick={() => openModal({ modalType: MODAL_TYPES.KakaoModal })}
         />
         <SidebarTile
           src={addBookmark}
           alt="add bookmark with link"
           padding={false}
-          onClick={() =>
-            handleOpenModal({ modalType: MODAL_TYPES.BookmarkAddModal })
-          }
+          onClick={() => openModal({ modalType: MODAL_TYPES.BookmarkAddModal })}
         />
       </div>
     </>
