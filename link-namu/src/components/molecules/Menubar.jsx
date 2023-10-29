@@ -4,6 +4,7 @@ import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
 import { useOpenModal } from "../../hooks/useOpenModal";
 
 import MODAL_TYPES from "../../constants/modal_types";
+import ModalCloseButton from "../atoms/ModalCloseButton";
 
 const Menubar = () => {
   const openModal = useOpenModal();
@@ -12,6 +13,7 @@ const Menubar = () => {
   return (
     <>
       <div className="w-[256px] h-screen fixed left-0 top-0 flex flex-col border border-[#d9d9d9] bg-white rounded-r-lg">
+        <ModalCloseButton />
         <div className="p-6 border-b border-[#d9d9d9] text-center">
           <span className="text-base font-medium">🎄 LinkNamu</span>
         </div>
