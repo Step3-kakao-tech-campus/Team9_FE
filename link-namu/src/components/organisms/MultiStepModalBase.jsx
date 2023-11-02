@@ -28,32 +28,47 @@ const MultiStepModalBase = ({
         <ModalPrevButton clickHandler={goToPrevPage}>이전</ModalPrevButton>
       );
   };
-  const rightButton = () => {
-    if (page === children.length)
-      return (
-        <ModalNextButton clickHandler={lastButtonHandler}>
-          {lastButtonName}
-        </ModalNextButton>
-      );
-    else
-      return (
-        <ModalNextButton clickHandler={goToNextPage}>다음</ModalNextButton>
-      );
-  };
-  const buttonBox = () => {
+  const rightButton = ({ title = "다음", clickHandler = null }) => {
+    // if (page === children.length)
+    //   return (
+    //     <ModalNextButton clickHandler={lastButtonHandler}>
+    //       {lastButtonName}
+    //     </ModalNextButton>
+    //   );
+    // else
+    //   return (
+    //     <ModalNextButton clickHandler={goToNextPage}>다음</ModalNextButton>
+    //   );
     return (
-      <ModalButtonBox>
-        {leftButton()}
-        {rightButton()}
-      </ModalButtonBox>
+      <ModalNextButton
+        clickHandler={() => {
+          if (clickHandler) {
+            try {
+              clickHandler();
+            } catch (err) {
+              console.log(err);
+              return;
+            }
+          }
+          goToNextPage();
+        }}
+      >
+        {title}
+      </ModalNextButton>
     );
   };
 
   return (
     <>
       <ModalBase size={size}>
-        {children[page - 1]}
-        {buttonBox()}
+        {children[page - 1].content}
+        <ModalButtonBox>
+          {leftButton()}
+          {rightButton({
+            title: children[page - 1].title,
+            clickHandler: children[page - 1].buttonHandler,
+          })}
+        </ModalButtonBox>
       </ModalBase>
     </>
   );

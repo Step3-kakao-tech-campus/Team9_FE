@@ -87,11 +87,6 @@ const BookmarkAddModal = () => {
     </>
   );
 
-  const contentList = [];
-  contentList.push(page1);
-  contentList.push(page2);
-  contentList.push(page3);
-
   const addBookmark = () => {
     const bookmarkData = {
       bookmarkName: bookmarkName,
@@ -138,11 +133,16 @@ const BookmarkAddModal = () => {
       });
   };
 
-  return (
-    <MultiStepModalBase size="md" lastButtonHandler={addBookmark}>
-      {contentList}
-    </MultiStepModalBase>
-  );
+  const contentList = [];
+  contentList.push({ content: page1 });
+  contentList.push({ content: page2 });
+  contentList.push({
+    content: page3,
+    title: "추가",
+    buttonHandler: addBookmark,
+  });
+
+  return <MultiStepModalBase size="md">{contentList}</MultiStepModalBase>;
 };
 
 export default BookmarkAddModal;
