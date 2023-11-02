@@ -4,6 +4,7 @@ const MODAL_TYPES = {
   GoogleModal: "GoogleModal",
   BookmarkAddModal: "BookmarkAddModal",
   CategoryAddModal: "CategoryAddModal",
+  WorkspaceAddModal: "WorkspaceAddModal",
   Menubar: "Menubar",
 };
 

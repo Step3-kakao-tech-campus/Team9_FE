@@ -40,11 +40,11 @@ const Menubar = () => {
         <div className="">
           <button
             onClick={() =>
-              openModal({ modalType: MODAL_TYPES.CategoryAddModal })
+              openModal({ modalType: MODAL_TYPES.WorkspaceAddModal })
             }
             className="block w-[190px] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md"
           >
-            카테고리 추가
+            워크스페이스 추가
           </button>
         </div>
       </div>
