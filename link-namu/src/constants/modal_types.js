@@ -5,6 +5,7 @@ const MODAL_TYPES = {
   BookmarkAddModal: "BookmarkAddModal",
   CategoryAddModal: "CategoryAddModal",
   WorkspaceAddModal: "WorkspaceAddModal",
+  ShareLinkModal: "ShareLinkModal",
   Menubar: "Menubar",
 };
 
