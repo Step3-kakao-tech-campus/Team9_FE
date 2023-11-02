@@ -2,7 +2,11 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState } from "react";
 import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
 
-const WorkspaceSeleceBox = ({ changeHandler = null, value = null }) => {
+const WorkspaceSeleceBox = ({
+  changeHandler = () => {},
+  value = null,
+  isSlimType = false,
+}) => {
   const workspaceList = useSelector(selectWorkspaceList).workspaceList;
   const [selectedId, setSelectedId] = useState(value);
 
@@ -17,7 +21,9 @@ const WorkspaceSeleceBox = ({ changeHandler = null, value = null }) => {
     <select
       onChange={handleChange}
       value={selectedId}
-      className="w-full p-3 rounded-lg bg-white border border-[#56678942]"
+      className={`w-full ${
+        isSlimType ? "p-1" : "p-3"
+      } rounded-lg bg-white border border-[#56678942]`}
     >
       <option key={0} value="" selected disabled>
         == 워크스페이스 선택 ==

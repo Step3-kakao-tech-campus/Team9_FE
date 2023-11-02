@@ -8,8 +8,9 @@ import { useEffect, useState } from "react";
  * @returns
  */
 const CategorySelectBox = ({
-  workspaceId = null,
+  workspaceId = () => {},
   value = null,
+  isSlimType = false,
   changeHandler,
 }) => {
   const workspaceList = useSelector(selectWorkspaceList).workspaceList;
@@ -38,7 +39,9 @@ const CategorySelectBox = ({
     <select
       onChange={handleChange}
       value={selectedId}
-      className="w-full p-3 rounded-lg bg-white border border-[#56678942]"
+      className={`w-full ${
+        isSlimType ? "p-1" : "p-3"
+      } rounded-lg bg-white border border-[#56678942]`}
     >
       <option key={0} value="" selected disabled>
         == 카테고리 선택 ==
