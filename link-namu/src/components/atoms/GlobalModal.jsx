@@ -3,7 +3,7 @@ import { selectModal } from "../../store/slices/modalSlice";
 
 import Container from "./Container";
 import Overlay from "./Overlay";
-import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
+import KakaoModal from "../organisms/KakaoModal";
 import BookmarkAddModal from "../organisms/BookmarkAddModal";
 import CategoryAddModal from "../organisms/CategoryAddModal";
 import NotionModal from "../organisms/NotionModal";
@@ -16,7 +16,7 @@ import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
 const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.KakaoModal,
-    component: <KakaoFileUploadModal />,
+    component: <KakaoModal />,
   },
   {
     type: MODAL_TYPES.NotionModal,
