@@ -48,13 +48,7 @@ const BookmarkSelectItem = ({
           disabled={!checked}
         />
       </div>
-      <input
-        id={id}
-        checked={checked}
-        onChange={handleCheckedChange}
-        type="checkbox"
-      />
-      {/* <Checkbox id={id} checked={checked} onChange={handleCheckedChange} /> */}
+      <Checkbox id={id} checked={checked} onChange={handleCheckedChange} />
     </div>
   );
 };

@@ -176,19 +176,12 @@ const KakaoFileUploadModal = () => {
         <div className="mx-auto px-5">
           <div className="float-right flex gap-x-3 pr-10">
             <span>전체 선택</span>
-            <input
+            <Checkbox
               id="selectAllCheckbox"
-              type="checkbox"
               checked={isAllChecked}
               onChange={handleSelectAllChange}
               onClick={handleSelectAllClick}
             />
-            {/* <Checkbox
-              id="selectAllCheckbox"
-              checked={isAllChecked}
-              onChange={handleSelectAllChange}
-              onClick={handleSelectAllClick}
-            /> */}
           </div>
           <ul className="h-[450px] w-[800px] mx-auto p-2 overflow-y-scroll overflow-x-clip">
             {linkList.map((item, index) => {
