@@ -6,6 +6,7 @@ const WorkspaceSeleceBox = ({
   changeHandler = () => {},
   value = null,
   isSlimType = false,
+  disabled = false,
 }) => {
   const workspaceList = useSelector(selectWorkspaceList).workspaceList;
   const [selectedId, setSelectedId] = useState(value);
@@ -21,6 +22,7 @@ const WorkspaceSeleceBox = ({
     <select
       onChange={handleChange}
       value={selectedId}
+      disabled={`${disabled ? "disabled" : ""}`}
       className={`w-full ${
         isSlimType ? "p-1" : "p-3"
       } rounded-lg bg-white border border-[#56678942]`}
