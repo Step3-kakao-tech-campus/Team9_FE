@@ -23,7 +23,13 @@ const Sidebar = () => {
       <div
         className={`w-[60px] h-screen border-l bg-white fixed right-0 top-0 flex flex-col justify-end`}
       >
-        <SidebarTile src={logoShare} alt="share" />
+        <SidebarTile
+          src={logoShare}
+          alt="share"
+          onClick={() =>
+            openModal({ modalType: MODAL_TYPES.CategoryShareModal })
+          }
+        />
         <SidebarTile
           src={logoNotion}
           alt="notion import"
