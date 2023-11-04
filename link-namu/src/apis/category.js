@@ -41,21 +41,3 @@ export const updateCategory = ({ categoryId, categoryName }) => {
     categoryName: categoryName,
   });
 };
-
-/**
- * 카테고리 공유 링크 생성
- * @param {number} categoryId - 공유할 카테고리 ID
- * @returns
- */
-export const shareCategory = ({ categoryId }) => {
-  return instance.get(`/api/category/share/${categoryId}`);
-};
-
-/**
- * 카테고리 가져오기
- * @param {string} shareLink
- * @returns
- */
-export const importCategory = ({ shareLink }) => {
-  return instance.post(`/api/category/import?shareLink=${shareLink}`);
-};
