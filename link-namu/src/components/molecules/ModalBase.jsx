@@ -1,8 +1,7 @@
 import ModalTitle from "../atoms/ModalTitle";
 import ModalBox from "../atoms/ModalBox";
-import ModalButtonBox from "../atoms/ModalButtonBox";
-import ModalNextButton from "../atoms/ModalNextButton";
-import ModalPrevButton from "../atoms/ModalPrevButton";
+import closeIcon from "../../assets/x.png";
+import ModalCloseButton from "../atoms/ModalCloseButton";
 
 const modalSize = {
   sm: "w-[15rem]",
@@ -27,6 +26,7 @@ const ModalBase = ({ size = "md", titleName = "제목", children }) => {
       className={`${fixedPositionCenter} ${modalSize[size]} z-50 mx-auto overflow-y-auto bg-white rounded shadow-lg`}
     >
       <ModalBox>{children}</ModalBox>
+      <ModalCloseButton />
     </div>
   );
 };
