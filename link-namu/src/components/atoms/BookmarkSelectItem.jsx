@@ -10,9 +10,28 @@ const BookmarkSelectItem = ({
   thumbnail = null,
   title = "북마크 제목",
   url = "",
+  changeHandler = () => {},
 }) => {
+  const [bookmarkName, setBookmarkName] = useState(title);
   const [workspaceId, setWorkspaceId] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
+  const [data, setData] = useState({
+    bookmarkName: bookmarkName,
+    categoryId: categoryId,
+    link: url,
+  });
+
+  useEffect(() => {
+    changeHandler(data);
+  }, [data]);
+
+  useEffect(() => {
+    setData({
+      bookmarkName: bookmarkName,
+      categoryId: categoryId,
+      link: url,
+    });
+  }, [bookmarkName, categoryId]);
 
   return (
     <div
@@ -28,8 +47,9 @@ const BookmarkSelectItem = ({
       <div className="grow">
         <input
           className="block w-full border"
-          defaultValue={title}
+          value={bookmarkName}
           disabled={`${!checked ? "disabled" : ""}`}
+          onChange={(e) => setBookmarkName(e.target.value)}
         />
         <input readOnly defaultValue={url} className="w-full border-b" />
       </div>

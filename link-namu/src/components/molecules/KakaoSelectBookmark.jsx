@@ -18,12 +18,13 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
     console.log("bookmarkList", bookmarkList);
   }, [bookmarkList]);
 
-  // const changeData = (index, updatedData) => {
-  //   console.log(index, updatedData);
-  //   const updatedBookmarkList = [...bookmarkList];
-  //   updatedBookmarkList[index] = updatedData;
-  //   setBookmarkList(updatedBookmarkList);
-  // };
+  const changeData = (index, updatedData) => {
+    setBookmarkList((prev) => {
+      const updatedBookmarkList = [...prev];
+      updatedBookmarkList[index] = updatedData;
+      return updatedBookmarkList;
+    });
+  };
 
   const handleSelectAllClick = () => {
     if (selectAllCheckbox && selectAllCheckbox.checked) {
@@ -46,10 +47,6 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
       setCheckedIdList(checkedIdList.filter((el) => el !== id));
     }
   };
-  // useEffect(() => {
-  //   console.log("isAllChecked : ", isAllChecked);
-  //   console.log("checkedIdList : ", checkedIdList);
-  // }, [checkedIdList, isAllChecked]);
 
   useEffect(() => {
     if (bookmarkList?.length > 0)
@@ -59,16 +56,29 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const addBookmarkList = () => {
     const selectedBookmarkList = [];
 
-    checkedIdList.forEach((id) => {});
+    checkedIdList.forEach((id) => {
+      try {
+        if (bookmarkList[id].bookmarkName.length === 0) {
+          throw new Error(id + " 북마크 제목은 공백일 수 없습니다.");
+        }
+        if (!bookmarkList[id].categoryId) {
+          throw new Error(id + " 카테고리를 선택해주세요.");
+        }
+      } catch (err) {
+        alert(err.message);
+        return;
+      }
+
+      selectedBookmarkList.push(bookmarkList[id]);
+    });
+
+    console.log("요청할 데이터 : ", selectedBookmarkList);
 
     selectedBookmarkList.forEach((data, index) => {
       createBookmark({
-        bookmarkName: data.title,
+        bookmarkName: data.bookmarkName,
         bookmarkLink: data.link,
-        bookmarkDescription: "",
         categoryId: data.categoryId,
-        imageUrl: "",
-        tags: [],
       })
         .then((res) => {
           if (res.status !== 200) {
@@ -92,37 +102,43 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
             추가할 링크를 선택해주세요.
           </span>
         </div>
-        {!bookmarkList ? (
-          <div>발견된 링크가 없습니다.</div>
-        ) : (
-          <div className="mx-auto px-5">
-            <div className="float-right flex gap-x-3 pr-10">
-              <span>전체 선택</span>
-              <Checkbox
-                id="selectAllCheckbox"
-                checked={isAllChecked}
-                onChange={handleSelectAllChange}
-                onClick={handleSelectAllClick}
-              />
-            </div>
-            <ul className="h-[450px] w-[800px] mx-auto p-2 overflow-y-scroll overflow-x-clip">
-              {bookmarkList.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <BookmarkSelectItem
-                      id={index}
-                      checked={checkedIdList.includes(index)}
-                      handleCheckedChange={(e) => {
-                        handleCheckedChange(e.target.checked, index);
-                      }}
-                      url={item.link}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
+        <ModalBox>
+          {bookmarkList &&
+            (bookmarkList.length === 0 ? (
+              <div>발견된 링크가 없습니다.</div>
+            ) : (
+              <div className="mx-auto px-5">
+                <div className="float-right flex gap-x-3 pr-10">
+                  <span>전체 선택</span>
+                  <Checkbox
+                    id="selectAllCheckbox"
+                    checked={isAllChecked}
+                    onChange={handleSelectAllChange}
+                    onClick={handleSelectAllClick}
+                  />
+                </div>
+                <ul className="h-[450px] w-[800px] mx-auto p-2 overflow-y-scroll overflow-x-clip">
+                  {bookmarkList.map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <BookmarkSelectItem
+                          id={index}
+                          checked={checkedIdList.includes(index)}
+                          handleCheckedChange={(e) => {
+                            handleCheckedChange(e.target.checked, index);
+                          }}
+                          url={item?.link}
+                          changeHandler={(data) => {
+                            changeData(index, data);
+                          }}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+        </ModalBox>
       </div>
     ),
     buttonHandler: addBookmarkList,
