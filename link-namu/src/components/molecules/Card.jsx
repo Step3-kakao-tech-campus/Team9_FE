@@ -23,6 +23,10 @@ const Card = ({
 }) => {
   const [isDragging, setIsDragging] = useState(false);
 
+  const onClickHandler = () => {
+    window.location.href = url;
+  };
+
   return (
     <Draggable key={bookmarkId} draggableId={dragId} index={1}>
       {provided => (
@@ -33,6 +37,7 @@ const Card = ({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          onClick={onClickHandler}
         >
           {/* 이미지 영역 */}
           <img
