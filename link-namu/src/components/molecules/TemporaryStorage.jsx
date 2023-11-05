@@ -33,7 +33,7 @@ const TemporaryStorage = ({ isOpen }) => {
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="h-[100%] flex flex-col items-center"
+            className="h-[100%] flex flex-col items-center overflow-y-scroll"
           >
             {cardList &&
               cardList.map(bookmark => {
