@@ -16,6 +16,7 @@ const Card = ({
   bookmarkId = "",
   imageUrl = "",
   imageAlt = "",
+  url = "",
   title = "",
   description = "",
   tags = [],

@@ -120,6 +120,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
                     description={bookmark.description}
                     tags={bookmark.tags}
                     imageUrl={bookmark.imageUrl}
+                    url={bookmark.url}
                     dragId={
                       bookmark.bookmarkId +
                       bookmark.title +
