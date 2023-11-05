@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import Card from "./Card";
+import DraggedCard from "../atoms/DraggedCard";
 
 const TemporaryStorage = ({ isOpen }) => {
   const [isContents, setIsContents] = useState(false);
@@ -28,20 +28,19 @@ const TemporaryStorage = ({ isOpen }) => {
       <div>
         <h3 className="m-4 text-2xl font-bold text-center">임시보관함</h3>
       </div>
-      <Droppable droppableId="temp">
+      <Droppable droppableId="temp" direction="vertical">
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="h-96"
+            className="h-[100%] flex flex-col items-center"
           >
             {cardList &&
               cardList.map(bookmark => {
                 return (
-                  <Card
+                  <DraggedCard
                     key={bookmark.id}
-                    bookmarkId={bookmark.id}
-                    dragId={bookmark.id}
+                    id={bookmark.id}
                     title={bookmark.title}
                   />
                 );
