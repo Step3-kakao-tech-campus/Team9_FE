@@ -13,7 +13,10 @@ const Menubar = () => {
 
   return (
     <>
-      <div className="w-[256px] h-screen fixed left-0 top-0 flex flex-col border border-[#d9d9d9] bg-white rounded-r-lg">
+      <div
+        className="w-[256px] h-screen fixed left-0 top-0 flex flex-col border border-[#d9d9d9] bg-white rounded-r-lg"
+        onContextMenu={(e) => e.preventDefault()}
+      >
         <ModalCloseButton />
         <div className="p-6 border-b border-[#d9d9d9] text-center">
           <span className="text-base font-medium">🎄 LinkNamu</span>
