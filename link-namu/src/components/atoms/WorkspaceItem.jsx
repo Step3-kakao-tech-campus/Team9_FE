@@ -23,9 +23,7 @@ const WorkspaceItem = ({
   return (
     <div className="wrapper">
       <div
-        className={`px-3 py-[10px] grid grid-cols-[20px,1fr,16px] gap-x-3 rounded-lg cursor-pointer hover:bg-[#f6f6f6] ${
-          opened && "bg-[#f6f6f6]"
-        }`}
+        className={`px-3 py-[10px] grid grid-cols-[20px,1fr,16px] gap-x-3 rounded-lg cursor-pointer hover:bg-[#f6f6f6]`}
         onClick={() => {
           setOpened(!opened);
         }}
@@ -38,7 +36,7 @@ const WorkspaceItem = ({
           <img className="w-[16px] h-[16px]" src={chevron_up} alt="" />
         )}
       </div>
-      <div className="px-[12px] py-0">
+      <div className="pl-[12px] py-0">
         {opened && categories && (
           <CategoryContainer
             workspaceId={workspaceId}
