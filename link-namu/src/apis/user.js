@@ -33,6 +33,10 @@ export const logout = () => {
  */
 export const reissue = () => {
   const refreshToken = cookies.load("refreshToken");
+  if (!refreshToken) {
+    console.log("reissue: refresh token이 존재하지 않습니다.");
+    return;
+  }
   return instance.post("/api/auth/reissue", { refreshToken: refreshToken });
 };
 

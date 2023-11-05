@@ -5,12 +5,31 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Toast from "./components/molecules/Toast";
+
+const queryErrorHandler = error => {
+  <Toast message="queryErrorHandler" type="error" />;
+  console.log("queryErrorHandler", error);
+};
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      onError: queryErrorHandler,
+      retry: 0,
+      suspense: true,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 );
