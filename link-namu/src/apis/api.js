@@ -20,10 +20,10 @@ instance.interceptors.request.use((config) => {
 
 // middleware
 instance.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
-  error => {
+  (error) => {
     console.log("error", error);
     const status = error?.response.status;
 
