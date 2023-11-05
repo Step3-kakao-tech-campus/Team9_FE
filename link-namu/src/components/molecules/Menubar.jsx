@@ -2,6 +2,7 @@ import WorkspaceItem from "../atoms/WorkspaceItem";
 import { useSelector } from "react-redux";
 import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
 import { useOpenModal } from "../../hooks/useOpenModal";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 import MODAL_TYPES from "../../constants/modal_types";
 import ModalCloseButton from "../atoms/ModalCloseButton";
@@ -23,19 +24,21 @@ const Menubar = () => {
           >
             MAIN
           </span>
-          <div>
-            {workspaceList &&
-              workspaceList.map((workspace, index) => {
-                return (
-                  <WorkspaceItem
-                    key={index}
-                    workspaceId={workspace.workspaceId}
-                    workspaceName={workspace.workspaceName}
-                    categories={workspace.categoryList}
-                  />
-                );
-              })}
-          </div>
+          <Scrollbars thumbSize={100} autoHide>
+            <div className="h-[500px] max-h-[500px]">
+              {workspaceList &&
+                workspaceList.map((workspace, index) => {
+                  return (
+                    <WorkspaceItem
+                      key={index}
+                      workspaceId={workspace.workspaceId}
+                      workspaceName={workspace.workspaceName}
+                      categories={workspace.categoryList}
+                    />
+                  );
+                })}
+            </div>
+          </Scrollbars>
         </div>
         <div className="">
           <button
