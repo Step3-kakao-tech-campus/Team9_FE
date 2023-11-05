@@ -1,17 +1,16 @@
-import "../molecules/ModalBase";
 import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { sendMe } from "../../apis/kakao";
 
-import ModalBase from "../molecules/ModalBase";
-import Toast from "../molecules/Toast";
+import ModalBox from "../atoms/ModalBox";
 
 import file_icon from "../../assets/paper_icon.png";
 import upload_cloud from "../../assets/upload_cloud.png";
 
-const KakaoFileUploadModal = () => {
+const KakaoFileUpload = ({ changeHandler }) => {
+  const dispatch = useDispatch();
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [linkList, setLinkList] = useState([]);
   const fileInput = useRef(null);
 
   // 파일 선택 핸들러
@@ -26,16 +25,24 @@ const KakaoFileUploadModal = () => {
   const removeFile = () => {
     fileInput.current.value = "";
     setSelectedFile(null);
-    setLinkList([]);
   };
   const sendMeHandler = () => {
     console.log("file: ", selectedFile);
     sendMe({ file: selectedFile })
       .then((res) => {
         console.log("send me: ", res.data?.response);
-        setLinkList(res.data?.response);
+        changeHandler(res.data?.response);
       })
       .catch((err) => console.log(err));
+  };
+  const selectFileButtonHandler = () => {
+    try {
+      if (!isFileSelected) throw new Error("파일을 선택해주세요.");
+    } catch (err) {
+      alert(err.message);
+      throw new Error();
+    }
+    sendMeHandler();
   };
 
   useEffect(() => {
@@ -61,22 +68,9 @@ const KakaoFileUploadModal = () => {
           </button>
         </div>
       )}
-      {linkList.length > 0 && (
-        <ul className="h-[150px] w-[670px] p-2 overflow-y-scroll overflow-x-clip bg-[#0f91d2]">
-          {linkList.map((item, index) => {
-            return (
-              <li
-                key={index}
-                className="p-2 mb-1 border rounded-xl bg-[#ffffff]"
-              >
-                {item.link}
-              </li>
-            );
-          })}
-        </ul>
-      )}
     </div>
   );
+
   const fileSelectArea = (
     <>
       <div
@@ -116,34 +110,23 @@ const KakaoFileUploadModal = () => {
         />
       </div>
       {isFileSelected && addedFileArea}
-      {isFileSelected && (
-        <button
-          className="border p-4 bg-[#000000] text-[#ffff00] rounded"
-          onClick={sendMeHandler}
-        >
-          API 요청
-        </button>
-      )}
     </>
   );
 
-  const modalContent = (
-    <div>
-      <div className="mx-auto text-center">
-        <h2 className="text-xl mb-4">카카오톡에서 가져오기</h2>
-        <span className="text-sm text-[rgba(0, 0, 0, 0.60)]">
-          카카오톡에서 내보내기한 파일을 선택해주세요.
-        </span>
-      </div>
-      {fileSelectArea}
-    </div>
-  );
-
-  return (
-    <ModalBase size="lg" titleName="" prevName="취소">
-      {modalContent}
-    </ModalBase>
-  );
+  return {
+    content: (
+      <>
+        <div className="mx-auto mt-5 text-center">
+          <h2 className="text-xl mb-4">카카오톡에서 가져오기</h2>
+          <span className="text-sm text-[rgba(0, 0, 0, 0.60)]">
+            카카오톡에서 내보내기한 파일을 선택해주세요.
+          </span>
+        </div>
+        <ModalBox>{fileSelectArea}</ModalBox>
+      </>
+    ),
+    buttonHandler: selectFileButtonHandler,
+  };
 };
 
-export default KakaoFileUploadModal;
+export default KakaoFileUpload;

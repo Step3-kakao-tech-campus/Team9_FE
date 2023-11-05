@@ -1,24 +1,27 @@
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal, selectModal } from "../../store/slices/modalSlice";
+import { useSelector } from "react-redux";
+import { selectModal } from "../../store/slices/modalSlice";
 
 import Container from "./Container";
 import Overlay from "./Overlay";
-import KakaoFileUploadModal from "../organisms/KakaoFileUploadModal";
+import KakaoModal from "../organisms/KakaoModal";
+import BookmarkAddModal from "../organisms/BookmarkAddModal";
+import CategoryAddModal from "../organisms/CategoryAddModal";
+import NotionModal from "../organisms/NotionModal";
+import MODAL_TYPES from "../../constants/modal_types";
+import { useCloseModal } from "../../hooks/useCloseModal";
+import CategoryShareModal from "../organisms/CategoryShareModal";
+import ShareLinkModal from "../organisms/ShareLinkModal";
+import Menubar from "../molecules/Menubar";
+import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
 
-const MODAL_TYPES = {
-  KakaoModal: "KakaoModal",
-  NotionModal: "NotionModal",
-  GoogleModal: "GoogleModal",
-  BookmarkAddModal: "BookmarkAddModal",
-};
 const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.KakaoModal,
-    component: <KakaoFileUploadModal />,
+    component: <KakaoModal />,
   },
   {
     type: MODAL_TYPES.NotionModal,
-    component: null,
+    component: <NotionModal />,
   },
   {
     type: MODAL_TYPES.GoogleModal,
@@ -26,13 +29,33 @@ const MODAL_COMPONENTS = [
   },
   {
     type: MODAL_TYPES.BookmarkAddModal,
-    component: null,
+    component: <BookmarkAddModal />,
+  },
+  {
+    type: MODAL_TYPES.CategoryAddModal,
+    component: <CategoryAddModal />,
+  },
+  {
+    type: MODAL_TYPES.WorkspaceAddModal,
+    component: <WorkspaceAddModal />,
+  },
+  {
+    type: MODAL_TYPES.CategoryShareModal,
+    component: <CategoryShareModal />,
+  },
+  {
+    type: MODAL_TYPES.ShareLinkModal,
+    component: <ShareLinkModal />,
+  },
+  {
+    type: MODAL_TYPES.Menubar,
+    component: <Menubar />,
   },
 ];
 
 function GlobalModal() {
   const { modalType, isOpen } = useSelector(selectModal);
-  const dispatch = useDispatch();
+  const closeModal = useCloseModal();
   if (!isOpen) return;
 
   const findModal = MODAL_COMPONENTS.find((modal) => {
@@ -44,7 +67,7 @@ function GlobalModal() {
 
   return (
     <Container>
-      <Overlay onClick={() => dispatch(closeModal())} />
+      <Overlay onClick={closeModal} />
       {renderModal()}
     </Container>
   );

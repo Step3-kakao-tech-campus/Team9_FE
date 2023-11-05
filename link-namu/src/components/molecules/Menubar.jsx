@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
 import WorkspaceItem from "../atoms/WorkspaceItem";
-import { getWorkspaceList } from "../../apis/workspace";
+import { useSelector } from "react-redux";
+import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
+import { useOpenModal } from "../../hooks/useOpenModal";
+
+import MODAL_TYPES from "../../constants/modal_types";
+import ModalCloseButton from "../atoms/ModalCloseButton";
+
 const Menubar = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    getWorkspaceList().then((res) => {
-      console.log(res);
-      setData(res.data?.response);
-    });
-  }, []);
+  const openModal = useOpenModal();
+  const { workspaceList } = useSelector(selectWorkspaceList);
 
   return (
     <>
       <div className="w-[256px] h-screen fixed left-0 top-0 flex flex-col border border-[#d9d9d9] bg-white rounded-r-lg">
+        <ModalCloseButton />
         <div className="p-6 border-b border-[#d9d9d9] text-center">
           <span className="text-base font-medium">🎄 LinkNamu</span>
         </div>
@@ -23,8 +24,8 @@ const Menubar = () => {
             MAIN
           </span>
           <div>
-            {data &&
-              data.map((workspace, index) => {
+            {workspaceList &&
+              workspaceList.map((workspace, index) => {
                 return (
                   <WorkspaceItem
                     key={index}
@@ -37,8 +38,13 @@ const Menubar = () => {
           </div>
         </div>
         <div className="">
-          <button className="block w-[190px] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md">
-            카테고리 추가
+          <button
+            onClick={() =>
+              openModal({ modalType: MODAL_TYPES.WorkspaceAddModal })
+            }
+            className="block w-[190px] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md"
+          >
+            워크스페이스 추가
           </button>
         </div>
       </div>

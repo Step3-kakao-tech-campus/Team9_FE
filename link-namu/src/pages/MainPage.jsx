@@ -3,6 +3,9 @@ import BookmarkGridTemplate from "../components/templates/BookmarkGridTemplate";
 import { useDispatch, useSelector } from "react-redux";
 import { reissue } from "../apis/user";
 import { setToken } from "../store/slices/userSlice";
+import { useEffect } from "react";
+import { getWorkspaceList } from "../apis/workspace";
+import { setWorkspaceList } from "../store/slices/workspaceSlice";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -13,7 +16,6 @@ const MainPage = () => {
   if (!accessToken) {
     if (!cookies.load("refreshToken")) {
       window.location.href = "/signin";
-      return;
     }
 
     reissue()
@@ -31,6 +33,14 @@ const MainPage = () => {
       })
       .catch((err) => console.log(err));
   }
+
+  useEffect(() => {
+    if (!accessToken) return;
+    getWorkspaceList().then((res) => {
+      console.log(res);
+      dispatch(setWorkspaceList({ workspaceList: res.data?.response }));
+    });
+  }, [accessToken]);
 
   return (
     <div>
