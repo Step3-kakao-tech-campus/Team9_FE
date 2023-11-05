@@ -102,6 +102,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      <TemporaryStorage isOpen={isOpen} />
       <Droppable droppableId="grid" direction="horizontal">
         {(provided, snapshot) => (
           <div
@@ -134,7 +135,6 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
           </div>
         )}
       </Droppable>
-      <TemporaryStorage isOpen={isOpen} />
     </DragDropContext>
   );
 };
