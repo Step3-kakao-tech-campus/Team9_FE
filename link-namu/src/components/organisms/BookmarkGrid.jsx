@@ -38,6 +38,11 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
         tempList = [{ id: id, title: title }];
         console.log(tempList);
       } else {
+        // 중복 확인
+        if (tempList.find(item => item.id === id) !== undefined) {
+          return;
+        }
+
         tempList = [...tempList, { id: id, title: title }];
         console.log(tempList);
       }
