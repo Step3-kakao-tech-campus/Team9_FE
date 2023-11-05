@@ -38,6 +38,11 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
         tempList = [{ id: id, title: title }];
         console.log(tempList);
       } else {
+        // 중복 확인
+        if (tempList.find(item => item.id === id) !== undefined) {
+          return;
+        }
+
         tempList = [...tempList, { id: id, title: title }];
         console.log(tempList);
       }
@@ -102,6 +107,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      <TemporaryStorage isOpen={isOpen} />
       <Droppable droppableId="grid" direction="horizontal">
         {(provided, snapshot) => (
           <div
@@ -119,6 +125,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
                     description={bookmark.description}
                     tags={bookmark.tags}
                     imageUrl={bookmark.imageUrl}
+                    url={bookmark.url}
                     dragId={
                       bookmark.bookmarkId +
                       bookmark.title +
@@ -134,7 +141,6 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
           </div>
         )}
       </Droppable>
-      <TemporaryStorage isOpen={isOpen} />
     </DragDropContext>
   );
 };
