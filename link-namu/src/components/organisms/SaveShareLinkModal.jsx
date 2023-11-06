@@ -10,17 +10,27 @@ import ModalBox from "../atoms/ModalBox";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalSubTitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
+import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
 
 const SaveShareLinkModal = () => {
   const closeModal = useCloseModal();
   const [shareLink, setShareLink] = useState(null);
+  const [isCategoryShareLink, setIsCategoryShareLink] = useState(null);
+  const [workspaceId, setWorkspaceId] = useState(null);
+
   const LINK_TYPE = {
     WORKSPACE: "workspace",
     CATEGORY: "category",
   };
 
   useEffect(() => {
+    if (!shareLink) return;
     console.log(shareLink);
+    const type = extractCode(shareLink)?.type;
+
+    if (type === LINK_TYPE.CATEGORY) {
+      setIsCategoryShareLink(true);
+    }
   }, [shareLink]);
 
   const extractCode = (url) => {
@@ -47,7 +57,11 @@ const SaveShareLinkModal = () => {
       console.log("encodedId: ", data.encodedId);
 
       if (data.type === LINK_TYPE.CATEGORY) {
+        if (!workspaceId) {
+          throw new Error("워크스페이스를 선택해주세요.");
+        }
         addCategoryFromEncodedId({
+          workspaceId: workspaceId,
           encodedCategoryId: data.encodedId,
         }).then((res) => {
           console.log(res);
@@ -98,6 +112,15 @@ const SaveShareLinkModal = () => {
             placeholder="공유 링크를 입력해주세요."
           />
         </div>
+        {isCategoryShareLink && (
+          <div>
+            <ModalSubTitle>워크스페이스 선택</ModalSubTitle>
+            <WorkspaceSeleceBox
+              value={workspaceId}
+              changeHandler={setWorkspaceId}
+            />
+          </div>
+        )}
       </ModalBox>
     </SingleStepModalBase>
   );
