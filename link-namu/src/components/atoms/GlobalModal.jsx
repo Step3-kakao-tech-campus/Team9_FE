@@ -9,7 +9,6 @@ import CategoryAddModal from "../organisms/CategoryAddModal";
 import NotionModal from "../organisms/NotionModal";
 import MODAL_TYPES from "../../constants/modal_types";
 import { useCloseModal } from "../../hooks/useCloseModal";
-import CategoryShareModal from "../organisms/CategoryShareModal";
 import ShareLinkModal from "../organisms/ShareLinkModal";
 import Menubar from "../molecules/Menubar";
 import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
@@ -41,10 +40,6 @@ const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.WorkspaceAddModal,
     component: <WorkspaceAddModal />,
-  },
-  {
-    type: MODAL_TYPES.CategoryShareModal,
-    component: <CategoryShareModal />,
   },
   {
     type: MODAL_TYPES.ShareLinkModal,
