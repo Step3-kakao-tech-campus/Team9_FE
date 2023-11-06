@@ -24,12 +24,17 @@ const SaveShareLinkModal = () => {
   };
 
   useEffect(() => {
-    if (!shareLink) return;
+    if (!shareLink) {
+      setIsCategoryShareLink(false);
+      return;
+    }
     console.log(shareLink);
     const type = extractCode(shareLink)?.type;
 
     if (type === LINK_TYPE.CATEGORY) {
       setIsCategoryShareLink(true);
+    } else {
+      setIsCategoryShareLink(false);
     }
   }, [shareLink]);
 
