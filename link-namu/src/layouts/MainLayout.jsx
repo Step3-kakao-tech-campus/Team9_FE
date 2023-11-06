@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useOpenModal } from "../hooks/useOpenModal";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 import Sidebar from "../components/atoms/Sidebar";
 import MODAL_TYPES from "../constants/modal_types";
@@ -13,7 +14,9 @@ const MainLayout = () => {
     <>
       <div className="flex">
         <div className="flex-1 h-screen">
-          <Outlet />
+          <Scrollbars thumbSize={100}>
+            <Outlet />
+          </Scrollbars>
         </div>
         <Sidebar />
       </div>
