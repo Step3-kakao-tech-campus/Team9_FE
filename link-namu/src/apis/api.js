@@ -25,7 +25,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     console.log("error", error);
-    const status = error?.response.status;
+    const status = error?.response?.status;
 
     if (status >= 500) {
       <Toast
