@@ -56,6 +56,11 @@ export const addWorkspaceFromEncodedId = ({ encodedWorkspaceId }) => {
  * @param {string} params.encodedCategoryId - 암호화된 카테고리 ID
  * @returns
  */
-export const addCategoryFromEncodedId = ({ encodedCategoryId }) => {
-  return instance.post(`/api/share/category/link/${encodedCategoryId}`);
+export const addCategoryFromEncodedId = ({
+  workspaceId,
+  encodedCategoryId,
+}) => {
+  return instance.post(`/api/share/category/link/${encodedCategoryId}`, {
+    workSpaceId: workspaceId,
+  });
 };
