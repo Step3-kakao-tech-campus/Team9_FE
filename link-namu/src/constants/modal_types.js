@@ -10,6 +10,7 @@ const MODAL_TYPES = {
   Menubar: "Menubar",
   WorkspaceDeleteModal: "WorkspaceDeleteModal",
   CategoryDeleteModal: "CategoryDeleteModal",
+  SaveShareLinkModal: "SaveShareLinkModal",
 };
 
 export default MODAL_TYPES;
