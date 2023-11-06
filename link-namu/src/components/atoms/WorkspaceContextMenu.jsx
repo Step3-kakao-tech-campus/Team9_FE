@@ -1,4 +1,5 @@
 import { useOpenModal } from "../../hooks/useOpenModal";
+import { createWorkspaceShareLink } from "../../apis/share";
 
 import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
@@ -19,6 +20,30 @@ const WorkspaceContextMenu = ({
       data: { workspaceId: workspaceId },
     });
   };
+
+  const shareWorkspace = () => {
+    console.log("shareWorkspace", workspaceId);
+
+    createWorkspaceShareLink({ workspaceId: workspaceId })
+      .then((res) => {
+        console.log("workspace share link", res.data?.response);
+
+        if (res?.status !== 200) {
+          throw new Error(res.data?.error.message);
+        }
+
+        openModal({
+          modalType: MODAL_TYPES.ShareLinkModal,
+          data: { shareLink: res.data?.response },
+        });
+      })
+      .catch((err) => {
+        const msg = "[워크스페이스 공유 에러] " + err.message;
+        alert(msg);
+        console.log(msg);
+      });
+  };
+
   return (
     <div
       className="context-menu fixed border bg-white rounded shadow-md"
@@ -29,6 +54,9 @@ const WorkspaceContextMenu = ({
       <hr />
       <ContextMenuItem handleAction={() => onAction(deleteWorkspace())}>
         삭제
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(shareWorkspace())}>
+        공유하기
       </ContextMenuItem>
     </div>
   );
