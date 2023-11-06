@@ -27,11 +27,11 @@ const App = () => {
           </Route>
           <Route element={<ShareLinkLayout />}>
             <Route
-              path="share-link/workspace"
+              path="share-link/workspace/share"
               element={<SharedWorkspacePage />}
             />
             <Route
-              path="share-link/category"
+              path="share-link/category/share"
               element={<SharedCategoryPage />}
             />
           </Route>
