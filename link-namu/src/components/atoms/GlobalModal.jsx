@@ -13,6 +13,8 @@ import CategoryShareModal from "../organisms/CategoryShareModal";
 import ShareLinkModal from "../organisms/ShareLinkModal";
 import Menubar from "../molecules/Menubar";
 import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
+import WorkspaceDeleteModal from "../organisms/WorkspaceDeleteModal";
+import CategoryDeleteModal from "../organisms/CategoryDeleteModal";
 
 const MODAL_COMPONENTS = [
   {
@@ -50,6 +52,14 @@ const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.Menubar,
     component: <Menubar />,
+  },
+  {
+    type: MODAL_TYPES.WorkspaceDeleteModal,
+    component: <WorkspaceDeleteModal />,
+  },
+  {
+    type: MODAL_TYPES.CategoryDeleteModal,
+    component: <CategoryDeleteModal />,
   },
 ];
 

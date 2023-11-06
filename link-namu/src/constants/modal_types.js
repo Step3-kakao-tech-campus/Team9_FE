@@ -8,6 +8,8 @@ const MODAL_TYPES = {
   CategoryShareModal: "CategoryShareModal",
   ShareLinkModal: "ShareLinkModal",
   Menubar: "Menubar",
+  WorkspaceDeleteModal: "WorkspaceDeleteModal",
+  CategoryDeleteModal: "CategoryDeleteModal",
 };
 
 export default MODAL_TYPES;
