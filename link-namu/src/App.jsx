@@ -8,6 +8,9 @@ import MainLayout from "./layouts/MainLayout";
 import MainPage from "./pages/MainPage";
 import SignInPage from "./pages/SignInPage";
 import NotionRedirectPage from "./pages/NotionRedirectPage";
+import ShareLinkLayout from "./layouts/ShareLinkLayout";
+import SharedCategoryPage from "./pages/SharedCategoryPage";
+import SharedWorkspacePage from "./pages/SharedWorkspacePage";
 
 const App = () => {
   return (
@@ -21,6 +24,16 @@ const App = () => {
           {/* 공통 레이아웃 */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<MainPage />} />
+          </Route>
+          <Route element={<ShareLinkLayout />}>
+            <Route
+              path="share-link/workspace"
+              element={<SharedWorkspacePage />}
+            />
+            <Route
+              path="share-link/category"
+              element={<SharedCategoryPage />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
