@@ -34,9 +34,6 @@ const SharedWorkspacePage = () => {
     });
   }, [encodedId]);
 
-  const getCategoryLink = ({ id }) => {
-    return window.location.origin + "/share-link/category/share?category=" + id;
-  };
   return (
     <div>
       <h1>공유된 워크스페이스를 표시하는 페이지</h1>
@@ -46,10 +43,10 @@ const SharedWorkspacePage = () => {
         <span>{workspaceName}</span>
       </div>
       <div>
-        <div className="grid grid-cols-5 gap-x-10 gap-y-10">
+        <div className="grid grid-cols-5 gap-x-10 gap-y-10 m-20">
           {categoryList.map((category) => {
             return (
-              <div className="">
+              <div className="" key={category.shareCategoryLink}>
                 <a
                   href={
                     window.location.origin +
@@ -57,9 +54,11 @@ const SharedWorkspacePage = () => {
                     category.shareCategoryLink
                   }
                 >
-                  <div className="h-[200px] border">
+                  <div className="w-full h-[200px] p-2 border overflow-hidden">
                     <h5>{category.categoryName}</h5>
-                    {category.shareCategoryLink}
+                    <div className="overflow-x-ellipsis">
+                      {category.shareCategoryLink}
+                    </div>
                   </div>
                 </a>
               </div>
