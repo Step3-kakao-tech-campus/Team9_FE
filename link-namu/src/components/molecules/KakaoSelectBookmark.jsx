@@ -4,6 +4,7 @@ import Checkbox from "../atoms/Checkbox";
 import { createBookmark } from "../../apis/bookmark";
 
 import ModalBox from "../atoms/ModalBox";
+import { printToast } from "../../utils/toast";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const [isAllChecked, setIsAllChecked] = useState(false);
@@ -65,7 +66,7 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
           throw new Error(id + " 카테고리를 선택해주세요.");
         }
       } catch (err) {
-        alert(err.message);
+        printToast(err.message, "error");
         return;
       }
 

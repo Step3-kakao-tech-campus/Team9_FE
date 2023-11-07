@@ -1,10 +1,9 @@
 import axios from "axios";
 import { getToken } from "../store";
-import Toast from "../components/molecules/Toast";
+import { printToast } from "../utils/toast";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  timeout: 1000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -25,13 +24,10 @@ instance.interceptors.response.use(
   },
   (error) => {
     console.log("error", error);
-    const status = error?.response.status;
+    const status = error?.response?.status;
 
     if (status >= 500) {
-      <Toast
-        message="오류가 발생했습니다. 잠시 후 다시 시도해주세요."
-        type="error"
-      />;
+      printToast("오류가 발생했습니다. 잠시 후 다시 시도해주세요", "error");
     }
     return Promise.resolve(error.response);
   }
