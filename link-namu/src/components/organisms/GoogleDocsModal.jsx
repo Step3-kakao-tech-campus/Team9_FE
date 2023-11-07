@@ -7,8 +7,10 @@ import ModalTitle from "../atoms/ModalTitle";
 import ModalBox from "../atoms/ModalBox";
 import ModalSubTitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
+import { useCloseModal } from "../../hooks/useCloseModal";
 
 const GoogleDocsModal = () => {
+  const closeModal = useCloseModal();
   const [pageLink, setPageLink] = useState(null);
 
   const extractDocumentId = (url) => {
@@ -37,7 +39,12 @@ const GoogleDocsModal = () => {
         if (res.status !== 200) {
           throw new Error(res?.data?.error?.message);
         }
-        console.log("google docs res", res);
+
+        const msg = "[구글 DOCS 연동] 페이지가 등록되었습니다.";
+        console.log(msg);
+        printToast(msg);
+
+        closeModal();
       })
       .catch((err) => {
         const msg = "[구글 DOCS 연동] " + err.message;
