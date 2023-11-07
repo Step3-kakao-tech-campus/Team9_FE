@@ -6,6 +6,7 @@ import ModalBox from "../atoms/ModalBox";
 
 import file_icon from "../../assets/paper_icon.png";
 import upload_cloud from "../../assets/upload_cloud.png";
+import { printToast } from "../../utils/toast";
 
 const KakaoFileUpload = ({ changeHandler }) => {
   const dispatch = useDispatch();
@@ -39,8 +40,9 @@ const KakaoFileUpload = ({ changeHandler }) => {
     try {
       if (!isFileSelected) throw new Error("파일을 선택해주세요.");
     } catch (err) {
-      alert(err.message);
-      throw new Error();
+      printToast(err.message, "error");
+      // throw new Error();
+      return;
     }
     sendMeHandler();
   };

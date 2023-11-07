@@ -5,6 +5,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import ModalBase from "../molecules/ModalBase";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalBox from "../atoms/ModalBox";
+import { printToast } from "../../utils/toast";
 
 const ShareLinkModal = () => {
   const modalData = useModalData();
@@ -20,7 +21,7 @@ const ShareLinkModal = () => {
     setIsCopied(true);
 
     const msg = "클립보드에 복사되었습니다!";
-    alert(msg); // TODO: 토스트로 변경
+    printToast(msg, "success");
 
     setTimeout(() => {
       setIsCopied(false);
