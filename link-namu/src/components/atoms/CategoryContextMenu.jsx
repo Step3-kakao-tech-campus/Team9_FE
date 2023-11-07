@@ -39,11 +39,7 @@ const CategoryContextMenu = ({
           throw new Error(res.data?.error.message);
         }
 
-        // api 수정 후 변경할 부분 //////////////
-        const originLink = res.data?.response;
-        const path = originLink.replace("https://www.linknamu.com", "");
-        /////////////////////////////
-
+        const path = res.data?.response;
         const currentOrigin = window.location.origin;
         const shareLink = currentOrigin + path;
 
