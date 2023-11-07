@@ -27,7 +27,11 @@ const Sidebar = () => {
           alt="notion import"
           onClick={() => openModal({ modalType: MODAL_TYPES.NotionModal })}
         />
-        <SidebarTile src={logoGoogle} alt="google import " />
+        <SidebarTile
+          src={logoGoogle}
+          alt="google import "
+          onClick={() => openModal({ modalType: MODAL_TYPES.GoogleDocsModal })}
+        />
         <SidebarTile
           src={logoKakao}
           alt="kakaotalk import "
