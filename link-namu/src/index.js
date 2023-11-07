@@ -6,8 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Toast from "./components/molecules/Toast";
 import GlobalModal from "./components/atoms/GlobalModal";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const queryErrorHandler = (error) => {
   <Toast message="queryErrorHandler" type="error" />;
@@ -30,6 +31,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <App />
       <GlobalModal />
+      <ToastContainer position="bottom-center" />
     </QueryClientProvider>
   </Provider>
 );
