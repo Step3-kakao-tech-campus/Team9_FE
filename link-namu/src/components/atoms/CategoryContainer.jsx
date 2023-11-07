@@ -15,6 +15,7 @@ const CategoryContainer = ({ workspaceId, categories }) => {
           return (
             <CategoryItem
               key={index}
+              workspaceId={workspaceId}
               categoryId={category.categoryId}
               categoryName={category.categoryName}
             />

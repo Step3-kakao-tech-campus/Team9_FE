@@ -1,22 +1,32 @@
 import { useEffect, useState } from "react";
+import { useCloseModal } from "../../hooks/useCloseModal";
+import { useModalData } from "../../hooks/useModalData";
+import { createBookmark } from "../../apis/bookmark";
+
+import MultiStepModalBase from "./MultiStepModalBase";
+import ModalTitle from "../atoms/ModalTitle";
+import ModalBox from "../atoms/ModalBox";
 import ModalSubtitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
 import CategorySelectBox from "../atoms/CategorySelectBox";
-import ModalBox from "../atoms/ModalBox";
-import MultiStepModalBase from "./MultiStepModalBase";
 import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
-import { useCloseModal } from "../../hooks/useCloseModal";
-import { createBookmark } from "../../apis/bookmark";
-import ModalTitle from "../atoms/ModalTitle";
 
 const BookmarkAddModal = () => {
   const closeModal = useCloseModal();
+  const modalData = useModalData();
   const [workspaceId, setWorkspaceId] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [bookmarkLink, setBookmarkLink] = useState("");
   const [bookmarkName, setBookmarkName] = useState("");
   const [bookmarkDescription, setBookmarkDescription] = useState("");
   const [tagInput, setTagInput] = useState("");
+
+  useEffect(() => {
+    if (!modalData) return;
+    console.log("modal data", modalData);
+    setWorkspaceId(modalData.workspaceId);
+    setCategoryId(modalData.categoryId);
+  }, [modalData]);
 
   const page1 = (
     <>
