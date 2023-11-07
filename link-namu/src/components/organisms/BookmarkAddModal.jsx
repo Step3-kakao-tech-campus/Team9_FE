@@ -10,9 +10,6 @@ import ModalSubtitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
 import CategorySelectBox from "../atoms/CategorySelectBox";
 import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
-import { useCloseModal } from "../../hooks/useCloseModal";
-import { createBookmark } from "../../apis/bookmark";
-import ModalTitle from "../atoms/ModalTitle";
 import { printToast } from "../../utils/toast";
 
 const BookmarkAddModal = () => {
