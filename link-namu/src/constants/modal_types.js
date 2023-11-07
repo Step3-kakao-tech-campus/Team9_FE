@@ -10,6 +10,9 @@ const MODAL_TYPES = {
   WorkspaceDeleteModal: "WorkspaceDeleteModal",
   CategoryDeleteModal: "CategoryDeleteModal",
   GoogleDocsModal: "GoogleDocsModal",
+  SaveShareLinkModal: "SaveShareLinkModal",
+  CategoryRenameModal: "CategoryRenameModal",
+  WorkspaceRenameModal: "WorkspaceRenameModal",
 };
 
 export default MODAL_TYPES;
