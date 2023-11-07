@@ -7,6 +7,7 @@ import ModalBox from "../atoms/ModalBox";
 import ModalTextInput from "../atoms/ModalTextInput";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import SingleStepModalBase from "./SingleStepModalBase";
+import { printToast } from "../../utils/toast";
 
 const WorkspaceAddModal = () => {
   const closeModal = useCloseModal();
@@ -14,7 +15,7 @@ const WorkspaceAddModal = () => {
 
   const addCategory = () => {
     if (!workspaceName) {
-      alert("워크스페이스 이름을 입력해주세요.");
+      printToast("워크스페이스 이름을 입력해주세요.", "error");
       return;
     }
 
@@ -23,7 +24,7 @@ const WorkspaceAddModal = () => {
         if (res.status === 200) {
           const msg = "워크스페이스가 추가되었습니다.";
           console.log(msg);
-          alert(msg); // TODO: toast로 바꾸기
+          printToast(msg, "success");
           closeModal();
         } else {
           throw new Error(res.data?.error?.message);
@@ -31,7 +32,7 @@ const WorkspaceAddModal = () => {
       })
       .catch((err) => {
         const msg = `[워크스페이스 추가 에러] ${err.message}`;
-        alert(msg);
+        printToast(msg, "error");
         console.log(msg);
       });
   };

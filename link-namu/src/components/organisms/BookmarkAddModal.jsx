@@ -1,22 +1,33 @@
 import { useEffect, useState } from "react";
+import { useCloseModal } from "../../hooks/useCloseModal";
+import { useModalData } from "../../hooks/useModalData";
+import { createBookmark } from "../../apis/bookmark";
+
+import MultiStepModalBase from "./MultiStepModalBase";
+import ModalTitle from "../atoms/ModalTitle";
+import ModalBox from "../atoms/ModalBox";
 import ModalSubtitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
 import CategorySelectBox from "../atoms/CategorySelectBox";
-import ModalBox from "../atoms/ModalBox";
-import MultiStepModalBase from "./MultiStepModalBase";
 import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
-import { useCloseModal } from "../../hooks/useCloseModal";
-import { createBookmark } from "../../apis/bookmark";
-import ModalTitle from "../atoms/ModalTitle";
+import { printToast } from "../../utils/toast";
 
 const BookmarkAddModal = () => {
   const closeModal = useCloseModal();
+  const modalData = useModalData();
   const [workspaceId, setWorkspaceId] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [bookmarkLink, setBookmarkLink] = useState("");
   const [bookmarkName, setBookmarkName] = useState("");
   const [bookmarkDescription, setBookmarkDescription] = useState("");
   const [tagInput, setTagInput] = useState("");
+
+  useEffect(() => {
+    if (!modalData) return;
+    console.log("modal data", modalData);
+    setWorkspaceId(modalData.workspaceId);
+    setCategoryId(modalData.categoryId);
+  }, [modalData]);
 
   const page1 = (
     <>
@@ -110,7 +121,7 @@ const BookmarkAddModal = () => {
         throw new Error("카테고리를 선택해주세요.");
       }
     } catch (err) {
-      alert(err.message);
+      printToast(err.message, "error");
       return;
     }
 
@@ -119,7 +130,7 @@ const BookmarkAddModal = () => {
         console.log("북마크 추가", res);
         if (res.status === 200) {
           const msg = "북마크가 추가되었습니다 !";
-          alert(msg); // TODO: toast로 바꾸기
+          printToast(msg, "success");
           console.log(msg);
           closeModal();
         } else {
@@ -128,7 +139,7 @@ const BookmarkAddModal = () => {
       })
       .catch((err) => {
         const msg = `$[북마크 추가 에러] ${err.message}`;
-        alert(msg); // TODO: toast로 바꾸기
+        printToast(msg, "error");
         console.log(msg);
       });
   };
