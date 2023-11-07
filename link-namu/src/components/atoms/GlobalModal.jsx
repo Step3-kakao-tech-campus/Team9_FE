@@ -10,11 +10,11 @@ import NotionModal from "../organisms/NotionModal";
 import MODAL_TYPES from "../../constants/modal_types";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import ShareLinkModal from "../organisms/ShareLinkModal";
-import Menubar from "../molecules/Menubar";
 import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
 import WorkspaceDeleteModal from "../organisms/WorkspaceDeleteModal";
 import CategoryDeleteModal from "../organisms/CategoryDeleteModal";
 import GoogleDocsModal from "../organisms/GoogleDocsModal";
+import SaveShareLinkModal from "../organisms/SaveShareLinkModal";
 
 const MODAL_COMPONENTS = [
   {
@@ -46,8 +46,8 @@ const MODAL_COMPONENTS = [
     component: <ShareLinkModal />,
   },
   {
-    type: MODAL_TYPES.Menubar,
-    component: <Menubar />,
+    type: MODAL_TYPES.SaveShareLinkModal,
+    component: <SaveShareLinkModal />,
   },
   {
     type: MODAL_TYPES.WorkspaceDeleteModal,
