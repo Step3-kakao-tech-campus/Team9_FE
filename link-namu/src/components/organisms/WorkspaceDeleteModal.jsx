@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import SingleStepModalBase from "./SingleStepModalBase";
 import ModalBox from "../atoms/ModalBox";
 import ModalTitle from "../atoms/ModalTitle";
+import { printToast } from "../../utils/toast";
 
 const WorkspaceDeleteModal = () => {
   const closeModal = useCloseModal();
@@ -25,7 +26,7 @@ const WorkspaceDeleteModal = () => {
         throw new Error("오류가 발생했습니다.");
       }
     } catch (err) {
-      alert(err.message);
+      printToast(err.message, "error");
       closeModal();
     }
 
@@ -35,13 +36,13 @@ const WorkspaceDeleteModal = () => {
         if (res?.status !== 200) {
           throw new Error(res.data?.error?.message);
         }
-        alert("삭제되었습니다.");
+        printToast("삭제되었습니다.", "success");
         closeModal();
       })
       .catch((err) => {
         const msg = "[워크스페이스 삭제 에러] " + err.message;
         console.log(msg);
-        alert(msg);
+        printToast(msg, "error");
         closeModal();
       });
   };
