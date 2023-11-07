@@ -39,9 +39,11 @@ const Sidebar = () => {
         />
         <SidebarTile
           src={addBookmark}
-          alt="add bookmark with link"
+          alt="share link import"
           padding={false}
-          onClick={() => openModal({ modalType: MODAL_TYPES.BookmarkAddModal })}
+          onClick={() =>
+            openModal({ modalType: MODAL_TYPES.SaveShareLinkModal })
+          }
         />
       </div>
     </>

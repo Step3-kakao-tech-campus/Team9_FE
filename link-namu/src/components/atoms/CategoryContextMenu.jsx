@@ -5,7 +5,14 @@ import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
 import { printToast } from "../../utils/toast";
 
-const CategoryContextMenu = ({ top, left, onClose, onAction, categoryId }) => {
+const CategoryContextMenu = ({
+  top,
+  left,
+  onClose,
+  onAction,
+  workspaceId,
+  categoryId,
+}) => {
   const openModal = useOpenModal();
 
   const deleteCategory = () => {
@@ -15,7 +22,13 @@ const CategoryContextMenu = ({ top, left, onClose, onAction, categoryId }) => {
       data: { categoryId: categoryId },
     });
   };
-
+  const addBookmark = () => {
+    console.log("addBookmark", categoryId);
+    openModal({
+      modalType: MODAL_TYPES.BookmarkAddModal,
+      data: { workspaceId: workspaceId, categoryId: categoryId },
+    });
+  };
   const shareCategory = () => {
     console.log("shareCategory", categoryId);
 
@@ -27,9 +40,13 @@ const CategoryContextMenu = ({ top, left, onClose, onAction, categoryId }) => {
           throw new Error(res.data?.error.message);
         }
 
+        const path = res.data?.response;
+        const currentOrigin = window.location.origin;
+        const shareLink = currentOrigin + path;
+
         openModal({
           modalType: MODAL_TYPES.ShareLinkModal,
-          data: { shareLink: res.data?.response },
+          data: { shareLink: shareLink },
         });
       })
       .catch((err) => {
@@ -49,6 +66,9 @@ const CategoryContextMenu = ({ top, left, onClose, onAction, categoryId }) => {
       <hr />
       <ContextMenuItem handleAction={() => onAction(deleteCategory())}>
         삭제
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(addBookmark())}>
+        북마크 추가
       </ContextMenuItem>
       <ContextMenuItem handleAction={() => onAction(shareCategory())}>
         공유하기

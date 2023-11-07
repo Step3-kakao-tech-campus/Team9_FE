@@ -33,9 +33,14 @@ const WorkspaceContextMenu = ({
           throw new Error(res.data?.error.message);
         }
 
+        const path = res.data?.response;
+        const currentOrigin = window.location.origin;
+        const shareLink = currentOrigin + path;
+
+        console.log(shareLink);
         openModal({
           modalType: MODAL_TYPES.ShareLinkModal,
-          data: { shareLink: res.data?.response },
+          data: { shareLink: shareLink },
         });
       })
       .catch((err) => {
