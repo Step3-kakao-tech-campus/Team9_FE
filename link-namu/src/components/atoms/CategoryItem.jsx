@@ -9,7 +9,11 @@ import CategoryContextMenu from "./CategoryContextMenu";
  * @param {string} categoryName - 카테고리 이름
  * @returns
  */
-const CategoryItem = ({ categoryId, categoryName = "하위 카테고리" }) => {
+const CategoryItem = ({
+  workspaceId,
+  categoryId,
+  categoryName = "하위 카테고리",
+}) => {
   const dispatch = useDispatch();
   const currCategoryId = useSelector((state) => {
     return state.bookmark.currCategoryId;
@@ -42,6 +46,7 @@ const CategoryItem = ({ categoryId, categoryName = "하위 카테고리" }) => {
           left={contextMenuPosition.left}
           onClose={closeContextMenu}
           onAction={handleContextMenuAction}
+          workspaceId={workspaceId}
           categoryId={categoryId}
         />
       )}
