@@ -15,6 +15,7 @@ import Menubar from "../molecules/Menubar";
 import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
 import WorkspaceDeleteModal from "../organisms/WorkspaceDeleteModal";
 import CategoryDeleteModal from "../organisms/CategoryDeleteModal";
+import GoogleDocsModal from "../organisms/GoogleDocsModal";
 
 const MODAL_COMPONENTS = [
   {
@@ -60,6 +61,10 @@ const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.CategoryDeleteModal,
     component: <CategoryDeleteModal />,
+  },
+  {
+    type: MODAL_TYPES.GoogleDocsModal,
+    component: <GoogleDocsModal />,
   },
 ];
 

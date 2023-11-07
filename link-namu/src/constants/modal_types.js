@@ -10,6 +10,7 @@ const MODAL_TYPES = {
   Menubar: "Menubar",
   WorkspaceDeleteModal: "WorkspaceDeleteModal",
   CategoryDeleteModal: "CategoryDeleteModal",
+  GoogleDocsModal: "GoogleDocsModal",
 };
 
 export default MODAL_TYPES;
