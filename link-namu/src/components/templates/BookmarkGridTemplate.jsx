@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import BookmarkGrid from "../organisms/BookmarkGrid";
 
 const BookmarkGridTemplate = () => {
-  const currCategoryId = useSelector(state => {
+  const currCategoryId = useSelector((state) => {
     return state.bookmark.currCategoryId;
   });
-  const currCategoryName = useSelector(state => {
+  const currCategoryName = useSelector((state) => {
     return state.bookmark.currCategoryName;
   });
   const [categoryId, setCategoryId] = useState(currCategoryId);
@@ -22,7 +22,7 @@ const BookmarkGridTemplate = () => {
     ({ pageParam = 0 }) =>
       getCategoryList({ categoryId: currCategoryId, page: pageParam }),
     {
-      getNextPageParam: lastPage => {
+      getNextPageParam: (lastPage) => {
         if (!lastPage) return undefined;
         console.log("lastPage", lastPage);
         const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
@@ -39,7 +39,7 @@ const BookmarkGridTemplate = () => {
     threshold: 0.5,
   };
 
-  const handleObserver = entities => {
+  const handleObserver = (entities) => {
     const target = entities[0];
     if (target.isIntersecting && hasNextPage) {
       fetchNextPage();
@@ -59,9 +59,9 @@ const BookmarkGridTemplate = () => {
   }, [bottomObserver, hasNextPage, fetchNextPage]);
 
   const bookmarkList = [];
-  data?.pages?.forEach(page => {
+  data?.pages?.forEach((page) => {
     if (page) {
-      page.data?.response?.bookmarkContents?.forEach(data => {
+      page.data?.response?.bookmarkContents?.forEach((data) => {
         bookmarkList.push(data);
       });
     }

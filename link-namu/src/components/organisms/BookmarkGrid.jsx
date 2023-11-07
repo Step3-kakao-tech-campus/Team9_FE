@@ -18,7 +18,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
   });
 
   // 드래그 종료
-  const onDragEnd = useCallback(result => {
+  const onDragEnd = useCallback((result) => {
     setIsOpen(false);
 
     if (result.destination === null) return;
@@ -39,7 +39,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
         console.log(tempList);
       } else {
         // 중복 확인
-        if (tempList.find(item => item.id === id) !== undefined) {
+        if (tempList.find((item) => item.id === id) !== undefined) {
           return;
         }
 
@@ -57,7 +57,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
     ) {
       const id = result.draggableId;
       let tempList = JSON.parse(window.localStorage.getItem("tempList"));
-      tempList = tempList.filter(bookmark => bookmark.id !== id);
+      tempList = tempList.filter((bookmark) => bookmark.id !== id);
 
       const payload = JSON.stringify({
         bookmarkList: [id],
@@ -70,7 +70,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
       mutate(
         { bookmarkIdList: [id], toCategoryId: categoryId },
         {
-          onError: error => {
+          onError: (error) => {
             console.log(error.response.data.error.message);
             printToast("이동에 실패했습니다.", "error");
           },
@@ -86,7 +86,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
   }, []);
 
   // 드래그 시작
-  const onDragStart = useCallback(result => {
+  const onDragStart = useCallback((result) => {
     setIsOpen(true);
   }, []);
 
@@ -117,7 +117,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
             {...provided.droppableProps}
           >
             {bookmarkList &&
-              bookmarkList.map(bookmark => {
+              bookmarkList.map((bookmark) => {
                 return (
                   <Card
                     bookmarkId={bookmark.bookmarkId}
