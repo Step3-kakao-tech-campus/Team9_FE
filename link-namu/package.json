@@ -1,17 +1,24 @@
 {
   "name": "link-namu",
   "version": "0.1.0",
-  "engines": {"node": ">=18.16.0"},
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "^1.9.7",
+    "@tanstack/react-query": "^5.4.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-cookies": "^0.1.1",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-query": "^3.39.3",
@@ -24,7 +31,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env SSL_CRT_FILE=.cert/cert.pem SSL_KEY_FILE=.cert/key.pem HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -48,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "redux-devtools-extension": "^2.13.9"
   }
 }

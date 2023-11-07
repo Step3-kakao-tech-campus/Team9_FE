@@ -48,12 +48,12 @@ export const updateBookmark = ({ bookmarkId, bookmarkName, description }) => {
  * @param {array, number} param0
  * @returns
  */
-// export const moveBookmark = ({ bookmarkIdList, toCategoryId }) => {
-//   return instance.post("/api/bookmark/move", {
-//     bookmarkIdList: bookmarkIdList,
-//     toCategoryId: toCategoryId,
-//   });
-// };
+export const moveBookmark = ({ bookmarkIdList, toCategoryId }) => {
+  return instance.post("/api/bookmark/move", {
+    bookmarkIdList: bookmarkIdList,
+    toCategoryId: toCategoryId,
+  });
+};
 
 /**
  * 북마크 조회
