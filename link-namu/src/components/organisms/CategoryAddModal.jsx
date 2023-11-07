@@ -8,6 +8,7 @@ import ModalTextInput from "../atoms/ModalTextInput";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import SingleStepModalBase from "./SingleStepModalBase";
 import { useModalData } from "../../hooks/useModalData";
+import { printToast } from "../../utils/toast";
 
 const CategoryAddModal = ({ data }) => {
   const closeModal = useCloseModal();
@@ -20,7 +21,7 @@ const CategoryAddModal = ({ data }) => {
   }, [modalData]);
   const addCategory = () => {
     if (!categoryName) {
-      alert("카테고리 이름을 입력해주세요.");
+      printToast("카테고리 이름을 입력해주세요.", "error");
       return;
     }
 
@@ -32,7 +33,7 @@ const CategoryAddModal = ({ data }) => {
         if (res.status === 200) {
           const msg = "카테고리가 추가되었습니다.";
           console.log(msg);
-          alert(msg); // TODO: toast로 바꾸기
+          printToast(msg, "success");
           closeModal();
         } else {
           throw new Error(res.data?.error?.message);
@@ -40,7 +41,7 @@ const CategoryAddModal = ({ data }) => {
       })
       .catch((err) => {
         const msg = `[카테고리 추가 에러] ${err.message}`;
-        alert(msg);
+        printToast(msg, "error");
         console.log(msg);
       });
   };

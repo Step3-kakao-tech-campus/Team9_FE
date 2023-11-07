@@ -3,6 +3,7 @@ import { createCategoryShareLink } from "../../apis/share";
 
 import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
+import { printToast } from "../../utils/toast";
 
 const CategoryContextMenu = ({
   top,
@@ -50,7 +51,7 @@ const CategoryContextMenu = ({
       })
       .catch((err) => {
         const msg = "[카테고리 공유 에러] " + err.message;
-        alert(msg);
+        printToast(msg, "error");
         console.log(msg);
       });
   };

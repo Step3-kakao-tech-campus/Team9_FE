@@ -9,6 +9,7 @@ import ModalSubtitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
 
 import logo_notion from "../../assets/notion_logo.png";
+import { printToast } from "../../utils/toast";
 
 const NotionModal = () => {
   const closeModal = useCloseModal();
@@ -39,7 +40,7 @@ const NotionModal = () => {
       .catch((err) => {
         const msg = "[노션 연동 에러] " + err.message;
         console.log(msg);
-        alert(msg);
+        printToast(msg, "error");
         // closeModal();
       });
   }, [dataReady]);
@@ -65,7 +66,7 @@ const NotionModal = () => {
     } catch (err) {
       const msg = "[노션 페이지 링크 에러] " + err.message;
       console.log(msg);
-      alert(msg);
+      printToast(msg, "error");
       return;
     }
 
@@ -75,7 +76,7 @@ const NotionModal = () => {
       }
     } catch (err) {
       console.log(err);
-      alert("[노션 계정 연동 에러] " + err.message);
+      printToast("[노션 계정 연동 에러] " + err.message, "error");
       return;
     }
   };

@@ -3,6 +3,7 @@ import { createWorkspaceShareLink } from "../../apis/share";
 
 import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
+import { printToast } from "../../utils/toast";
 
 const WorkspaceContextMenu = ({
   top,
@@ -44,7 +45,7 @@ const WorkspaceContextMenu = ({
       })
       .catch((err) => {
         const msg = "[워크스페이스 공유 에러] " + err.message;
-        alert(msg);
+        printToast(msg, "error");
         console.log(msg);
       });
   };
