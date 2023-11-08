@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import BookmarkSelectItem from "../atoms/BookmarkSelectItem";
 import Checkbox from "../atoms/Checkbox";
 import { createBookmark } from "../../apis/bookmark";
@@ -76,7 +76,10 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
     }
 
     console.log("요청할 데이터 : ", selectedBookmarkList);
-
+    if (selectedBookmarkList.length === 0) {
+      printToast("추가할 북마크를 선택해주세요.", "error");
+      return;
+    }
     selectedBookmarkList.forEach((data, index) => {
       createBookmark({
         bookmarkName: data.bookmarkName,
