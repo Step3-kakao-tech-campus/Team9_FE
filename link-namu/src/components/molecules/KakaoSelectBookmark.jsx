@@ -6,6 +6,8 @@ import { createBookmark } from "../../apis/bookmark";
 import ModalBox from "../atoms/ModalBox";
 import { printToast } from "../../utils/toast";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import ModalTitle from "../atoms/ModalTitle";
+import ModalSubtitle from "../atoms/ModalSubtitle";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const [isAllChecked, setIsAllChecked] = useState(false);
@@ -97,10 +99,8 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
     content: (
       <div>
         <div className="mx-auto mt-5 text-center">
-          <h2 className="text-xl mb-4">발견된 링크</h2>
-          <span className="text-sm text-[rgba(0, 0, 0, 0.60)]">
-            추가할 링크를 선택해주세요.
-          </span>
+          <ModalTitle>발견된 링크</ModalTitle>
+          <ModalSubtitle>추가할 링크를 선택해주세요.</ModalSubtitle>
         </div>
         <ModalBox>
           {bookmarkList &&

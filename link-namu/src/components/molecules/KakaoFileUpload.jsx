@@ -7,6 +7,8 @@ import ModalBox from "../atoms/ModalBox";
 import file_icon from "../../assets/paper_icon.png";
 import upload_cloud from "../../assets/upload_cloud.png";
 import { printToast } from "../../utils/toast";
+import ModalTitle from "../atoms/ModalTitle";
+import ModalSubtitle from "../atoms/ModalSubtitle";
 
 const KakaoFileUpload = ({ changeHandler }) => {
   const dispatch = useDispatch();
@@ -137,10 +139,10 @@ const KakaoFileUpload = ({ changeHandler }) => {
     content: (
       <>
         <div className="mx-auto mt-5 text-center">
-          <h2 className="text-xl mb-4">카카오톡에서 가져오기</h2>
-          <span className="text-sm text-[rgba(0, 0, 0, 0.60)]">
+          <ModalTitle>카카오톡에서 가져오기</ModalTitle>
+          <ModalSubtitle>
             카카오톡에서 내보내기한 파일을 선택해주세요.
-          </span>
+          </ModalSubtitle>
         </div>
         <ModalBox>{fileSelectArea}</ModalBox>
       </>
