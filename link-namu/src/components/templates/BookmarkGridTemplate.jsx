@@ -4,14 +4,14 @@ import { useInfiniteQuery } from "react-query";
 import { useSelector } from "react-redux";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
+import Breadcrumbs from "../atoms/Breadcrumbs";
 
 const BookmarkGridTemplate = () => {
-  const currCategoryId = useSelector(state => {
-    return state.bookmark.currCategoryId;
-  });
-  const currCategoryName = useSelector(state => {
-    return state.bookmark.currCategoryName;
-  });
+  const { currWorkspaceName, currCategoryId, currCategoryName } = useSelector(
+    (state) => {
+      return state.bookmark;
+    }
+  );
   const [categoryId, setCategoryId] = useState(currCategoryId);
   useEffect(() => {
     setCategoryId(currCategoryId);
@@ -22,7 +22,7 @@ const BookmarkGridTemplate = () => {
     ({ pageParam = 0 }) =>
       getCategoryList({ categoryId: currCategoryId, page: pageParam }),
     {
-      getNextPageParam: lastPage => {
+      getNextPageParam: (lastPage) => {
         if (!lastPage) return undefined;
         console.log("lastPage", lastPage);
         const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
@@ -39,7 +39,7 @@ const BookmarkGridTemplate = () => {
     threshold: 0.5,
   };
 
-  const handleObserver = entities => {
+  const handleObserver = (entities) => {
     const target = entities[0];
     if (target.isIntersecting && hasNextPage) {
       fetchNextPage();
@@ -59,9 +59,9 @@ const BookmarkGridTemplate = () => {
   }, [bottomObserver, hasNextPage, fetchNextPage]);
 
   const bookmarkList = [];
-  data?.pages?.forEach(page => {
+  data?.pages?.forEach((page) => {
     if (page) {
-      page.data?.response?.bookmarkContents?.forEach(data => {
+      page.data?.response?.bookmarkContents?.forEach((data) => {
         bookmarkList.push(data);
       });
     }
@@ -69,7 +69,12 @@ const BookmarkGridTemplate = () => {
 
   return (
     <div>
-      <h1 className="text-[40px] text-center">{`현재 카테고리: ${currCategoryName} (ID: ${currCategoryId})`}</h1>
+      {currCategoryId && (
+        <Breadcrumbs
+          workspaceName={currWorkspaceName}
+          categoryName={currCategoryName}
+        />
+      )}
       {bookmarkList.length !== 0 && (
         <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
       )}

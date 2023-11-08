@@ -7,7 +7,7 @@ import CategoryItem from "./CategoryItem";
  * @param {array} categories - 카테고리 리스트
  * @returns
  */
-const CategoryContainer = ({ workspaceId, categories }) => {
+const CategoryContainer = ({ workspaceId, workspaceName, categories }) => {
   return (
     <div className="ml-3">
       <div className="border-l-2 border-[#d9d9d9]">
@@ -16,6 +16,7 @@ const CategoryContainer = ({ workspaceId, categories }) => {
             <CategoryItem
               key={index}
               workspaceId={workspaceId}
+              workspaceName={workspaceName}
               categoryId={category.categoryId}
               categoryName={category.categoryName}
             />
