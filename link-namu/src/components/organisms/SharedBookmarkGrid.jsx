@@ -7,7 +7,7 @@ const SharedBookmarkGrid = ({ bookmarkList }) => {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-y-10 justify-items-center p-10">
+      <div className="w-[75%] mx-auto grid grid-cols-3 gap-y-10 justify-items-center p-10">
         {bookmarkList &&
           bookmarkList.map((bookmark) => {
             return (
