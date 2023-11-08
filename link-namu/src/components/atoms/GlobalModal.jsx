@@ -13,6 +13,9 @@ import ShareLinkModal from "../organisms/ShareLinkModal";
 import WorkspaceAddModal from "../organisms/WorkspaceAddModal";
 import WorkspaceDeleteModal from "../organisms/WorkspaceDeleteModal";
 import CategoryDeleteModal from "../organisms/CategoryDeleteModal";
+import SaveShareLinkModal from "../organisms/SaveShareLinkModal";
+import CategoryRenameModal from "../organisms/CategoryRenameModal";
+import WorkspaceRenameModal from "../organisms/WorkspaceRenameModal";
 import GoogleDocsModal from "../organisms/GoogleDocsModal";
 import SaveShareLinkModal from "../organisms/SaveShareLinkModal";
 
@@ -60,6 +63,18 @@ const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.GoogleDocsModal,
     component: <GoogleDocsModal />,
+  },
+  {
+    type: MODAL_TYPES.SaveShareLinkModal,
+    component: <SaveShareLinkModal />,
+  },
+  {
+    type: MODAL_TYPES.CategoryRenameModal,
+    component: <CategoryRenameModal />,
+  },
+  {
+    type: MODAL_TYPES.WorkspaceRenameModal,
+    component: <WorkspaceRenameModal />,
   },
 ];
 
