@@ -9,8 +9,10 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalSubtitle from "../atoms/ModalSubtitle";
 import Loader from "../atoms/Loader";
+import { useCloseModal } from "../../hooks/useCloseModal";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
+  const closeModal = useCloseModal();
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [checkedIdList, setCheckedIdList] = useState([]);
   const [bookmarkList, setBookmarkList] = useState(null);
@@ -59,6 +61,10 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
   }, [checkedIdList]);
 
   const addBookmarkList = () => {
+    if (bookmarkList.length === 0) {
+      closeModal();
+      return;
+    }
     const selectedBookmarkList = [];
 
     try {
@@ -152,6 +158,7 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
         </ModalBox>
       </div>
     ),
+    title: bookmarkList && bookmarkList.length !== 0 ? "추가" : "확인",
     buttonHandler: addBookmarkList,
   };
 };
