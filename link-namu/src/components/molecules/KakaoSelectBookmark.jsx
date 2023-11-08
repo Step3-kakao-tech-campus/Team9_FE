@@ -126,6 +126,7 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                           handleCheckedChange={(e) => {
                             handleCheckedChange(e.target.checked, index);
                           }}
+                          title={item?.title}
                           url={item?.link}
                           changeHandler={(data) => {
                             changeData(index, data);

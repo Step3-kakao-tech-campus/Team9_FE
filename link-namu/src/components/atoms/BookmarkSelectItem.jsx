@@ -8,7 +8,7 @@ const BookmarkSelectItem = ({
   checked = false,
   handleCheckedChange,
   thumbnail = null,
-  title = "북마크 제목",
+  title,
   url = "",
   changeHandler = () => {},
 }) => {
