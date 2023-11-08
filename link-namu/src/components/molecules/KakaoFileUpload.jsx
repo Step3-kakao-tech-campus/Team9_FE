@@ -14,13 +14,30 @@ const KakaoFileUpload = ({ changeHandler }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInput = useRef(null);
 
+  useEffect(() => {
+    console.log("선택된 파일", selectedFile);
+  }, [selectedFile]);
+
   // 파일 선택 핸들러
   const handleUpload = (e) => {
     fileInput.current.click();
   };
   const handleChange = (e) => {
-    console.log("selected file: ", e.target.files[0]);
     if (e.target.files[0]) setSelectedFile(e.target.files[0]);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      // 여기서 선택한 파일을 처리합니다.
+      const selectedFile = files[0];
+      setSelectedFile(selectedFile);
+    }
   };
 
   const removeFile = () => {
@@ -80,6 +97,8 @@ const KakaoFileUpload = ({ changeHandler }) => {
             ? "flex-row px-8 py-4 gap-x-8"
             : "flex-col p-14 gap-y-6 "
         }`}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
       >
         <img
           src={upload_cloud}
