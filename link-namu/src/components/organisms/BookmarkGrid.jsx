@@ -19,72 +19,68 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
   });
 
   // 드래그 종료
-  const onDragEnd = useCallback((result) => {
-    setIsOpen(false);
+  const onDragEnd = useCallback(
+    result => {
+      setIsOpen(false);
 
-    if (result.destination === null) return;
+      if (result.destination === null) return;
 
-    // 임시보관함으로 이동
-    if (
-      result.source.droppableId === "grid" &&
-      result.destination.droppableId === "temp"
-    ) {
-      let tempList = JSON.parse(window.localStorage.getItem("tempList"));
-      const dragId = result.draggableId;
-      const idLeng = dragId.substring(dragId.lastIndexOf("-") + 1);
-      const id = dragId.substring(0, idLeng);
-      const title = dragId.substring(idLeng, dragId.lastIndexOf("-"));
+      // 임시보관함으로 이동
+      if (
+        result.source.droppableId === "grid" &&
+        result.destination.droppableId === "temp"
+      ) {
+        let tempList = JSON.parse(window.localStorage.getItem("tempList"));
+        const dragId = result.draggableId;
+        const idLeng = dragId.substring(dragId.lastIndexOf("-") + 1);
+        const id = dragId.substring(0, idLeng);
+        const title = dragId.substring(idLeng, dragId.lastIndexOf("-"));
 
-      if (tempList === null) {
-        tempList = [{ id: id, title: title }];
-        console.log(tempList);
-      } else {
-        // 중복 확인
-        if (tempList.find((item) => item.id === id) !== undefined) {
-          return;
+        if (tempList === null) {
+          tempList = [{ id: id, title: title }];
+          console.log(tempList);
+        } else {
+          // 중복 확인
+          if (tempList.find(item => item.id === id) !== undefined) {
+            return;
+          }
+
+          tempList = [...tempList, { id: id, title: title }];
+          console.log(tempList);
         }
 
-        tempList = [...tempList, { id: id, title: title }];
-        console.log(tempList);
+        window.localStorage.setItem("tempList", JSON.stringify(tempList));
       }
 
-      window.localStorage.setItem("tempList", JSON.stringify(tempList));
-    }
+      // 그리드로 이동
+      if (
+        result.source.droppableId === "temp" &&
+        result.destination.droppableId === "grid"
+      ) {
+        const id = result.draggableId;
+        let tempList = JSON.parse(window.localStorage.getItem("tempList"));
+        tempList = tempList.filter(bookmark => bookmark.id !== id);
 
-    // 그리드로 이동
-    if (
-      result.source.droppableId === "temp" &&
-      result.destination.droppableId === "grid"
-    ) {
-      const id = result.draggableId;
-      let tempList = JSON.parse(window.localStorage.getItem("tempList"));
-      tempList = tempList.filter((bookmark) => bookmark.id !== id);
+        // 북마크 이동 (서버)
+        mutate(
+          { bookmarkIdList: [id], toCategoryId: categoryId },
+          {
+            onError: error => {
+              console.log(error.response.data.error.message);
+              printToast("이동에 실패했습니다.", "error");
+            },
+            onSuccess: () => {
+              printToast("이동에 성공했습니다.", "success");
+            },
+          }
+        );
 
-      const payload = JSON.stringify({
-        bookmarkList: [id],
-        toCategoryId: categoryId,
-      });
-
-      console.log(payload);
-
-      // 북마크 이동 (서버)
-      mutate(
-        { bookmarkIdList: [id], toCategoryId: categoryId },
-        {
-          onError: (error) => {
-            console.log(error.response.data.error.message);
-            printToast("이동에 실패했습니다.", "error");
-          },
-          onSuccess: () => {
-            printToast("이동에 성공했습니다.", "success");
-          },
-        }
-      );
-
-      window.localStorage.setItem("tempList", JSON.stringify(tempList));
-    }
-    console.log(result);
-  }, []);
+        window.localStorage.setItem("tempList", JSON.stringify(tempList));
+      }
+      console.log(result);
+    },
+    [categoryId, mutate]
+  );
 
   // 드래그 시작
   const onDragStart = useCallback((result) => {
