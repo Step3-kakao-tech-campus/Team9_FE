@@ -133,6 +133,7 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                             }}
                             title={item?.title}
                             url={item?.link}
+                            imageUrl={item?.imageUrl}
                             changeHandler={(data) => {
                               changeData(index, data);
                             }}
