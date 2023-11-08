@@ -82,7 +82,7 @@ const BookmarkAddModal = () => {
       bookmarkLink: bookmarkLink,
       bookmarkDescription: bookmarkDescription,
       categoryId: categoryId,
-      imageUrl: "",
+      imageUrl: null,
       tags: tagInput.split(" "),
     };
 

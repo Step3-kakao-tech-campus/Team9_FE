@@ -9,7 +9,7 @@ export const createBookmark = ({
   bookmarkLink,
   bookmarkDescription = "",
   categoryId,
-  imageUrl = "",
+  imageUrl = null,
   tags = [],
 }) => {
   return instance.post("/api/bookmark/create", {
