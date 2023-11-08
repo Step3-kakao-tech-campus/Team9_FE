@@ -113,7 +113,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <AddCard />
+            <AddCard categoryId={categoryId} />
             {bookmarkList &&
               bookmarkList.map((bookmark) => {
                 return (
