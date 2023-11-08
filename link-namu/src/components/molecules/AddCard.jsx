@@ -2,13 +2,18 @@ import addBookmark from "../../assets/add_bookmark.png";
 import MODAL_TYPES from "../../constants/modal_types";
 import { useOpenModal } from "../../hooks/useOpenModal";
 
-const AddCard = () => {
+const AddCard = ({ categoryId }) => {
   const openModal = useOpenModal();
 
   return (
     <div
       className={`transform flex flex-col bg-white border-2 rounded-md shadow-md w-72 h-80 hover:bg-gray-100 hover:border hover:border-gray-300 hover:shadow-lg hover:cursor-pointer`}
-      onClick={() => openModal({ modalType: MODAL_TYPES.BookmarkAddModal })}
+      onClick={() =>
+        openModal({
+          modalType: MODAL_TYPES.BookmarkAddModal,
+          data: { categoryId: categoryId },
+        })
+      }
     >
       <img
         src={addBookmark}
