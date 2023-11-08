@@ -59,7 +59,7 @@ const WorkspaceContextMenu = ({
 
   return (
     <div
-      className="context-menu fixed border bg-white rounded shadow-md"
+      className="context-menu fixed border bg-white rounded shadow-md z-50"
       style={{ top, left }}
       onClick={onClose}
     >
