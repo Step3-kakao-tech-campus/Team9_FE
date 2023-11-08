@@ -7,8 +7,7 @@ const BookmarkSelectItem = ({
   id,
   checked = false,
   handleCheckedChange,
-  thumbnail = null,
-  title = "북마크 제목",
+  title,
   url = "",
   changeHandler = () => {},
 }) => {
@@ -35,15 +34,10 @@ const BookmarkSelectItem = ({
 
   return (
     <div
-      className={`grow flex flex-row gap-x-4 p-2 mb-1 border rounded-xl ${
+      className={`grow flex flex-row items-center gap-x-4 px-5 py-2 mr-3 mb-1 border rounded-xl ${
         checked ? "bg-[#ecf8fc]" : "bg-[#ffffff]"
       }`}
     >
-      <img
-        src={thumbnail}
-        alt="thumbnail"
-        className="w-[50px] h-[50px] border"
-      />
       <div className="grow">
         <input
           className="block w-full border"

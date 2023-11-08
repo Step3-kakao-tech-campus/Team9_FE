@@ -2,7 +2,7 @@ const ModalSubtitle = ({ htmlFor, children }) => {
   return (
     <label
       htmlFor={htmlFor}
-      className="block px-6 py-2 text-xs text-[#2B4BF2] font-semibold"
+      className="block py-2 text-sm text-[rgba(0, 0, 0, 0.60)]"
     >
       {children}
     </label>

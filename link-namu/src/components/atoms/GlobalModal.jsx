@@ -17,7 +17,6 @@ import SaveShareLinkModal from "../organisms/SaveShareLinkModal";
 import CategoryRenameModal from "../organisms/CategoryRenameModal";
 import WorkspaceRenameModal from "../organisms/WorkspaceRenameModal";
 import GoogleDocsModal from "../organisms/GoogleDocsModal";
-import SaveShareLinkModal from "../organisms/SaveShareLinkModal";
 
 const MODAL_COMPONENTS = [
   {

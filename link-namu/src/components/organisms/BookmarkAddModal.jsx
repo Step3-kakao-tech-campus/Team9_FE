@@ -57,28 +57,6 @@ const BookmarkAddModal = () => {
       <ModalTitle>북마크 추가하기</ModalTitle>
       <ModalBox>
         <div>
-          <ModalSubtitle>워크스페이스 선택</ModalSubtitle>
-          <WorkspaceSeleceBox
-            value={workspaceId}
-            changeHandler={setWorkspaceId}
-          />
-        </div>
-        <div>
-          <ModalSubtitle>카테고리 선택</ModalSubtitle>
-          <CategorySelectBox
-            workspaceId={workspaceId}
-            value={categoryId}
-            changeHandler={setCategoryId}
-          />
-        </div>
-      </ModalBox>
-    </>
-  );
-  const page3 = (
-    <>
-      <ModalTitle>북마크 추가하기</ModalTitle>
-      <ModalBox>
-        <div>
           <ModalSubtitle>북마크 설명 (옵션)</ModalSubtitle>
           <ModalTextInput
             changeHandler={setBookmarkDescription}
@@ -146,9 +124,8 @@ const BookmarkAddModal = () => {
 
   const contentList = [];
   contentList.push({ content: page1 });
-  contentList.push({ content: page2 });
   contentList.push({
-    content: page3,
+    content: page2,
     title: "추가",
     buttonHandler: addBookmark,
   });
