@@ -41,8 +41,7 @@ const KakaoFileUpload = ({ changeHandler }) => {
       if (!isFileSelected) throw new Error("파일을 선택해주세요.");
     } catch (err) {
       printToast(err.message, "error");
-      // throw new Error();
-      return;
+      throw new Error();
     }
     sendMeHandler();
   };
