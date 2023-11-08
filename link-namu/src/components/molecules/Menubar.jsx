@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useEffect } from "react";
+import { useOpenModal } from "../../hooks/useOpenModal";
+import MODAL_TYPES from "../../constants/modal_types";
 
 const Menubar = ({ isOpen }) => {
+  const openModal = useOpenModal();
   const { workspaceList } = useSelector(selectWorkspaceList);
 
   useEffect(() => {
@@ -45,7 +48,9 @@ const Menubar = ({ isOpen }) => {
         </div>
         <div className="">
           <button
-            onClick={() => {}}
+            onClick={openModal({
+              modalType: MODAL_TYPES.WorkspaceAddModal,
+            })}
             className="block w-[75%] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md overflow-hidden"
           >
             <span className="whitespace-nowrap">워크스페이스 추가</span>
