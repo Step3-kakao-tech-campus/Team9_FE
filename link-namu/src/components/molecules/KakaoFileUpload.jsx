@@ -38,7 +38,12 @@ const KakaoFileUpload = ({ changeHandler }) => {
     if (files.length > 0) {
       // 여기서 선택한 파일을 처리합니다.
       const selectedFile = files[0];
-      setSelectedFile(selectedFile);
+      const fileExtension = selectedFile.name.split(".").pop();
+      if (fileExtension === "txt" || fileExtension === "csv") {
+        setSelectedFile(selectedFile);
+      } else {
+        printToast("올바른 파일 형식이 아닙니다.", "error");
+      }
     }
   };
 
