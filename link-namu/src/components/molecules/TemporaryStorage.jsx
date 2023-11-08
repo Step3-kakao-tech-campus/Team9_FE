@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import DraggedCard from "../atoms/DraggedCard";
+import Scrollbars from "react-custom-scrollbars-2";
 
 const TemporaryStorage = ({ isOpen }) => {
   const [isContents, setIsContents] = useState(false);
@@ -21,7 +22,7 @@ const TemporaryStorage = ({ isOpen }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 flex flex-col w-80 h-screen border-l bg-slate-200 ${
+      className={`fixed top-[56px] right-[60px] bottom-0 flex flex-col w-80 border-l bg-slate-200 ${
         isOpen || isContents ? `opacity-1 z-50` : `opacity-0 z-0`
       }`}
     >
@@ -30,23 +31,25 @@ const TemporaryStorage = ({ isOpen }) => {
       </div>
       <Droppable droppableId="temp" direction="vertical">
         {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className="h-[100%] flex flex-col items-center overflow-y-scroll"
-          >
-            {cardList &&
-              cardList.map(bookmark => {
-                return (
-                  <DraggedCard
-                    key={bookmark.id}
-                    id={bookmark.id}
-                    title={bookmark.title}
-                  />
-                );
-              })}
-            {provided.placeholder}
-          </div>
+          <Scrollbars>
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="h-[100%] flex flex-col items-center"
+            >
+              {cardList &&
+                cardList.map((bookmark) => {
+                  return (
+                    <DraggedCard
+                      key={bookmark.id}
+                      id={bookmark.id}
+                      title={bookmark.title}
+                    />
+                  );
+                })}
+              {provided.placeholder}
+            </div>
+          </Scrollbars>
         )}
       </Droppable>
     </div>

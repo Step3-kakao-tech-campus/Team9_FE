@@ -71,6 +71,7 @@ const WorkspaceItem = ({
         {opened && categories && (
           <CategoryContainer
             workspaceId={workspaceId}
+            workspaceName={workspaceName}
             categories={categories}
           />
         )}
