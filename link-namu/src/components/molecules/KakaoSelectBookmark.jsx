@@ -57,21 +57,19 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const addBookmarkList = () => {
     const selectedBookmarkList = [];
 
-    checkedIdList.forEach((id) => {
-      try {
+    try {
+      checkedIdList.forEach((id) => {
         if (bookmarkList[id].bookmarkName.length === 0) {
           throw new Error(id + " 북마크 제목은 공백일 수 없습니다.");
         }
         if (!bookmarkList[id].categoryId) {
           throw new Error(id + " 카테고리를 선택해주세요.");
         }
-      } catch (err) {
-        printToast(err.message, "error");
-        return;
-      }
-
-      selectedBookmarkList.push(bookmarkList[id]);
-    });
+        selectedBookmarkList.push(bookmarkList[id]);
+      });
+    } catch (err) {
+      printToast(err.message, "error");
+    }
 
     console.log("요청할 데이터 : ", selectedBookmarkList);
 
