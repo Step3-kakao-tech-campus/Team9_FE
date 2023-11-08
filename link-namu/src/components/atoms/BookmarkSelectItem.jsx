@@ -2,6 +2,7 @@ import WorkspaceSeleceBox from "./WorkspaceSelectBox";
 import CategorySelectBox from "./CategorySelectBox";
 import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
+import default_image from "../../assets/default_image.png";
 
 const BookmarkSelectItem = ({
   id,
@@ -40,9 +41,9 @@ const BookmarkSelectItem = ({
         checked ? "bg-[#ecf8fc]" : "bg-[#ffffff]"
       }`}
     >
-      <div className="h-24 w-32 flex items-center justify-center rounded-xl border bg-white hover:translate-x-14 hover:scale-[2]">
+      <div className="h-24 w-32 overflow-hidden flex items-center justify-center rounded-xl border bg-white hover:translate-x-14 hover:translate-y-10 hover:scale-[2]">
         <img
-          src={imageUrl}
+          src={imageUrl !== "" ? imageUrl : default_image}
           alt={`thumbnail of ${bookmarkName}`}
           className="block h-full"
         />
