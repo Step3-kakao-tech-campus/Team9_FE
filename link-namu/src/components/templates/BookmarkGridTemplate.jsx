@@ -4,14 +4,14 @@ import { useInfiniteQuery } from "react-query";
 import { useSelector } from "react-redux";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
+import Breadcrumbs from "../atoms/Breadcrumbs";
 
 const BookmarkGridTemplate = () => {
-  const currCategoryId = useSelector((state) => {
-    return state.bookmark.currCategoryId;
-  });
-  const currCategoryName = useSelector((state) => {
-    return state.bookmark.currCategoryName;
-  });
+  const { currWorkspaceName, currCategoryId, currCategoryName } = useSelector(
+    (state) => {
+      return state.bookmark;
+    }
+  );
   const [categoryId, setCategoryId] = useState(currCategoryId);
   useEffect(() => {
     setCategoryId(currCategoryId);
@@ -69,7 +69,12 @@ const BookmarkGridTemplate = () => {
 
   return (
     <div>
-      <h1 className="text-[40px] text-center">{`현재 카테고리: ${currCategoryName} (ID: ${currCategoryId})`}</h1>
+      {currCategoryId && (
+        <Breadcrumbs
+          workspaceName={currWorkspaceName}
+          categoryName={currCategoryName}
+        />
+      )}
       {bookmarkList.length !== 0 && (
         <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
       )}
