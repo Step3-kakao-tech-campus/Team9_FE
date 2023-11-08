@@ -4,7 +4,6 @@ import { createCategoryShareLink } from "../../apis/share";
 import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
 import { printToast } from "../../utils/toast";
-import CategoryRenameModal from "../organisms/CategoryRenameModal";
 
 const CategoryContextMenu = ({
   top,
@@ -65,7 +64,7 @@ const CategoryContextMenu = ({
 
   return (
     <div
-      className="context-menu fixed border bg-white rounded shadow-md"
+      className="context-menu fixed border bg-white rounded shadow-md z-50"
       style={{ top, left }}
       onClick={onClose}
     >
