@@ -10,6 +10,7 @@ import ModalTitle from "../atoms/ModalTitle";
 import ModalSubtitle from "../atoms/ModalSubtitle";
 import Loader from "../atoms/Loader";
 import { useCloseModal } from "../../hooks/useCloseModal";
+import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const closeModal = useCloseModal();
@@ -93,14 +94,17 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
         categoryId: data.categoryId,
       })
         .then((res) => {
+          console.log(res);
           if (res.status !== 200) {
-            throw new Error();
+            throw new Error(res.data?.error?.message);
           }
 
           console.log(index + "번째 항목이 추가되었습니다.");
         })
         .catch((err) => {
-          console.log(err);
+          const msg = err.message;
+          console.log(msg);
+          printToast(msg, "error");
         });
     });
   };
