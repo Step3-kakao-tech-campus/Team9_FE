@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import BookmarkSelectItem from "../atoms/BookmarkSelectItem";
 import Checkbox from "../atoms/Checkbox";
 import { createBookmark } from "../../apis/bookmark";
@@ -8,6 +8,7 @@ import { printToast } from "../../utils/toast";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalSubtitle from "../atoms/ModalSubtitle";
+import Loader from "../atoms/Loader";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const [isAllChecked, setIsAllChecked] = useState(false);
@@ -103,11 +104,13 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
           <ModalSubtitle>추가할 링크를 선택해주세요.</ModalSubtitle>
         </div>
         <ModalBox>
-          {bookmarkList &&
-            (bookmarkList.length === 0 ? (
+          <div className="h-[450px] flex items-center justify-center">
+            {!bookmarkList ? (
+              <Loader />
+            ) : bookmarkList.length === 0 ? (
               <div>발견된 링크가 없습니다.</div>
             ) : (
-              <div className="mx-auto px-5">
+              <div className="px-5">
                 <div className="float-right flex gap-x-3 pr-10">
                   <span>전체 선택</span>
                   <Checkbox
@@ -140,7 +143,8 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                   </Scrollbars>
                 </ul>
               </div>
-            ))}
+            )}
+          </div>
         </ModalBox>
       </div>
     ),
