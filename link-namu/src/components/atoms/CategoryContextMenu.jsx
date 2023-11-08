@@ -4,6 +4,7 @@ import { createCategoryShareLink } from "../../apis/share";
 import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
 import { printToast } from "../../utils/toast";
+import CategoryRenameModal from "../organisms/CategoryRenameModal";
 
 const CategoryContextMenu = ({
   top,
@@ -55,6 +56,12 @@ const CategoryContextMenu = ({
         console.log(msg);
       });
   };
+  const renameCategory = () => {
+    openModal({
+      modalType: MODAL_TYPES.CategoryRenameModal,
+      data: { categoryId: categoryId },
+    });
+  };
 
   return (
     <div
@@ -66,6 +73,9 @@ const CategoryContextMenu = ({
       <hr />
       <ContextMenuItem handleAction={() => onAction(deleteCategory())}>
         삭제
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(renameCategory())}>
+        이름 바꾸기
       </ContextMenuItem>
       <ContextMenuItem handleAction={() => onAction(addBookmark())}>
         북마크 추가

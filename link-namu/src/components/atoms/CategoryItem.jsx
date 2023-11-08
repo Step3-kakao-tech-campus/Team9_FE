@@ -11,6 +11,7 @@ import CategoryContextMenu from "./CategoryContextMenu";
  */
 const CategoryItem = ({
   workspaceId,
+  workspaceName,
   categoryId,
   categoryName = "하위 카테고리",
 }) => {
@@ -58,6 +59,8 @@ const CategoryItem = ({
         onClick={() => {
           dispatch(
             setCurrCategory({
+              workspaceId: workspaceId,
+              workspaceName: workspaceName,
               categoryId: categoryId,
               categoryName: categoryName,
             })

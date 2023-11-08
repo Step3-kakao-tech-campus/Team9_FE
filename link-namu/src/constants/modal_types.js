@@ -6,10 +6,12 @@ const MODAL_TYPES = {
   CategoryAddModal: "CategoryAddModal",
   WorkspaceAddModal: "WorkspaceAddModal",
   ShareLinkModal: "ShareLinkModal",
-  Menubar: "Menubar",
   WorkspaceDeleteModal: "WorkspaceDeleteModal",
   CategoryDeleteModal: "CategoryDeleteModal",
   GoogleDocsModal: "GoogleDocsModal",
+  SaveShareLinkModal: "SaveShareLinkModal",
+  CategoryRenameModal: "CategoryRenameModal",
+  WorkspaceRenameModal: "WorkspaceRenameModal",
 };
 
 export default MODAL_TYPES;

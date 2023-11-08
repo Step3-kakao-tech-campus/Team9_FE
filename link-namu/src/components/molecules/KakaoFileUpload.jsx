@@ -7,6 +7,8 @@ import ModalBox from "../atoms/ModalBox";
 import file_icon from "../../assets/paper_icon.png";
 import upload_cloud from "../../assets/upload_cloud.png";
 import { printToast } from "../../utils/toast";
+import ModalTitle from "../atoms/ModalTitle";
+import ModalSubtitle from "../atoms/ModalSubtitle";
 
 const KakaoFileUpload = ({ changeHandler }) => {
   const dispatch = useDispatch();
@@ -14,13 +16,35 @@ const KakaoFileUpload = ({ changeHandler }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInput = useRef(null);
 
+  useEffect(() => {
+    console.log("선택된 파일", selectedFile);
+  }, [selectedFile]);
+
   // 파일 선택 핸들러
   const handleUpload = (e) => {
     fileInput.current.click();
   };
   const handleChange = (e) => {
-    console.log("selected file: ", e.target.files[0]);
     if (e.target.files[0]) setSelectedFile(e.target.files[0]);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      // 여기서 선택한 파일을 처리합니다.
+      const selectedFile = files[0];
+      const fileExtension = selectedFile.name.split(".").pop();
+      if (fileExtension === "txt" || fileExtension === "csv") {
+        setSelectedFile(selectedFile);
+      } else {
+        printToast("올바른 파일 형식이 아닙니다.", "error");
+      }
+    }
   };
 
   const removeFile = () => {
@@ -41,8 +65,7 @@ const KakaoFileUpload = ({ changeHandler }) => {
       if (!isFileSelected) throw new Error("파일을 선택해주세요.");
     } catch (err) {
       printToast(err.message, "error");
-      // throw new Error();
-      return;
+      throw new Error();
     }
     sendMeHandler();
   };
@@ -81,6 +104,8 @@ const KakaoFileUpload = ({ changeHandler }) => {
             ? "flex-row px-8 py-4 gap-x-8"
             : "flex-col p-14 gap-y-6 "
         }`}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
       >
         <img
           src={upload_cloud}
@@ -119,10 +144,10 @@ const KakaoFileUpload = ({ changeHandler }) => {
     content: (
       <>
         <div className="mx-auto mt-5 text-center">
-          <h2 className="text-xl mb-4">카카오톡에서 가져오기</h2>
-          <span className="text-sm text-[rgba(0, 0, 0, 0.60)]">
+          <ModalTitle>카카오톡에서 가져오기</ModalTitle>
+          <ModalSubtitle>
             카카오톡에서 내보내기한 파일을 선택해주세요.
-          </span>
+          </ModalSubtitle>
         </div>
         <ModalBox>{fileSelectArea}</ModalBox>
       </>

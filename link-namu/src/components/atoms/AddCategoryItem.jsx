@@ -15,7 +15,9 @@ const AddCategoryItem = ({ workspaceId }) => {
           })
         }
       >
-        <span className="text-xs leading-4 text-left">+ 카테고리 추가</span>
+        <span className="text-xs leading-4 text-left whitespace-nowrap">
+          + 카테고리 추가
+        </span>
       </button>
     </div>
   );

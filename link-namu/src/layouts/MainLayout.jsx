@@ -1,40 +1,33 @@
 import { Outlet } from "react-router-dom";
-import { useOpenModal } from "../hooks/useOpenModal";
 import { Scrollbars } from "react-custom-scrollbars-2";
 
 import Sidebar from "../components/atoms/Sidebar";
-import MODAL_TYPES from "../constants/modal_types";
-
-import dehaze from "../assets/dehaze.png";
+import GNB from "../components/atoms/GNB";
+import Menubar from "../components/molecules/Menubar";
+import { useState } from "react";
 
 const MainLayout = () => {
-  const openModal = useOpenModal();
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>
-      <div className="flex">
-        <div className="flex-1 h-screen">
+      <div className="w-full h-[56px]"></div>
+      <div className="fixed top-[56px] left-0 right-0 bottom-0 flex mr-[60px] overflow-y-hidden">
+        <div className={`${isOpen ? "w-[256px]" : "w-0"} duration-500`}>
+          <Menubar isOpen={isOpen} />
+        </div>
+        <div className="flex-1 h-[100%]">
           <Scrollbars thumbSize={100}>
             <Outlet />
           </Scrollbars>
         </div>
-        <Sidebar />
       </div>
-      {/* Menu */}
-      <div
-        className="w-[60px] h-[60px] m-[10px] fixed left-0 top-0 rounded-[60px] shadow-md cursor-pointer bg-white hover:bg-[#d9d9d9] duration-300"
-        onClick={() => {
-          openModal({ modalType: MODAL_TYPES.Menubar });
+      <GNB
+        setState={() => {
+          setIsOpen((prev) => !prev);
         }}
-      >
-        <div className="w-[40px] h-[40px] m-[10px]">
-          <img
-            src={dehaze}
-            alt="open menubar button"
-            className="w-full h-full"
-          />
-        </div>
-      </div>
+      />
+      <Sidebar />
     </>
   );
 };
