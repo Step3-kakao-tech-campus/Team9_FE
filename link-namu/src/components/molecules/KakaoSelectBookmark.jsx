@@ -5,6 +5,7 @@ import { createBookmark } from "../../apis/bookmark";
 
 import ModalBox from "../atoms/ModalBox";
 import { printToast } from "../../utils/toast";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
   const [isAllChecked, setIsAllChecked] = useState(false);
@@ -116,25 +117,27 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                     onClick={handleSelectAllClick}
                   />
                 </div>
-                <ul className="h-[450px] w-[800px] mx-auto p-2 overflow-y-scroll overflow-x-clip">
-                  {bookmarkList.map((item, index) => {
-                    return (
-                      <li key={index}>
-                        <BookmarkSelectItem
-                          id={index}
-                          checked={checkedIdList.includes(index)}
-                          handleCheckedChange={(e) => {
-                            handleCheckedChange(e.target.checked, index);
-                          }}
-                          title={item?.title}
-                          url={item?.link}
-                          changeHandler={(data) => {
-                            changeData(index, data);
-                          }}
-                        />
-                      </li>
-                    );
-                  })}
+                <ul className="h-[450px] w-[800px] mx-auto p-2">
+                  <Scrollbars>
+                    {bookmarkList.map((item, index) => {
+                      return (
+                        <li key={index}>
+                          <BookmarkSelectItem
+                            id={index}
+                            checked={checkedIdList.includes(index)}
+                            handleCheckedChange={(e) => {
+                              handleCheckedChange(e.target.checked, index);
+                            }}
+                            title={item?.title}
+                            url={item?.link}
+                            changeHandler={(data) => {
+                              changeData(index, data);
+                            }}
+                          />
+                        </li>
+                      );
+                    })}
+                  </Scrollbars>
                 </ul>
               </div>
             ))}
