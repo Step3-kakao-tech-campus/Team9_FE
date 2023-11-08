@@ -75,9 +75,7 @@ const BookmarkGridTemplate = () => {
           categoryName={currCategoryName}
         />
       )}
-      {bookmarkList.length !== 0 && (
-        <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
-      )}
+      <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
       <div ref={bottomObserver} style={{ height: "20px" }}>
         {isFetching && "Loading more..."}
       </div>
