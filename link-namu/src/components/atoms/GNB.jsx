@@ -1,5 +1,3 @@
-import { useOpenModal } from "../../hooks/useOpenModal";
-import MODAL_TYPES from "../../constants/modal_types";
 import dehaze from "../../assets/dehaze.png";
 import Searchbar from "../atoms/Searchbar";
 import LogoutButton from "./LogoutButton";
@@ -30,7 +28,7 @@ const GNB = ({ setState }) => {
                 <span className="text-base font-medium">🎄 LinkNamu</span>
               </button>
             </div>
-            {/* <Searchbar width="900px" /> */}
+            <Searchbar />
             <LogoutButton />
           </div>
         </div>
