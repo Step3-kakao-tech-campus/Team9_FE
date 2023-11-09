@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { notionRegistration } from "../../apis/notion";
 import { useCloseModal } from "../../hooks/useCloseModal";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 import SingleStepModalBase from "./SingleStepModalBase";
 import ModalTitle from "../atoms/ModalTitle";
@@ -17,6 +18,7 @@ const NotionModal = () => {
   const [notionPageLink, setNotionPageLink] = useState(null);
   const [notionPageId, setNotionPageId] = useState(null);
   const [dataReady, setDataReady] = useState(false);
+  const { refetchData } = useWorkspaceList();
 
   useEffect(() => {
     if (!notionCode || !notionPageId) return;
@@ -35,6 +37,9 @@ const NotionModal = () => {
         if (res.status !== 200) {
           throw new Error(res.data?.error?.message);
         }
+        const msg = "연동되었습니다.";
+        printToast(msg);
+        refetchData();
         closeModal();
       })
       .catch((err) => {
