@@ -72,14 +72,7 @@ const CategoryItem = ({
           categoryId === currCategoryId && "bg-[#f6f6f6]"
         } hover:bg-[#f6f6f6]`}
         onClick={() => {
-          dispatch(
-            setCurrCategory({
-              workspaceId: workspaceId,
-              workspaceName: workspaceName,
-              categoryId: categoryId,
-              categoryName: categoryName,
-            })
-          );
+          window.location.href = `${window.location.origin}?workspace=${workspaceId}&category=${categoryId}`;
         }}
         onContextMenu={openContextMenu}
       >

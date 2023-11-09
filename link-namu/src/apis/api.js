@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "../store";
+import { getAccessToken } from "../store";
 import { printToast } from "../utils/toast";
 
 export const instance = axios.create({
@@ -10,7 +10,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const accessToken = getToken();
+  const accessToken = getAccessToken();
   if (accessToken) {
     config.headers["Authorization"] = "Bearer " + accessToken;
   }
