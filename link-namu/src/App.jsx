@@ -8,12 +8,13 @@ import "./App.css";
 
 // layouts
 import MainLayout from "./layouts/MainLayout";
+import ShareLinkLayout from "./layouts/ShareLinkLayout";
+import SearchLayout from "./layouts/SearchLayout";
 
 // pages
 import MainPage from "./pages/MainPage";
 import SignInPage from "./pages/SignInPage";
 import NotionRedirectPage from "./pages/NotionRedirectPage";
-import ShareLinkLayout from "./layouts/ShareLinkLayout";
 import SharedCategoryPage from "./pages/SharedCategoryPage";
 import SharedWorkspacePage from "./pages/SharedWorkspacePage";
 import SearchResultPage from "./pages/SearchResultPage";
@@ -59,7 +60,6 @@ const App = () => {
           {/* 단독 레이아웃 */}
           <Route path="signin" element={<SignInPage />} />
           <Route path="notion/redirect" element={<NotionRedirectPage />} />
-          <Route path="search/result" element={<SearchResultPage />} />
 
           {/* 공통 레이아웃 */}
           <Route element={<MainLayout />}>
@@ -74,6 +74,9 @@ const App = () => {
               path="share-link/category/share"
               element={<SharedCategoryPage />}
             />
+          </Route>
+          <Route element={<SearchLayout />}>
+            <Route path="search/result" element={<SearchResultPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
