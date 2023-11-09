@@ -43,7 +43,7 @@ const Card = ({
           <img
             src={imageUrl}
             alt={imageAlt}
-            className="object-cover w-64 h-40 mx-auto my-1 rounded-sm"
+            className="object-contain w-64 h-40 mx-auto my-1 rounded-sm"
           />
 
           {/* 내용 영역 */}
