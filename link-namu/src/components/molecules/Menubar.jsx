@@ -1,6 +1,6 @@
 import WorkspaceItem from "../atoms/WorkspaceItem";
 import { useSelector } from "react-redux";
-import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
+import { getWorkspaceList } from "../../store/slices/workspaceSlice";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useEffect } from "react";
 import { useOpenModal } from "../../hooks/useOpenModal";
@@ -8,7 +8,7 @@ import MODAL_TYPES from "../../constants/modal_types";
 
 const Menubar = ({ isOpen }) => {
   const openModal = useOpenModal();
-  const { workspaceList } = useSelector(selectWorkspaceList);
+  const workspaceList = useSelector(getWorkspaceList);
 
   useEffect(() => {
     console.log("isOpen", isOpen);

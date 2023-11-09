@@ -2,6 +2,7 @@ import { useModalData } from "../../hooks/useModalData";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import { deleteWorkspace } from "../../apis/workspace";
 import { useEffect, useState } from "react";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 import SingleStepModalBase from "./SingleStepModalBase";
 import ModalBox from "../atoms/ModalBox";
@@ -12,6 +13,7 @@ const WorkspaceDeleteModal = () => {
   const closeModal = useCloseModal();
   const modalData = useModalData();
   const [workspaceName, setWorkspaceName] = useState("");
+  const { refetchData } = useWorkspaceList();
 
   console.log();
   useEffect(() => {
@@ -37,6 +39,7 @@ const WorkspaceDeleteModal = () => {
           throw new Error(res.data?.error?.message);
         }
         printToast("삭제되었습니다.", "success");
+        refetchData();
         closeModal();
       })
       .catch((err) => {

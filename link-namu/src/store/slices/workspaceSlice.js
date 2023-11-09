@@ -15,6 +15,6 @@ const workspaceSlice = createSlice({
 });
 
 export const { setWorkspaceList } = workspaceSlice.actions;
-export const selectWorkspaceList = (state) => state.workspace;
+export const getWorkspaceList = (state) => state.workspace.workspaceList;
 
 export default workspaceSlice.reducer;
