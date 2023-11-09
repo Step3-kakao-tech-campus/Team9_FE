@@ -68,9 +68,14 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
             onError: (error) => {
               console.log(error.response.data.error.message);
               printToast("이동에 실패했습니다.", "error");
+              return;
             },
             onSuccess: () => {
-              printToast("이동에 성공했습니다.", "success");
+              printToast(
+                "이동에 성공했습니다.\n새로고침됩니다.",
+                "success",
+                () => window.location.reload()
+              );
             },
           }
         );
@@ -83,7 +88,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
   );
 
   // 드래그 시작
-  const onDragStart = useCallback((result) => {
+  const onDragStart = useCallback(result => {
     setIsOpen(true);
   }, []);
 
@@ -115,7 +120,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
           >
             <AddCard categoryId={categoryId} />
             {bookmarkList &&
-              bookmarkList.map((bookmark) => {
+              bookmarkList.map(bookmark => {
                 return (
                   <Card
                     bookmarkId={bookmark.bookmarkId}
