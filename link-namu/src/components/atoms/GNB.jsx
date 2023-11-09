@@ -31,7 +31,7 @@ const GNB = ({ setState }) => {
                 <span className="text-base font-medium">🎄 LinkNamu</span>
               </button>
             </div>
-            {/* <Searchbar /> */}
+            <Searchbar />
             <LogoutButton />
           </div>
         </div>
