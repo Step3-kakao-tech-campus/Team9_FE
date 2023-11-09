@@ -1,36 +1,43 @@
 import { getCategoryList } from "../../apis/category";
 import { useEffect, useRef, useState, startTransition } from "react";
 import { useInfiniteQuery } from "react-query";
-import { useSelector } from "react-redux";
+import { getAccessToken } from "../../store";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
 
 const BookmarkGridTemplate = () => {
-  const { currWorkspaceName, currCategoryId, currCategoryName } = useSelector(
-    (state) => {
-      return state.bookmark;
-    }
-  );
-  const [categoryId, setCategoryId] = useState(currCategoryId);
-  useEffect(() => {
-    setCategoryId(currCategoryId);
-  }, [currCategoryId]);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const currWorkspaceId = urlParams.get("workspace");
+  const currCategoryId = urlParams.get("category");
+  const accessToken = getAccessToken();
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery(
-    ["bookmarkList", categoryId],
-    ({ pageParam = 0 }) =>
-      getCategoryList({ categoryId: currCategoryId, page: pageParam }),
-    {
-      getNextPageParam: (lastPage) => {
-        if (!lastPage) return undefined;
-        console.log("lastPage", lastPage);
-        const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
-        const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
-        return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
-      },
+  const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
+    useInfiniteQuery(
+      ["bookmarkList", currCategoryId],
+      ({ pageParam = 0 }) =>
+        getCategoryList({ categoryId: currCategoryId, page: pageParam }),
+      {
+        getNextPageParam: (lastPage) => {
+          if (!lastPage) return undefined;
+          console.log("lastPage", lastPage);
+          const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
+          const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
+          return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
+        },
+      }
+    );
+
+  const refetchData = async () => {
+    await refetch();
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      refetchData();
     }
-  );
+  }, [accessToken]);
 
   const bottomObserver = useRef();
   const options = {
@@ -69,12 +76,7 @@ const BookmarkGridTemplate = () => {
 
   return (
     <div>
-      {currCategoryId && (
-        <Breadcrumbs
-          workspaceName={currWorkspaceName}
-          categoryName={currCategoryName}
-        />
-      )}
+      {currCategoryId && <Breadcrumbs workspaceName={""} categoryName={""} />}
       <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
       <div ref={bottomObserver} style={{ height: "20px" }}>
         {isFetching && "Loading more..."}

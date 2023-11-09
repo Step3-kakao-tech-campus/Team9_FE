@@ -11,7 +11,9 @@ const DraggedCard = ({ id, title }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className="overflow-hidden font-bold text-ellipsis">{title}</div>
+          <div className="overflow-hidden font-bold break-all text-ellipsis whitespace-nowrap">
+            {title}
+          </div>
         </div>
       )}
     </Draggable>
