@@ -11,12 +11,14 @@ import ModalTitle from "../atoms/ModalTitle";
 import ModalSubTitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
 import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 const SaveShareLinkModal = () => {
   const closeModal = useCloseModal();
   const [shareLink, setShareLink] = useState(null);
   const [isCategoryShareLink, setIsCategoryShareLink] = useState(null);
   const [workspaceId, setWorkspaceId] = useState(null);
+  const { refetchData } = useWorkspaceList();
 
   const LINK_TYPE = {
     WORKSPACE: "workspace",
@@ -76,6 +78,7 @@ const SaveShareLinkModal = () => {
           }
 
           alert("추가되었습니다.");
+          refetchData();
           closeModal();
         });
       } else if (data.type === LINK_TYPE.WORKSPACE) {
@@ -88,6 +91,7 @@ const SaveShareLinkModal = () => {
             }
 
             alert("추가되었습니다.");
+            refetchData();
             closeModal();
           }
         );

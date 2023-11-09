@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import CategoryContainer from "./CategoryContainer";
 import WorkspaceContextMenu from "./WorkspaceContextMenu";
@@ -40,6 +40,21 @@ const WorkspaceItem = ({
     closeContextMenu();
   };
 
+  useEffect(() => {
+    if (isContextMenuVisible) {
+      window.addEventListener("click", closeContextMenu);
+      setTimeout(
+        () => window.addEventListener("contextmenu", closeContextMenu),
+        100
+      );
+    }
+
+    return () => {
+      window.removeEventListener("click", closeContextMenu);
+      window.removeEventListener("contextmenu", closeContextMenu);
+    };
+  }, [isContextMenuVisible]);
+
   return (
     <div className="wrapper">
       {isContextMenuVisible && (
@@ -71,6 +86,7 @@ const WorkspaceItem = ({
         {opened && categories && (
           <CategoryContainer
             workspaceId={workspaceId}
+            workspaceName={workspaceName}
             categories={categories}
           />
         )}

@@ -5,8 +5,15 @@ import { createBookmark } from "../../apis/bookmark";
 
 import ModalBox from "../atoms/ModalBox";
 import { printToast } from "../../utils/toast";
+import { Scrollbars } from "react-custom-scrollbars-2";
+import ModalTitle from "../atoms/ModalTitle";
+import ModalSubtitle from "../atoms/ModalSubtitle";
+import Loader from "../atoms/Loader";
+import { useCloseModal } from "../../hooks/useCloseModal";
+import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
+  const closeModal = useCloseModal();
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [checkedIdList, setCheckedIdList] = useState([]);
   const [bookmarkList, setBookmarkList] = useState(null);
@@ -55,26 +62,31 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
   }, [checkedIdList]);
 
   const addBookmarkList = () => {
+    if (bookmarkList.length === 0) {
+      closeModal();
+      return;
+    }
     const selectedBookmarkList = [];
 
-    checkedIdList.forEach((id) => {
-      try {
+    try {
+      checkedIdList.forEach((id) => {
         if (bookmarkList[id].bookmarkName.length === 0) {
           throw new Error(id + " 북마크 제목은 공백일 수 없습니다.");
         }
         if (!bookmarkList[id].categoryId) {
           throw new Error(id + " 카테고리를 선택해주세요.");
         }
-      } catch (err) {
-        printToast(err.message, "error");
-        return;
-      }
-
-      selectedBookmarkList.push(bookmarkList[id]);
-    });
+        selectedBookmarkList.push(bookmarkList[id]);
+      });
+    } catch (err) {
+      printToast(err.message, "error");
+    }
 
     console.log("요청할 데이터 : ", selectedBookmarkList);
-
+    if (selectedBookmarkList.length === 0) {
+      printToast("추가할 북마크를 선택해주세요.", "error");
+      return;
+    }
     selectedBookmarkList.forEach((data, index) => {
       createBookmark({
         bookmarkName: data.bookmarkName,
@@ -82,14 +94,17 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
         categoryId: data.categoryId,
       })
         .then((res) => {
+          console.log(res);
           if (res.status !== 200) {
-            throw new Error();
+            throw new Error(res.data?.error?.message);
           }
 
           console.log(index + "번째 항목이 추가되었습니다.");
         })
         .catch((err) => {
-          console.log(err);
+          const msg = err.message;
+          console.log(msg);
+          printToast(msg, "error");
         });
     });
   };
@@ -98,17 +113,17 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
     content: (
       <div>
         <div className="mx-auto mt-5 text-center">
-          <h2 className="text-xl mb-4">발견된 링크</h2>
-          <span className="text-sm text-[rgba(0, 0, 0, 0.60)]">
-            추가할 링크를 선택해주세요.
-          </span>
+          <ModalTitle>발견된 링크</ModalTitle>
+          <ModalSubtitle>추가할 링크를 선택해주세요.</ModalSubtitle>
         </div>
         <ModalBox>
-          {bookmarkList &&
-            (bookmarkList.length === 0 ? (
+          <div className="h-[450px] flex items-center justify-center">
+            {!bookmarkList ? (
+              <Loader />
+            ) : bookmarkList.length === 0 ? (
               <div>발견된 링크가 없습니다.</div>
             ) : (
-              <div className="mx-auto px-5">
+              <div className="px-5">
                 <div className="float-right flex gap-x-3 pr-10">
                   <span>전체 선택</span>
                   <Checkbox
@@ -118,30 +133,36 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                     onClick={handleSelectAllClick}
                   />
                 </div>
-                <ul className="h-[450px] w-[800px] mx-auto p-2 overflow-y-scroll overflow-x-clip">
-                  {bookmarkList.map((item, index) => {
-                    return (
-                      <li key={index}>
-                        <BookmarkSelectItem
-                          id={index}
-                          checked={checkedIdList.includes(index)}
-                          handleCheckedChange={(e) => {
-                            handleCheckedChange(e.target.checked, index);
-                          }}
-                          url={item?.link}
-                          changeHandler={(data) => {
-                            changeData(index, data);
-                          }}
-                        />
-                      </li>
-                    );
-                  })}
+                <ul className="h-[450px] w-[800px] mx-auto p-2">
+                  <Scrollbars>
+                    {bookmarkList.map((item, index) => {
+                      return (
+                        <li key={index}>
+                          <BookmarkSelectItem
+                            id={index}
+                            checked={checkedIdList.includes(index)}
+                            handleCheckedChange={(e) => {
+                              handleCheckedChange(e.target.checked, index);
+                            }}
+                            title={item?.title}
+                            url={item?.link}
+                            imageUrl={item?.imageUrl}
+                            changeHandler={(data) => {
+                              changeData(index, data);
+                            }}
+                          />
+                        </li>
+                      );
+                    })}
+                  </Scrollbars>
                 </ul>
               </div>
-            ))}
+            )}
+          </div>
         </ModalBox>
       </div>
     ),
+    title: bookmarkList && bookmarkList.length !== 0 ? "추가" : "확인",
     buttonHandler: addBookmarkList,
   };
 };

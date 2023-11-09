@@ -50,9 +50,16 @@ const WorkspaceContextMenu = ({
       });
   };
 
+  const renameWorkspace = () => {
+    openModal({
+      modalType: MODAL_TYPES.WorkspaceRenameModal,
+      data: { workspaceId: workspaceId },
+    });
+  };
+
   return (
     <div
-      className="context-menu fixed border bg-white rounded shadow-md"
+      className="context-menu fixed border bg-white rounded shadow-md z-50"
       style={{ top, left }}
       onClick={onClose}
     >
@@ -60,6 +67,9 @@ const WorkspaceContextMenu = ({
       <hr />
       <ContextMenuItem handleAction={() => onAction(deleteWorkspace())}>
         삭제
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(renameWorkspace())}>
+        이름 바꾸기
       </ContextMenuItem>
       <ContextMenuItem handleAction={() => onAction(shareWorkspace())}>
         공유하기

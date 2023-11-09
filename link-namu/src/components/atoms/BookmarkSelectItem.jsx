@@ -2,14 +2,15 @@ import WorkspaceSeleceBox from "./WorkspaceSelectBox";
 import CategorySelectBox from "./CategorySelectBox";
 import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
+import default_image from "../../assets/default_image.png";
 
 const BookmarkSelectItem = ({
   id,
   checked = false,
   handleCheckedChange,
-  thumbnail = null,
-  title = "북마크 제목",
+  title,
   url = "",
+  imageUrl = "",
   changeHandler = () => {},
 }) => {
   const [bookmarkName, setBookmarkName] = useState(title);
@@ -30,20 +31,23 @@ const BookmarkSelectItem = ({
       bookmarkName: bookmarkName,
       categoryId: categoryId,
       link: url,
+      imageUrl: imageUrl,
     });
   }, [bookmarkName, categoryId]);
 
   return (
     <div
-      className={`grow flex flex-row gap-x-4 p-2 mb-1 border rounded-xl ${
+      className={`grow flex flex-row items-center gap-x-3 px-3 py-3 mr-3 mb-1 border rounded-xl ${
         checked ? "bg-[#ecf8fc]" : "bg-[#ffffff]"
       }`}
     >
-      <img
-        src={thumbnail}
-        alt="thumbnail"
-        className="w-[50px] h-[50px] border"
-      />
+      <div className="h-24 w-32 overflow-hidden flex items-center justify-center rounded-xl border bg-white hover:translate-x-14 hover:translate-y-10 hover:scale-[2]">
+        <img
+          src={imageUrl !== "" ? imageUrl : default_image}
+          alt={`thumbnail of ${bookmarkName}`}
+          className="block h-full"
+        />
+      </div>
       <div className="grow">
         <input
           className="block w-full border"
@@ -68,7 +72,9 @@ const BookmarkSelectItem = ({
           disabled={!checked}
         />
       </div>
-      <Checkbox id={id} checked={checked} onChange={handleCheckedChange} />
+      <div className="px-5">
+        <Checkbox id={id} checked={checked} onChange={handleCheckedChange} />
+      </div>
     </div>
   );
 };

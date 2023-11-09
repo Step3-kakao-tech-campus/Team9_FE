@@ -55,10 +55,16 @@ const CategoryContextMenu = ({
         console.log(msg);
       });
   };
+  const renameCategory = () => {
+    openModal({
+      modalType: MODAL_TYPES.CategoryRenameModal,
+      data: { categoryId: categoryId },
+    });
+  };
 
   return (
     <div
-      className="context-menu fixed border bg-white rounded shadow-md"
+      className="context-menu fixed border bg-white rounded shadow-md z-50"
       style={{ top, left }}
       onClick={onClose}
     >
@@ -66,6 +72,9 @@ const CategoryContextMenu = ({
       <hr />
       <ContextMenuItem handleAction={() => onAction(deleteCategory())}>
         삭제
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(renameCategory())}>
+        이름 바꾸기
       </ContextMenuItem>
       <ContextMenuItem handleAction={() => onAction(addBookmark())}>
         북마크 추가

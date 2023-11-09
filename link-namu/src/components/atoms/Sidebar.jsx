@@ -18,7 +18,6 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="w-[60px] h-screen"></div>
       <div
         className={`w-[60px] h-screen border-l bg-white fixed right-0 top-0 flex flex-col justify-end`}
       >
