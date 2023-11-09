@@ -3,6 +3,7 @@ import { printToast } from "../../utils/toast";
 import { updateWorkspace } from "../../apis/workspace";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import { useModalData } from "../../hooks/useModalData";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 import SingleStepModalBase from "./SingleStepModalBase";
 import ModalTitle from "../atoms/ModalTitle";
@@ -14,6 +15,7 @@ const WorkspaceRenameModal = () => {
   const closeModal = useCloseModal();
   const modalData = useModalData();
   const [newName, setNewName] = useState(null);
+  const { refetchData } = useWorkspaceList();
 
   const handleRenameWorkspace = () => {
     if (!newName) {
@@ -33,6 +35,7 @@ const WorkspaceRenameModal = () => {
 
         printToast("변경되었습니다.");
         console.log("[워크스페이스 수정] 변경되었습니다.");
+        refetchData();
         closeModal();
       })
       .catch((err) => {

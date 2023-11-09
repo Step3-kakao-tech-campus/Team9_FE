@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
+import { getWorkspaceList } from "../../store/slices/workspaceSlice";
 import { useEffect, useState } from "react";
 
 /**
@@ -14,7 +14,7 @@ const CategorySelectBox = ({
   changeHandler,
   disabled = false,
 }) => {
-  const workspaceList = useSelector(selectWorkspaceList).workspaceList;
+  const workspaceList = useSelector(getWorkspaceList);
   const [selectedId, setSelectedId] = useState(value);
   const [categoryList, setCategoryList] = useState([]);
 
