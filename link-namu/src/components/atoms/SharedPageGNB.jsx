@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
 const SharedPageGNB = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <header className="m-0 p-0">
@@ -10,7 +13,7 @@ const SharedPageGNB = () => {
             <div></div>
             <div className="flex items-center">
               <button
-                onClick={() => (window.location.href = "/")}
+                onClick={() => navigate("/")}
                 className="px-4 text-center"
               >
                 <span className="text-base font-medium">🎄 LinkNamu</span>

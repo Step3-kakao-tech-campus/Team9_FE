@@ -35,10 +35,7 @@ const SharedWorkspacePage = () => {
           className={`mx-auto grid grid-cols-5 gap-x-5 gap-y-5 m-10 p-5 border rounded`}
         >
           {categoryList.map((category) => {
-            const url =
-              window.location.origin +
-              "/share-link/category/share?category=" +
-              category.shareCategoryLink;
+            const url = `/share-link/category/share?category=${category.shareCategoryLink}`;
             return (
               <SharedCategoryCard
                 categoryName={category.categoryName}
