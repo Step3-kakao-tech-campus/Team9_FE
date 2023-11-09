@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react";
 import { getWorkspaceFromEncodedId } from "../apis/share";
-import { useReissueToken } from "../hooks/useReissueToken";
+import SharedCategoryCard from "../components/atoms/SharedCategoryCard";
 
 const SharedWorkspacePage = () => {
-  const reissueToken = useReissueToken();
-  const [isTokenReady, setIsTokenReady] = useState(false);
   const [encodedId, setEncodedId] = useState(null);
   const [workspaceName, setWorkspaceName] = useState("");
   const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
-    reissueToken({
-      changeState: () => setIsTokenReady(true),
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!isTokenReady) return;
     const currentUrl = window.location.href;
     const query = currentUrl?.split("?")[1];
     setEncodedId(query.split("=")[1] + "=");
-  }, [isTokenReady]);
+  }, []);
 
   useEffect(() => {
     if (!encodedId) return;
@@ -35,33 +26,24 @@ const SharedWorkspacePage = () => {
   }, [encodedId]);
 
   return (
-    <div>
-      <h1>공유된 워크스페이스를 표시하는 페이지</h1>
-      <span>{encodedId}</span>
-      <div>
-        <span>워크스페이스 이름 : </span>
-        <span>{workspaceName}</span>
+    <div className="flex flex-col items-center">
+      <div className="mx-auto pt-20">
+        <span className="text-xl font-semibold">{workspaceName}</span>
       </div>
       <div>
-        <div className="grid grid-cols-5 gap-x-10 gap-y-10 m-20">
+        <div
+          className={`mx-auto grid grid-cols-5 gap-x-5 gap-y-5 m-10 p-5 border rounded`}
+        >
           {categoryList.map((category) => {
+            const url =
+              window.location.origin +
+              "/share-link/category/share?category=" +
+              category.shareCategoryLink;
             return (
-              <div className="" key={category.shareCategoryLink}>
-                <a
-                  href={
-                    window.location.origin +
-                    "/share-link/category/share?category=" +
-                    category.shareCategoryLink
-                  }
-                >
-                  <div className="w-full h-[200px] p-2 border overflow-hidden">
-                    <h5>{category.categoryName}</h5>
-                    <div className="overflow-x-ellipsis">
-                      {category.shareCategoryLink}
-                    </div>
-                  </div>
-                </a>
-              </div>
+              <SharedCategoryCard
+                categoryName={category.categoryName}
+                url={url}
+              />
             );
           })}
         </div>

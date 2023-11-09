@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setCurrCategory } from "../../store/slices/bookmarkSlice";
@@ -25,7 +25,7 @@ const CategoryItem = ({
     left: 0,
   });
 
-  const handleContextMenu = (event) => {
+  const openContextMenu = (event) => {
     event.preventDefault();
     setContextMenuPosition({ top: event.clientY, left: event.clientX });
     setContextMenuVisible(true);
@@ -38,6 +38,21 @@ const CategoryItem = ({
     console.log("Selected action:", action);
     closeContextMenu();
   };
+
+  useEffect(() => {
+    if (isContextMenuVisible) {
+      window.addEventListener("click", closeContextMenu);
+      setTimeout(
+        () => window.addEventListener("contextmenu", closeContextMenu),
+        100
+      );
+    }
+
+    return () => {
+      window.removeEventListener("click", closeContextMenu);
+      window.removeEventListener("contextmenu", closeContextMenu);
+    };
+  }, [isContextMenuVisible]);
 
   return (
     <>
@@ -66,7 +81,7 @@ const CategoryItem = ({
             })
           );
         }}
-        onContextMenu={handleContextMenu}
+        onContextMenu={openContextMenu}
       >
         <span className="text-xs leading-4 truncate">{categoryName}</span>
       </button>

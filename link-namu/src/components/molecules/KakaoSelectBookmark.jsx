@@ -8,8 +8,12 @@ import { printToast } from "../../utils/toast";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalSubtitle from "../atoms/ModalSubtitle";
+import Loader from "../atoms/Loader";
+import { useCloseModal } from "../../hooks/useCloseModal";
+import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
 
 const KakaoSelectBookmark = ({ data, getLinkList }) => {
+  const closeModal = useCloseModal();
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [checkedIdList, setCheckedIdList] = useState([]);
   const [bookmarkList, setBookmarkList] = useState(null);
@@ -58,6 +62,10 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
   }, [checkedIdList]);
 
   const addBookmarkList = () => {
+    if (bookmarkList.length === 0) {
+      closeModal();
+      return;
+    }
     const selectedBookmarkList = [];
 
     try {
@@ -75,7 +83,10 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
     }
 
     console.log("요청할 데이터 : ", selectedBookmarkList);
-
+    if (selectedBookmarkList.length === 0) {
+      printToast("추가할 북마크를 선택해주세요.", "error");
+      return;
+    }
     selectedBookmarkList.forEach((data, index) => {
       createBookmark({
         bookmarkName: data.bookmarkName,
@@ -83,14 +94,17 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
         categoryId: data.categoryId,
       })
         .then((res) => {
+          console.log(res);
           if (res.status !== 200) {
-            throw new Error();
+            throw new Error(res.data?.error?.message);
           }
 
           console.log(index + "번째 항목이 추가되었습니다.");
         })
         .catch((err) => {
-          console.log(err);
+          const msg = err.message;
+          console.log(msg);
+          printToast(msg, "error");
         });
     });
   };
@@ -103,11 +117,13 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
           <ModalSubtitle>추가할 링크를 선택해주세요.</ModalSubtitle>
         </div>
         <ModalBox>
-          {bookmarkList &&
-            (bookmarkList.length === 0 ? (
+          <div className="h-[450px] flex items-center justify-center">
+            {!bookmarkList ? (
+              <Loader />
+            ) : bookmarkList.length === 0 ? (
               <div>발견된 링크가 없습니다.</div>
             ) : (
-              <div className="mx-auto px-5">
+              <div className="px-5">
                 <div className="float-right flex gap-x-3 pr-10">
                   <span>전체 선택</span>
                   <Checkbox
@@ -130,6 +146,7 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                             }}
                             title={item?.title}
                             url={item?.link}
+                            imageUrl={item?.imageUrl}
                             changeHandler={(data) => {
                               changeData(index, data);
                             }}
@@ -140,10 +157,12 @@ const KakaoSelectBookmark = ({ data, getLinkList }) => {
                   </Scrollbars>
                 </ul>
               </div>
-            ))}
+            )}
+          </div>
         </ModalBox>
       </div>
     ),
+    title: bookmarkList && bookmarkList.length !== 0 ? "추가" : "확인",
     buttonHandler: addBookmarkList,
   };
 };
