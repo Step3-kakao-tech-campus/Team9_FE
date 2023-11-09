@@ -5,6 +5,8 @@ import { getAccessToken } from "../../store";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
+import { useWorkspaceName } from "../../hooks/useWorkspaceName";
+import { useCategoryName } from "../../hooks/useCategoryName";
 
 const BookmarkGridTemplate = () => {
   const queryString = window.location.search;
@@ -12,6 +14,8 @@ const BookmarkGridTemplate = () => {
   const currWorkspaceId = urlParams.get("workspace");
   const currCategoryId = urlParams.get("category");
   const accessToken = getAccessToken();
+  const getWorkspaceName = useWorkspaceName();
+  const getCategoryName = useCategoryName();
 
   const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
     useInfiniteQuery(
@@ -76,7 +80,12 @@ const BookmarkGridTemplate = () => {
 
   return (
     <div>
-      {currCategoryId && <Breadcrumbs workspaceName={""} categoryName={""} />}
+      {currCategoryId && (
+        <Breadcrumbs
+          workspaceName={getWorkspaceName(currWorkspaceId)}
+          categoryName={getCategoryName(currCategoryId)}
+        />
+      )}
       <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
       <div ref={bottomObserver} style={{ height: "20px" }}>
         {isFetching && "Loading more..."}
