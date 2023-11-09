@@ -29,12 +29,12 @@ const App = () => {
       reissue()
         .then((res) => {
           const accessToken = res.data?.response?.accessToken.split(" ")[1];
-          const refreshToken = res.data?.response?.refreshToken;
+          const newRefreshToken = res.data?.response?.refreshToken;
 
           dispatch(
             setToken({
               accessToken: accessToken,
-              refreshToken: refreshToken,
+              refreshToken: newRefreshToken,
             })
           );
           console.log("토큰이 재발급되었습니다.", accessToken);
