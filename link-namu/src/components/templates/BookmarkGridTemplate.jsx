@@ -17,6 +17,7 @@ const BookmarkGridTemplate = () => {
   const getWorkspaceName = useWorkspaceName();
   const getCategoryName = useCategoryName();
 
+
   const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
     useInfiniteQuery(
       ["bookmarkList", currCategoryId],
