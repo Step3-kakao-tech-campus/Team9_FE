@@ -42,6 +42,8 @@ const App = () => {
         .catch((err) => console.log(err));
     };
 
+    refreshToken(); // 최초에 재발급 한 번
+
     // 토큰을 15분마다 재발급
     const refreshTokenTimer = setInterval(refreshToken, 15 * 60 * 1000);
     // const refreshTokenTimer = setInterval(refreshToken, 15 * 1000); // text) 15초마다
