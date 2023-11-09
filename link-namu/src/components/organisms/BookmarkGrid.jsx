@@ -71,7 +71,11 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
               return;
             },
             onSuccess: () => {
-              printToast("이동에 성공했습니다.", "success");
+              printToast(
+                "이동에 성공했습니다.\n새로고침됩니다.",
+                "success",
+                () => window.location.reload()
+              );
             },
           }
         );
