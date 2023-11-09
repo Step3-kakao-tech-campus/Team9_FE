@@ -1,5 +1,5 @@
 import { getCategoryList } from "../../apis/category";
-import { useEffect, useRef, useState, startTransition } from "react";
+import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getAccessToken } from "../../store";
 
@@ -25,7 +25,7 @@ const BookmarkGridTemplate = () => {
       {
         getNextPageParam: (lastPage) => {
           if (!lastPage) return undefined;
-          console.log("lastPage", lastPage);
+          // console.log("lastPage", lastPage);
           const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
           const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
           return currentPage < totalPages - 1 ? currentPage + 1 : undefined;

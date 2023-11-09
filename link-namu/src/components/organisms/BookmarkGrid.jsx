@@ -20,7 +20,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
 
   // 드래그 종료
   const onDragEnd = useCallback(
-    result => {
+    (result) => {
       setIsOpen(false);
 
       if (result.destination === null) return;
@@ -41,7 +41,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
           console.log(tempList);
         } else {
           // 중복 확인
-          if (tempList.find(item => item.id === id) !== undefined) {
+          if (tempList.find((item) => item.id === id) !== undefined) {
             return;
           }
 
@@ -59,13 +59,13 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
       ) {
         const id = result.draggableId;
         let tempList = JSON.parse(window.localStorage.getItem("tempList"));
-        tempList = tempList.filter(bookmark => bookmark.id !== id);
+        tempList = tempList.filter((bookmark) => bookmark.id !== id);
 
         // 북마크 이동 (서버)
         mutate(
           { bookmarkIdList: [id], toCategoryId: categoryId },
           {
-            onError: error => {
+            onError: (error) => {
               console.log(error.response.data.error.message);
               printToast("이동에 실패했습니다.", "error");
             },
