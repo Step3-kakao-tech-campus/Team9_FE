@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState } from "react";
-import { selectWorkspaceList } from "../../store/slices/workspaceSlice";
+import { getWorkspaceList } from "../../store/slices/workspaceSlice";
 
 const WorkspaceSeleceBox = ({
   changeHandler = () => {},
@@ -8,7 +8,7 @@ const WorkspaceSeleceBox = ({
   isSlimType = false,
   disabled = false,
 }) => {
-  const workspaceList = useSelector(selectWorkspaceList).workspaceList;
+  const workspaceList = useSelector(getWorkspaceList);
   const [selectedId, setSelectedId] = useState(value);
 
   const handleChange = (e) => {

@@ -8,10 +8,12 @@ import ModalTextInput from "../atoms/ModalTextInput";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import SingleStepModalBase from "./SingleStepModalBase";
 import { printToast } from "../../utils/toast";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 const WorkspaceAddModal = () => {
   const closeModal = useCloseModal();
   const [workspaceName, setWorkspaceName] = useState("");
+  const { refetchData } = useWorkspaceList();
 
   const addCategory = () => {
     if (!workspaceName) {
@@ -25,6 +27,7 @@ const WorkspaceAddModal = () => {
           const msg = "워크스페이스가 추가되었습니다.";
           console.log(msg);
           printToast(msg, "success");
+          refetchData();
           closeModal();
         } else {
           throw new Error(res.data?.error?.message);

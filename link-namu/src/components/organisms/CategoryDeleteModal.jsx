@@ -2,6 +2,7 @@ import { useModalData } from "../../hooks/useModalData";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import { useEffect, useState } from "react";
 import { deleteCategory } from "../../apis/category";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 import SingleStepModalBase from "./SingleStepModalBase";
 import ModalBox from "../atoms/ModalBox";
@@ -11,6 +12,7 @@ import { printToast } from "../../utils/toast";
 const CategoryDeleteModal = () => {
   const closeModal = useCloseModal();
   const modalData = useModalData();
+  const { refetchData } = useWorkspaceList();
 
   console.log();
   useEffect(() => {
@@ -36,6 +38,7 @@ const CategoryDeleteModal = () => {
           throw new Error(res.data?.error?.message);
         }
         printToast("삭제되었습니다.", "success");
+        refetchData();
         closeModal();
       })
       .catch((err) => {
