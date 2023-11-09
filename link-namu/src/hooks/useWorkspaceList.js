@@ -38,7 +38,7 @@ const useWorkspaceList = () => {
   }
 
   if (workspaceData) {
-    console.log("workspaceData", workspaceData);
+    // console.log("workspaceData", workspaceData);
     if (workspaceData.status === 200) {
       dispatch(
         setWorkspaceList({ workspaceList: workspaceData.data?.response })
