@@ -9,12 +9,14 @@ import { useCloseModal } from "../../hooks/useCloseModal";
 import SingleStepModalBase from "./SingleStepModalBase";
 import { useModalData } from "../../hooks/useModalData";
 import { printToast } from "../../utils/toast";
+import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 
 const CategoryAddModal = ({ data }) => {
   const closeModal = useCloseModal();
   const modalData = useModalData();
   const [workspaceId, setWorkspaceId] = useState(null);
   const [categoryName, setCategoryName] = useState("");
+  const { refetchData } = useWorkspaceList();
 
   useEffect(() => {
     console.log("modalData", modalData);
@@ -34,6 +36,7 @@ const CategoryAddModal = ({ data }) => {
           const msg = "카테고리가 추가되었습니다.";
           console.log(msg);
           printToast(msg, "success");
+          refetchData();
           closeModal();
         } else {
           throw new Error(res.data?.error?.message);
