@@ -32,7 +32,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <App />
       <GlobalModal />
-      <ToastContainer position="bottom-center" />
+      <ToastContainer position="bottom-center" autoClose={2000} />
     </QueryClientProvider>
   </Provider>
 );
