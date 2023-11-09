@@ -48,10 +48,10 @@ const Card = ({
 
           {/* 내용 영역 */}
           <div className="px-4 py-4">
-            <div className="mb-2 overflow-hidden text-xl font-bold text-ellipsis">
+            <div className="mb-2 overflow-hidden text-xl font-bold break-all text-ellipsis whitespace-nowrap">
               {title}
             </div>
-            <p className="overflow-hidden text-base text-gray-700 text-ellipsis">
+            <p className="overflow-hidden text-base text-gray-700 break-all text-ellipsis whitespace-nowrap">
               {description}
             </p>
           </div>
@@ -59,13 +59,13 @@ const Card = ({
           {/* 꼬리 영역 */}
           <div className="px-2 py-2">
             {/* 태그 영역 */}
-            <span className="inline-block w-[80%]">
+            <span className="flex w-full">
               {tags.map((tag, index) => (
                 <Tag key={index} name={tag.tagName} />
               ))}
             </span>
             {/* 버튼 영역 */}
-            <span className="inline-block w-[20%]"></span>
+            {/*<span className="inline-block w-[20%]"></span>*/}
           </div>
         </div>
       )}
