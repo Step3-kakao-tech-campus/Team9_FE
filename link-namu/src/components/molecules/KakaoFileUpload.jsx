@@ -67,6 +67,7 @@ const KakaoFileUpload = ({ changeHandler }) => {
       printToast(err.message, "error");
       throw new Error();
     }
+    changeHandler(null);
     sendMeHandler();
   };
 

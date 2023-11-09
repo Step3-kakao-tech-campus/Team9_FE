@@ -70,8 +70,10 @@ const SharedCategoryPageTemplate = ({ encodedId }) => {
   });
 
   return (
-    <div>
-      <h1 className="text-[40px] text-center">{`카테고리 이름: ${categoryName}`}</h1>
+    <div className="flex flex-col">
+      <div className="mx-auto pt-20">
+        <span className="text-xl font-semibold">{categoryName}</span>
+      </div>
       {bookmarkList.length !== 0 && (
         <SharedBookmarkGrid bookmarkList={bookmarkList} />
       )}
