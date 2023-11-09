@@ -67,7 +67,12 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
           {
             onError: (error) => {
               console.log(error.response.data.error.message);
-              printToast("이동에 실패했습니다.", "error");
+              /*
+              if(error.response.data.error.errorCode === "24000") {
+                printToast("해당 북마크가 이미 존재합니다.", "error");
+              }
+              */
+              printToast(error.response.data.error.message, "error");
               return;
             },
             onSuccess: () => {
