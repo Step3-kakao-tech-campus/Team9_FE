@@ -24,7 +24,7 @@ const Card = ({
   const [isDragging, setIsDragging] = useState(false);
 
   const onClickHandler = () => {
-    window.location.href = url;
+    window.open(url);
   };
 
   return (
