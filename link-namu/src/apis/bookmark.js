@@ -51,7 +51,7 @@ export const updateBookmark = ({ bookmarkId, bookmarkName, description }) => {
  * @returns
  */
 export const updateBookmarkImage = ({ bookmarkId, imageUrl }) => {
-  return instance.post(`/api/bookmark/image/updata/${bookmarkId}`, {
+  return instance.post(`/api/bookmark/image/update/${bookmarkId}`, {
     imageUrl: imageUrl,
   });
 };
