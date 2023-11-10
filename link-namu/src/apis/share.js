@@ -28,7 +28,8 @@ export const createCategoryShareLink = ({ categoryId }) => {
  * @returns
  */
 export const getWorkspaceFromEncodedId = ({ encodedWorkspaceId }) => {
-  return instance.get(`/api/share/workspace/link/${encodedWorkspaceId}`);
+  const urlEncoded = encodeURIComponent(encodedWorkspaceId);
+  return instance.get(`/api/share/workspace/link/${urlEncoded}`);
 };
 
 /**
@@ -38,9 +39,8 @@ export const getWorkspaceFromEncodedId = ({ encodedWorkspaceId }) => {
  * @returns
  */
 export const getCategoryFromEncodedId = ({ encodedCategoryId, page = 0 }) => {
-  return instance.get(
-    `/api/share/category/link/${encodedCategoryId}?page=${page}`
-  );
+  const urlEncoded = encodeURIComponent(encodedCategoryId);
+  return instance.get(`/api/share/category/link/${urlEncoded}?page=${page}`);
 };
 
 /**
@@ -50,7 +50,8 @@ export const getCategoryFromEncodedId = ({ encodedCategoryId, page = 0 }) => {
  * @returns
  */
 export const addWorkspaceFromEncodedId = ({ encodedWorkspaceId }) => {
-  return instance.post(`/api/share/workspace/link/${encodedWorkspaceId}`);
+  const urlEncoded = encodeURIComponent(encodedWorkspaceId);
+  return instance.post(`/api/share/workspace/link/${urlEncoded}`);
 };
 
 /**
@@ -63,7 +64,8 @@ export const addCategoryFromEncodedId = ({
   workspaceId,
   encodedCategoryId,
 }) => {
-  return instance.post(`/api/share/category/link/${encodedCategoryId}`, {
+  const urlEncoded = encodeURIComponent(encodedCategoryId);
+  return instance.post(`/api/share/category/link/${urlEncoded}`, {
     workSpaceId: workspaceId,
   });
 };
