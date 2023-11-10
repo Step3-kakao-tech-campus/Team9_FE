@@ -2,7 +2,7 @@ import addBookmark from "../../assets/add_bookmark.png";
 import MODAL_TYPES from "../../constants/modal_types";
 import { useOpenModal } from "../../hooks/useOpenModal";
 
-const AddCard = ({ categoryId }) => {
+const AddCard = ({ categoryId, handleRefetch }) => {
   const openModal = useOpenModal();
 
   return (
