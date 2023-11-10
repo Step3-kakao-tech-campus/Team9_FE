@@ -61,9 +61,9 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             {/* 단독 레이아웃 */}
+            <Route path="*" element={<NotFoundPage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="notion/redirect" element={<NotionRedirectPage />} />
-            <Route path="notfound" element={<NotFoundPage />} />
 
             {/* 공통 레이아웃 */}
             <Route element={<MainLayout />}>
