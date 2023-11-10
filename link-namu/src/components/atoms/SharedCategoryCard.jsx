@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import category_icon from "../../assets/category_icon.png";
 
 const SharedCategoryCard = ({ categoryName, url }) => {
+  const navigate = useNavigate();
+
   return (
     <button
       title={categoryName}
-      onClick={() => (window.location.href = url)}
+      onClick={() => navigate(url)}
       className="block w-28"
     >
       <div className="w-full flex flex-col gap-y-3 items-center justify-center p-4 rounded-lg hover:bg-[#d9d9d9] ">

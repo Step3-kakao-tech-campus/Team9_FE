@@ -1,7 +1,8 @@
 import { getCategoryList } from "../../apis/category";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getAccessToken } from "../../store";
+import { useLocation } from "react-router-dom";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
@@ -9,14 +10,12 @@ import { useWorkspaceName } from "../../hooks/useWorkspaceName";
 import { useCategoryName } from "../../hooks/useCategoryName";
 
 const BookmarkGridTemplate = () => {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const currWorkspaceId = urlParams.get("workspace");
-  const currCategoryId = urlParams.get("category");
+  const location = useLocation();
+  const [currWorkspaceId, setCurrWorkspaceId] = useState(null);
+  const [currCategoryId, setCurrCategoryId] = useState(null);
   const accessToken = getAccessToken();
   const getWorkspaceName = useWorkspaceName();
   const getCategoryName = useCategoryName();
-
 
   const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
     useInfiniteQuery(
@@ -37,12 +36,21 @@ const BookmarkGridTemplate = () => {
   const refetchData = async () => {
     await refetch();
   };
-
+  useEffect(() => {
+    const queryString = location.search;
+    const urlParams = new URLSearchParams(queryString);
+    setCurrWorkspaceId(urlParams.get("workspace"));
+    setCurrCategoryId(urlParams.get("category"));
+  }, [location.search]);
   useEffect(() => {
     if (accessToken) {
       refetchData();
     }
   }, [accessToken]);
+  useEffect(() => {
+    console.log("workspace", currWorkspaceId, "category", currCategoryId);
+    refetch();
+  }, [currCategoryId]);
 
   const bottomObserver = useRef();
   const options = {
@@ -87,7 +95,11 @@ const BookmarkGridTemplate = () => {
           categoryName={getCategoryName(currCategoryId)}
         />
       )}
-      <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
+      <BookmarkGrid
+        bookmarkList={bookmarkList}
+        categoryId={currCategoryId}
+        handleRefetch={refetchData}
+      />
       <div ref={bottomObserver} style={{ height: "20px" }}>
         {isFetching && "Loading more..."}
       </div>

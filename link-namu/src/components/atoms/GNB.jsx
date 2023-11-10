@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import dehaze from "../../assets/dehaze.png";
 import Searchbar from "../atoms/Searchbar";
 import LogoutButton from "./LogoutButton";
 
 const GNB = ({ setState }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <header className="m-0 p-0">
@@ -22,7 +25,7 @@ const GNB = ({ setState }) => {
                 </div>
               </button>
               <button
-                onClick={() => (window.location.href = "/")}
+                onClick={() => navigate("/")}
                 className="px-4 text-center"
               >
                 <span className="text-base font-medium">🎄 LinkNamu</span>
