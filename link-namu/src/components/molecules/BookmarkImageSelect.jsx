@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { imageToBase64 } from "../../utils/imageToBase64";
 import ModalTextInput from "../atoms/ModalTextInput";
 
 const IMAGE_TYPE = {
@@ -12,14 +13,22 @@ const BookmarkImageSelect = ({ onChange }) => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
   const [imageData, setImageData] = useState();
+  const [base64Data, setBase64Data] = useState("");
+
+  useEffect(() => {
+    imageToBase64(selectedImageFile, (base64Data) => {
+      setBase64Data(base64Data);
+    });
+  }, [selectedImageFile]);
 
   useEffect(() => {
     if (selectedImageType === IMAGE_TYPE.URL) {
       setImageData({ type: IMAGE_TYPE.URL, value: selectedImageUrl });
     } else if (selectedImageType === IMAGE_TYPE.FILE) {
-      setImageData({ type: IMAGE_TYPE.FILE, value: selectedImageFile });
+      setImageData({ type: IMAGE_TYPE.FILE, value: base64Data });
     }
-  }, [selectedImageType, selectedImageFile, selectedImageUrl]);
+  }, [selectedImageType, base64Data, selectedImageUrl]);
+
   useEffect(() => {
     onChange(imageData);
   }, [onChange, imageData]);
