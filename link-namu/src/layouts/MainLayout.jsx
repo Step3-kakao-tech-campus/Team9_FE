@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { useState, Suspense } from "react";
 
 import Sidebar from "../components/atoms/Sidebar";
 import GNB from "../components/atoms/GNB";
 import Menubar from "../components/molecules/Menubar";
-import { useState } from "react";
+import Loader from "../components/atoms/Loader";
 
 const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -17,9 +18,11 @@ const MainLayout = () => {
           <Menubar isOpen={isOpen} />
         </div>
         <div className="flex-1 h-[100%]">
-          <Scrollbars thumbSize={100}>
-            <Outlet />
-          </Scrollbars>
+          <Suspense fallback={<Loader />}>
+            <Scrollbars thumbSize={100}>
+              <Outlet />
+            </Scrollbars>
+          </Suspense>
         </div>
       </div>
       <GNB
