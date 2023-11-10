@@ -34,7 +34,12 @@ const TemporaryStorage = ({ isOpen }) => {
       }`}
     >
       <div className="absolute w-12 p-4 cursor-pointer" onClick={closeStorage}>
-        <img src={x} alt="close" aria-label="임시보관함 닫기" />
+        <img
+          src={x}
+          alt="close"
+          aria-label="임시보관함 닫기"
+          className="hover:opacity-50"
+        />
       </div>
       <div>
         <h3 className="m-4 text-2xl font-bold text-center">임시보관함</h3>

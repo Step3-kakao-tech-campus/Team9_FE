@@ -8,6 +8,8 @@ import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
 import { useWorkspaceName } from "../../hooks/useWorkspaceName";
 import { useCategoryName } from "../../hooks/useCategoryName";
+import FirstPage from "../../pages/FirstPage";
+import FirstAccessPage from "../../pages/FirstAccessPage";
 
 const BookmarkGridTemplate = () => {
   const location = useLocation();
@@ -95,11 +97,19 @@ const BookmarkGridTemplate = () => {
           categoryName={getCategoryName(currCategoryId)}
         />
       )}
-      <BookmarkGrid
-        bookmarkList={bookmarkList}
-        categoryId={currCategoryId}
-        handleRefetch={refetchData}
-      />
+      {currCategoryId === null ? (
+        accessToken ? (
+          <FirstAccessPage />
+        ) : (
+          <FirstPage />
+        )
+      ) : (
+        <BookmarkGrid
+          bookmarkList={bookmarkList}
+          categoryId={currCategoryId}
+          handleRefetch={refetchData}
+        />
+      )}
       <div ref={bottomObserver} style={{ height: "20px" }}>
         {isFetching && "Loading more..."}
       </div>
