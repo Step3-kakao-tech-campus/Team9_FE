@@ -44,6 +44,19 @@ export const updateBookmark = ({ bookmarkId, bookmarkName, description }) => {
 };
 
 /**
+ * 북마크 이미지 수정
+ * @param {Object} params
+ * @param {number} params.bookmarkId - 북마크 ID
+ * @param {string} params.imageUrl - base64로 변환한 이미지 또는 이미지 URL
+ * @returns
+ */
+export const updateBookmarkImage = ({ bookmarkId, imageUrl }) => {
+  return instance.post(`/api/bookmark/image/updata/${bookmarkId}`, {
+    imageUrl: imageUrl,
+  });
+};
+
+/**
  * 북마크 이동
  * @param {array, number} param0
  * @returns
