@@ -51,7 +51,7 @@ const SaveShareLinkModal = () => {
     }
     if (queryString.startsWith(LINK_TYPE.CATEGORY)) {
       return {
-        tpe: LINK_TYPE.CATEGORY,
+        type: LINK_TYPE.CATEGORY,
         encodedId: queryString.replace(`${LINK_TYPE.CATEGORY}=`, ""),
       };
     }
@@ -67,6 +67,7 @@ const SaveShareLinkModal = () => {
       return;
     }
     const data = extractCode(shareLink);
+    console.log("추출 코드", data);
     if (!data.type || !data.encodedId) {
       printToast("링크 분석 중 오류가 발생하였습니다.");
       return;
