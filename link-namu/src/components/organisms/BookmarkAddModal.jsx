@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import { useModalData } from "../../hooks/useModalData";
 import { createBookmark } from "../../apis/bookmark";
+import { stringToTags } from "../../utils/stringToTags";
 
 import MultiStepModalBase from "./MultiStepModalBase";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalBox from "../atoms/ModalBox";
 import ModalSubtitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
-import CategorySelectBox from "../atoms/CategorySelectBox";
-import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
 import { printToast } from "../../utils/toast";
+import Checkbox from "../atoms/Checkbox";
+import BookmarkImageSelect from "../molecules/BookmarkImageSelect";
 
 const BookmarkAddModal = () => {
   const closeModal = useCloseModal();
@@ -21,6 +22,8 @@ const BookmarkAddModal = () => {
   const [bookmarkName, setBookmarkName] = useState("");
   const [bookmarkDescription, setBookmarkDescription] = useState("");
   const [tagInput, setTagInput] = useState("");
+  const [allowImage, setAllowImage] = useState(false);
+  const [imageData, setImageData] = useState();
 
   useEffect(() => {
     if (!modalData) return;
@@ -72,18 +75,33 @@ const BookmarkAddModal = () => {
             placeholder="태그1 태그2"
           />
         </div>
+        <div>
+          <ModalSubtitle>
+            이미지 선택
+            <span className="inline-block px-3">
+              <Checkbox
+                checked={allowImage}
+                onChange={() => setAllowImage((prev) => !prev)}
+              />
+            </span>
+            (미선택 시 링크의 썸네일이 추가됩니다.)
+          </ModalSubtitle>
+          {allowImage && <BookmarkImageSelect onChange={setImageData} />}
+        </div>
       </ModalBox>
     </>
   );
 
   const addBookmark = () => {
+    const imageUrl = allowImage ? imageData.value : null;
+
     const bookmarkData = {
       bookmarkName: bookmarkName,
       bookmarkLink: bookmarkLink,
       bookmarkDescription: bookmarkDescription,
       categoryId: categoryId,
-      imageUrl: null,
-      tags: tagInput.split(" "),
+      imageUrl: imageUrl,
+      tags: stringToTags(tagInput),
     };
 
     console.log(bookmarkData);

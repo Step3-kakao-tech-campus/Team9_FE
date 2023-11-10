@@ -10,7 +10,7 @@ const SharedWorkspacePage = () => {
   useEffect(() => {
     const currentUrl = window.location.href;
     const query = currentUrl?.split("?")[1];
-    setEncodedId(query.split("=")[1] + "=");
+    setEncodedId(query.replace(`workspace=`, ""));
   }, []);
 
   useEffect(() => {
