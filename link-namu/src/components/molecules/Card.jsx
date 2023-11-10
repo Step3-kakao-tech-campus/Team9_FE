@@ -21,6 +21,7 @@ const Card = ({
   title = "",
   description = "",
   tags = [],
+  handleRefetch,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isContextMenuVisible, setContextMenuVisible] = useState(false);
@@ -72,6 +73,7 @@ const Card = ({
           onClose={closeContextMenu}
           onAction={handleContextMenuAction}
           bookmarkId={bookmarkId}
+          handleRefetch={handleRefetch}
         />
       )}
       <Draggable key={bookmarkId} draggableId={dragId} index={1}>

@@ -95,7 +95,11 @@ const BookmarkGridTemplate = () => {
           categoryName={getCategoryName(currCategoryId)}
         />
       )}
-      <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
+      <BookmarkGrid
+        bookmarkList={bookmarkList}
+        categoryId={currCategoryId}
+        handleRefetch={refetchData}
+      />
       <div ref={bottomObserver} style={{ height: "20px" }}>
         {isFetching && "Loading more..."}
       </div>
