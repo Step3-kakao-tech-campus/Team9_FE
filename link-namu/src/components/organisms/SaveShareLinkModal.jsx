@@ -43,21 +43,17 @@ const SaveShareLinkModal = () => {
 
   const extractCode = (url) => {
     try {
-      const queryParams = new URL(url)?.searchParams;
-
-      const workspaceParam = queryParams.get(LINK_TYPE.WORKSPACE);
-      const categoryParam = queryParams.get(LINK_TYPE.CATEGORY);
-
-      if (workspaceParam) {
+      const query = url.split("?")[1];
+      if (query.startsWith(LINK_TYPE.WORKSPACE)) {
         return {
           type: LINK_TYPE.WORKSPACE,
-          encodedId: decodeURIComponent(workspaceParam),
+          encodedId: query.replace(`${LINK_TYPE.WORKSPACE}=`, ""),
         };
       }
-      if (categoryParam) {
+      if (query.startsWith(LINK_TYPE.CATEGORY)) {
         return {
           type: LINK_TYPE.CATEGORY,
-          encodedId: decodeURIComponent(categoryParam),
+          encodedId: query.replace(`${LINK_TYPE.CATEGORY}=`, ""),
         };
       }
       return {
