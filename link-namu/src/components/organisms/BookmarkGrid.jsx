@@ -86,7 +86,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId, handleRefetch }) => {
   );
 
   // 드래그 시작
-  const onDragStart = useCallback(result => {
+  const onDragStart = useCallback((result) => {
     setIsOpen(true);
   }, []);
 
@@ -118,7 +118,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId, handleRefetch }) => {
           >
             <AddCard categoryId={categoryId} />
             {bookmarkList &&
-              bookmarkList.map(bookmark => {
+              bookmarkList.map((bookmark) => {
                 return (
                   <Card
                     bookmarkId={bookmark.bookmarkId}
