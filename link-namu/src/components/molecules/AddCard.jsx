@@ -11,7 +11,7 @@ const AddCard = ({ categoryId, handleRefetch }) => {
       onClick={() =>
         openModal({
           modalType: MODAL_TYPES.BookmarkAddModal,
-          data: { categoryId: categoryId },
+          data: { categoryId: categoryId, handleRefetch: handleRefetch },
         })
       }
     >

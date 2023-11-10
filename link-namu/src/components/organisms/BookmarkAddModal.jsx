@@ -109,6 +109,7 @@ const BookmarkAddModal = () => {
         if (res.status === 200) {
           const msg = "북마크가 추가되었습니다 !";
           printToast(msg, "success");
+          modalData.handleRefetch();
           console.log(msg);
           closeModal();
         } else {
