@@ -35,7 +35,7 @@ const BookmarkContextMenu = ({
     console.log("editBookmarkImage", bookmarkId);
     openModal({
       modalType: MODAL_TYPES.BookmarkImageEditModal,
-      data: { bookmarkId: bookmarkId },
+      data: { bookmarkId: bookmarkId, handleRefetch: handleRefetch },
     });
   };
   return (
