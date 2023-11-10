@@ -31,10 +31,10 @@ const BookmarkContextMenu = ({
     });
   };
 
-  const editBookmarkImage = () => {
+  const updateBookmarkImage = () => {
     console.log("editBookmarkImage", bookmarkId);
     openModal({
-      modalType: MODAL_TYPES.BookmarkImageEditModal,
+      modalType: MODAL_TYPES.BookmarkImageUpdateModal,
       data: { bookmarkId: bookmarkId, handleRefetch: handleRefetch },
     });
   };
@@ -52,7 +52,7 @@ const BookmarkContextMenu = ({
       <ContextMenuItem handleAction={() => onAction(editBookmark())}>
         북마크 수정
       </ContextMenuItem>
-      <ContextMenuItem handleAction={() => onAction(editBookmarkImage())}>
+      <ContextMenuItem handleAction={() => onAction(updateBookmarkImage())}>
         이미지 변경
       </ContextMenuItem>
     </div>
