@@ -88,7 +88,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
   );
 
   // 드래그 시작
-  const onDragStart = useCallback(result => {
+  const onDragStart = useCallback((result) => {
     setIsOpen(true);
   }, []);
 
@@ -120,7 +120,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
           >
             <AddCard categoryId={categoryId} />
             {bookmarkList &&
-              bookmarkList.map(bookmark => {
+              bookmarkList.map((bookmark) => {
                 return (
                   <Card
                     bookmarkId={bookmark.bookmarkId}
