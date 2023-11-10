@@ -14,6 +14,10 @@ const FirstPage = () => {
     if (index < PAGE_LENGTH) setIndex(index + 1);
   };
 
+  const startHandler = () => {
+    setIndex(0);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 " onClick={handleToggleVisibility}>
       <FirstPageModal index={index} count={0}>
@@ -75,7 +79,12 @@ const FirstPage = () => {
         <br />
         공유받은 북마크를 추가할 수 있습니다.
       </FirstPageModal>
-      <FirstPageModal index={index} count={9} isEnd={true}>
+      <FirstPageModal
+        index={index}
+        count={9}
+        isEnd={true}
+        startHandler={startHandler}
+      >
         환영합니다!
         <br />
         링크나무를 바로 사용해보세요.
