@@ -31,7 +31,11 @@ const GNB = ({ setState }) => {
                 <span className="text-base font-medium">🎄 LinkNamu</span>
               </button>
             </div>
-            {/* <Searchbar /> */}
+            <Searchbar
+              detailSearchButtonHandler={() => {
+                navigate("/search/result");
+              }}
+            />
             <LogoutButton />
           </div>
         </div>

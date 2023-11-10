@@ -3,7 +3,7 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 
 import DefaultGNB from "../components/atoms/DefaultGNB";
 
-const ShareLinkLayout = () => {
+const SearchLayout = () => {
   return (
     <>
       <div className="w-full h-[56px]"></div>
@@ -19,4 +19,4 @@ const ShareLinkLayout = () => {
   );
 };
 
-export default ShareLinkLayout;
+export default SearchLayout;
