@@ -31,6 +31,13 @@ const BookmarkContextMenu = ({
     });
   };
 
+  const editBookmarkImage = () => {
+    console.log("editBookmarkImage", bookmarkId);
+    openModal({
+      modalType: MODAL_TYPES.BookmarkImageEditModal,
+      data: { bookmarkId: bookmarkId },
+    });
+  };
   return (
     <div
       className="fixed z-50 bg-white border rounded shadow-md context-menu"
@@ -44,6 +51,9 @@ const BookmarkContextMenu = ({
       </ContextMenuItem>
       <ContextMenuItem handleAction={() => onAction(editBookmark())}>
         북마크 수정
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(editBookmarkImage())}>
+        이미지 변경
       </ContextMenuItem>
     </div>
   );
