@@ -91,3 +91,11 @@ export const searchBookmark = ({
     tags: tags,
   });
 };
+
+/**
+ * 최근 등록한 북마크 리스트 조회
+ * @returns
+ */
+export const recentBoookmark = () => {
+  return instance.get(`/api/bookmark/list`);
+};
