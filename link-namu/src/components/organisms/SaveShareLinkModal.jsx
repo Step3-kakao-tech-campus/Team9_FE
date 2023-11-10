@@ -42,23 +42,30 @@ const SaveShareLinkModal = () => {
   }, [shareLink]);
 
   const extractCode = (url) => {
-    const queryString = url?.split("?")[1];
-    if (queryString.startsWith(LINK_TYPE.WORKSPACE)) {
+    try {
+      const query = url.split("?")[1];
+      if (query.startsWith(LINK_TYPE.WORKSPACE)) {
+        return {
+          type: LINK_TYPE.WORKSPACE,
+          encodedId: query.replace(`${LINK_TYPE.WORKSPACE}=`, ""),
+        };
+      }
+      if (query.startsWith(LINK_TYPE.CATEGORY)) {
+        return {
+          type: LINK_TYPE.CATEGORY,
+          encodedId: query.replace(`${LINK_TYPE.CATEGORY}=`, ""),
+        };
+      }
       return {
-        type: LINK_TYPE.WORKSPACE,
-        encodedId: queryString.replace(`${LINK_TYPE.WORKSPACE}=`, ""),
+        type: null,
+        encodedId: null,
       };
+    } catch (err) {
+      const msg = "잘못된 공유 링크 형식입니다.";
+      printToast(msg, "error");
+      console.log(msg);
+      return;
     }
-    if (queryString.startsWith(LINK_TYPE.CATEGORY)) {
-      return {
-        type: LINK_TYPE.CATEGORY,
-        encodedId: queryString.replace(`${LINK_TYPE.CATEGORY}=`, ""),
-      };
-    }
-    return {
-      type: null,
-      encodedId: null,
-    };
   };
 
   const saveShareLink = () => {
@@ -77,7 +84,8 @@ const SaveShareLinkModal = () => {
 
     if (data.type === LINK_TYPE.CATEGORY) {
       if (!workspaceId) {
-        throw new Error("워크스페이스를 선택해주세요.");
+        printToast("워크스페이스를 선택해주세요.", "error");
+        return;
       }
       addCategoryFromEncodedId({
         workspaceId: workspaceId,
