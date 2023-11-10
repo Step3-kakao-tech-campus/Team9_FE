@@ -19,7 +19,7 @@ import WorkspaceRenameModal from "../organisms/WorkspaceRenameModal";
 import GoogleDocsModal from "../organisms/GoogleDocsModal";
 import BookmarkDeleteModal from "../organisms/BookmarkDeleteModal";
 import BookmarkEditModal from "../organisms/BookmarkEditModal";
-import BookmarkImageUpdataModal from "../organisms/BookmarkImageUpdataModal";
+import BookmarkImageUpdateModal from "../organisms/BookmarkImageUpdateModal";
 
 const MODAL_COMPONENTS = [
   {
@@ -88,7 +88,7 @@ const MODAL_COMPONENTS = [
   },
   {
     type: MODAL_TYPES.BookmarkImageEditModal,
-    component: <BookmarkImageUpdataModal />,
+    component: <BookmarkImageUpdateModal />,
   },
 ];
 
