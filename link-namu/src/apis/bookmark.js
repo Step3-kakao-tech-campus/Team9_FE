@@ -81,8 +81,9 @@ export const searchBookmark = ({
   bookmarkDescription = null,
   workspaceName = null,
   tags = null,
+  page = 0,
 }) => {
-  return instance.post("/api/bookmark/search", {
+  return instance.post(`/api/bookmark/search?page=${page}`, {
     bookmarkName: bookmarkName,
     bookmarkLink: bookmarkLink,
     bookmarkDescription: bookmarkDescription,
