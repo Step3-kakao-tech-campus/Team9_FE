@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import { useModalData } from "../../hooks/useModalData";
 import { createBookmark } from "../../apis/bookmark";
+import { stringToTags } from "../../utils/stringToTags";
 
 import MultiStepModalBase from "./MultiStepModalBase";
 import ModalTitle from "../atoms/ModalTitle";
@@ -100,7 +101,7 @@ const BookmarkAddModal = () => {
       bookmarkDescription: bookmarkDescription,
       categoryId: categoryId,
       imageUrl: imageUrl,
-      tags: tagInput.split(" "),
+      tags: stringToTags(tagInput),
     };
 
     console.log(bookmarkData);
