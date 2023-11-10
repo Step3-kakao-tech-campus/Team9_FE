@@ -5,14 +5,21 @@ import ContextMenuItem from "./ContextMenuItem";
 import MODAL_TYPES from "../../constants/modal_types";
 import { printToast } from "../../utils/toast";
 
-const BookmarkContextMenu = ({ top, left, onClose, onAction, bookmarkId }) => {
+const BookmarkContextMenu = ({
+  top,
+  left,
+  onClose,
+  onAction,
+  bookmarkId,
+  handleRefetch,
+}) => {
   const openModal = useOpenModal();
 
   const deleteBookmark = () => {
     console.log("deleteBookmark", bookmarkId);
     openModal({
       modalType: MODAL_TYPES.BookmarkDeleteModal,
-      data: { bookmarkId: bookmarkId },
+      data: { bookmarkId: bookmarkId, handleRefetch: handleRefetch },
     });
   };
 
@@ -20,7 +27,7 @@ const BookmarkContextMenu = ({ top, left, onClose, onAction, bookmarkId }) => {
     console.log("editBookmark", bookmarkId);
     openModal({
       modalType: MODAL_TYPES.BookmarkEditModal,
-      data: { bookmarkId: bookmarkId },
+      data: { bookmarkId: bookmarkId, handleRefetch: handleRefetch },
     });
   };
 

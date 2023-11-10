@@ -59,9 +59,8 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
         // 북마크 이동 (서버)
         moveBookmark({ bookmarkIdList: [id], toCategoryId: categoryId })
           .then(res => {
-            printToast("이동에 성공했습니다.\n새로고침됩니다.", "success", () =>
-              window.location.reload()
-            );
+            handleRefetch();
+            printToast("이동에 성공했습니다.", "success");
           })
           .catch(err => {
             switch (err.errorCode) {
@@ -135,6 +134,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
                       "-" +
                       bookmark.bookmarkId.toString().length
                     }
+                    handleRefetch={handleRefetch}
                     // imageUrl={base64Image}
                     imageAlt={bookmark.url}
                   />

@@ -5,7 +5,6 @@ import { useCloseModal } from "../../hooks/useCloseModal";
 import SingleStepModalBase from "./SingleStepModalBase";
 import { useModalData } from "../../hooks/useModalData";
 import { printToast } from "../../utils/toast";
-import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 import { updateBookmark } from "../../apis/bookmark";
 import ModalTextInput from "../atoms/ModalTextInput";
 import { useState } from "react";
@@ -13,7 +12,6 @@ import { useState } from "react";
 const BookmarkEditModal = ({ data }) => {
   const closeModal = useCloseModal();
   const modalData = useModalData();
-  const { refetchData } = useWorkspaceList();
   const [bookmarkName, setBookmarkName] = useState("");
   const [bookmarkDescription, setBookmarkDescription] = useState("");
 
@@ -36,7 +34,7 @@ const BookmarkEditModal = ({ data }) => {
         if (res.status === 200) {
           const msg = "북마크가 수정되었습니다.";
           printToast(msg, "success");
-          refetchData();
+          modalData.handleRefetch();
           closeModal();
         } else {
           throw new Error(res.data?.error?.message);

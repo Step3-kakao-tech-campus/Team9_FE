@@ -5,13 +5,11 @@ import { useCloseModal } from "../../hooks/useCloseModal";
 import SingleStepModalBase from "./SingleStepModalBase";
 import { useModalData } from "../../hooks/useModalData";
 import { printToast } from "../../utils/toast";
-import { useWorkspaceList } from "../../hooks/useWorkspaceList";
 import { deleteBookmark } from "../../apis/bookmark";
 
 const BookmarkDeleteModal = ({ data }) => {
   const closeModal = useCloseModal();
   const modalData = useModalData();
-  const { refetchData } = useWorkspaceList();
 
   const deleteBookmarkHandler = () => {
     deleteBookmark({
@@ -21,7 +19,7 @@ const BookmarkDeleteModal = ({ data }) => {
         if (res.status === 200) {
           const msg = "북마크가 삭제되었습니다.";
           printToast(msg, "success");
-          refetchData();
+          modalData.handleRefetch();
           closeModal();
         } else {
           throw new Error(res.data?.error?.message);
