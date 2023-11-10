@@ -50,8 +50,8 @@ const DetailSearchBox = ({ value, changeHandler, clickHandler, isOpen }) => {
   return (
     <div
       className={`${
-        isOpen ? "h-[350px]" : "h-0"
-      } duration-500 overflow-hidden flex flex-col border`}
+        isOpen ? "h-[350px] border" : "h-0"
+      } duration-500 overflow-hidden flex flex-col`}
     >
       <div className="flex-1 flex flex-col">
         <div>
