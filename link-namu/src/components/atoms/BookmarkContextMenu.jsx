@@ -1,0 +1,45 @@
+import { useOpenModal } from "../../hooks/useOpenModal";
+import { createCategoryShareLink } from "../../apis/share";
+
+import ContextMenuItem from "./ContextMenuItem";
+import MODAL_TYPES from "../../constants/modal_types";
+import { printToast } from "../../utils/toast";
+
+const BookmarkContextMenu = ({ top, left, onClose, onAction, bookmarkId }) => {
+  const openModal = useOpenModal();
+
+  const deleteBookmark = () => {
+    console.log("deleteBookmark", bookmarkId);
+    openModal({
+      modalType: MODAL_TYPES.BookmarkDeleteModal,
+      data: { bookmarkId: bookmarkId },
+    });
+  };
+
+  const editBookmark = () => {
+    console.log("editBookmark", bookmarkId);
+    openModal({
+      modalType: MODAL_TYPES.BookmarkEditModal,
+      data: { bookmarkId: bookmarkId },
+    });
+  };
+
+  return (
+    <div
+      className="fixed z-50 bg-white border rounded shadow-md context-menu"
+      style={{ top, left }}
+      onClick={onClose}
+    >
+      <ContextMenuItem handleAction={() => onAction()}>닫기</ContextMenuItem>
+      <hr />
+      <ContextMenuItem handleAction={() => onAction(deleteBookmark())}>
+        북마크 삭제
+      </ContextMenuItem>
+      <ContextMenuItem handleAction={() => onAction(editBookmark())}>
+        북마크 수정
+      </ContextMenuItem>
+    </div>
+  );
+};
+
+export default BookmarkContextMenu;
