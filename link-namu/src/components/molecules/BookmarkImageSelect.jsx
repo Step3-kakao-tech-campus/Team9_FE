@@ -107,6 +107,7 @@ const BookmarkImageSelect = ({ onChange }) => {
           // 이미지 URL 선택 영역
           <ModalTextInput
             value={selectedImageUrl}
+            placeholder="이미지 URL을 입력해주세요."
             changeHandler={setSelectedImageUrl}
           />
         )}
