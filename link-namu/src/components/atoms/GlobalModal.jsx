@@ -17,6 +17,8 @@ import SaveShareLinkModal from "../organisms/SaveShareLinkModal";
 import CategoryRenameModal from "../organisms/CategoryRenameModal";
 import WorkspaceRenameModal from "../organisms/WorkspaceRenameModal";
 import GoogleDocsModal from "../organisms/GoogleDocsModal";
+import BookmarkDeleteModal from "../organisms/BookmarkDeleteModal";
+import BookmarkEditModal from "../organisms/BookmarkEditModal";
 
 const MODAL_COMPONENTS = [
   {
@@ -74,6 +76,14 @@ const MODAL_COMPONENTS = [
   {
     type: MODAL_TYPES.WorkspaceRenameModal,
     component: <WorkspaceRenameModal />,
+  },
+  {
+    type: MODAL_TYPES.BookmarkDeleteModal,
+    component: <BookmarkDeleteModal />,
+  },
+  {
+    type: MODAL_TYPES.BookmarkEditModal,
+    component: <BookmarkEditModal />,
   },
 ];
 

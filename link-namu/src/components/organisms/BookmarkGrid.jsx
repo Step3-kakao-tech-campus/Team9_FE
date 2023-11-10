@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import Card from "../molecules/Card";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import TemporaryStorage from "../molecules/TemporaryStorage";
-import { useMutation } from "react-query";
 import { moveBookmark } from "../../apis/bookmark";
 import { printToast } from "../../utils/toast";
 import AddCard from "../molecules/AddCard";
@@ -13,10 +12,6 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
   // enabled : StrictMode 문제 해결.
   const [enabled, setEnabled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  const { mutate } = useMutation({
-    mutationFn: moveBookmark,
-  });
 
   // 드래그 종료
   const onDragEnd = useCallback(
@@ -62,29 +57,32 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
         tempList = tempList.filter((bookmark) => bookmark.id !== id);
 
         // 북마크 이동 (서버)
-        mutate(
-          { bookmarkIdList: [id], toCategoryId: categoryId },
-          {
-            onError: (error) => {
-              console.log(error.response.data.error.message);
-              printToast("이동에 실패했습니다.", "error");
-              return;
-            },
-            onSuccess: () => {
-              printToast(
-                "이동에 성공했습니다.\n새로고침됩니다.",
-                "success",
-                () => window.location.reload()
-              );
-            },
-          }
-        );
+        moveBookmark({ bookmarkIdList: [id], toCategoryId: categoryId })
+          .then(res => {
+            handleRefetch();
+            printToast("이동에 성공했습니다.", "success");
+          })
+          .catch(err => {
+            switch (err.errorCode) {
+              case "24000":
+                printToast("해당 북마크가 이미 존재합니다.", "error");
+                break;
+              case "24030":
+                printToast("북마크에 접근할 권한이 없습니다.", "error");
+                break;
+              case "24040":
+                printToast("해당 북마크가 존재하지 않습니다.", "error");
+                break;
+              default:
+                printToast("이동에 실패했습니다.", "error");
+            }
+          });
 
         window.localStorage.setItem("tempList", JSON.stringify(tempList));
       }
       console.log(result);
     },
-    [categoryId, mutate]
+    [categoryId]
   );
 
   // 드래그 시작
@@ -136,6 +134,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId }) => {
                       "-" +
                       bookmark.bookmarkId.toString().length
                     }
+                    handleRefetch={handleRefetch}
                     // imageUrl={base64Image}
                     imageAlt={bookmark.url}
                   />
