@@ -4,10 +4,13 @@
  */
 const Tag = ({ name }) => {
   return (
-    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 text-ellipsis overflow-hidden max-w-[80%] break-all whitespace-nowrap">
+    <span
+      title={name}
+      className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 text-ellipsis overflow-hidden max-w-[80%] break-all whitespace-nowrap"
+    >
       {name}
     </span>
-  )
-}
+  );
+};
 
-export default Tag
+export default Tag;
