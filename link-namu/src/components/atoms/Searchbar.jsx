@@ -10,7 +10,7 @@ import xIcon from "../../assets/x.png";
  * @param {string} width - 컴포넌트 가로 길이
  * @returns
  */
-const Searchbar = () => {
+const Searchbar = ({ detailSearchButtonHandler }) => {
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const searchButtonRef = useRef(null);
@@ -91,11 +91,10 @@ const Searchbar = () => {
             <span className="block text-sm">검색</span>
           </button>
         </div>
-        <button className={`${!isExtended && "invisible"} px-2`}>
+        <button className={`px-2`} onClick={detailSearchButtonHandler}>
           <span className="text-sm">상세 검색</span>
         </button>
       </div>
-      {/* <DetailSearchBox /> */}
     </>
   );
 };

@@ -4,7 +4,7 @@ import SearchInputText from "./SearchInputText";
 import SearchInputLabel from "./SearchInputLabel";
 import Tag from "./Tag";
 
-const DetailSearchBox = ({ value, changeHandler, clickHandler }) => {
+const DetailSearchBox = ({ value, changeHandler, clickHandler, isOpen }) => {
   const [bookmarkNameText, setBookmarkNameText] = useState("");
   const [bookmarkDescText, setBookmarkDescText] = useState("");
   const [bookmarkLinkText, setBookmarkLinkText] = useState("");
@@ -48,7 +48,11 @@ const DetailSearchBox = ({ value, changeHandler, clickHandler }) => {
   ]);
 
   return (
-    <div className="flex flex-col border">
+    <div
+      className={`${
+        isOpen ? "h-[350px]" : "h-0"
+      } duration-500 overflow-hidden flex flex-col border`}
+    >
       <div className="flex-1 flex flex-col">
         <div>
           <SearchInputLabel htmlFor="bookmarkNameInput">

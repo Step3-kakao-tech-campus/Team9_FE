@@ -9,6 +9,7 @@ import DetailSearchBox from "../components/atoms/DetailSearchBox";
 const SearchResultPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isOpenDetailSearch, setIsOpenDetailSearch] = useState(false);
   const [detailSearchValue, setDetailSearchValue] = useState({
     bookmarkName: null,
     bookmarkDescription: null,
@@ -48,22 +49,27 @@ const SearchResultPage = () => {
   return (
     <div className="flex flex-col items-center ">
       <div className="mx-auto my-5">
-        <Searchbar />
+        <Searchbar
+          detailSearchButtonHandler={() => {
+            setIsOpenDetailSearch((prev) => !prev);
+          }}
+        />
         <DetailSearchBox
           value={detailSearchValue}
           changeHandler={setDetailSearchValue}
           clickHandler={searchDetail}
+          isOpen={isOpenDetailSearch}
         />
       </div>
       <div className="w-full border-b"></div>
       <div className="w-[1280px] mx-auto">
         <Suspense fallback={<Loader />}>
           <SearchResultTemplate
-            bookmarkName={location.state.bookmarkName}
-            bookmarkLink={location.state.bookmarkLink}
-            bookmarkDescription={location.state.bookmarkDescription}
-            workspaceName={location.state.workspaceName}
-            tags={location.state.tags}
+            bookmarkName={location.state?.bookmarkName}
+            bookmarkLink={location.state?.bookmarkLink}
+            bookmarkDescription={location.state?.bookmarkDescription}
+            workspaceName={location.state?.workspaceName}
+            tags={location.state?.tags}
           />
         </Suspense>
       </div>
