@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import cookies from "react-cookies";
 import { reissue } from "./apis/user";
 import { setToken } from "./store/slices/userSlice";
 import "./App.css";
+import Loader from "./components/atoms/Loader";
 
 // layouts
 import MainLayout from "./layouts/MainLayout";
@@ -55,31 +56,33 @@ const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          {/* 단독 레이아웃 */}
-          <Route path="signin" element={<SignInPage />} />
-          <Route path="notion/redirect" element={<NotionRedirectPage />} />
+      <Suspense fallback={<Loader />}>
+        <BrowserRouter>
+          <Routes>
+            {/* 단독 레이아웃 */}
+            <Route path="signin" element={<SignInPage />} />
+            <Route path="notion/redirect" element={<NotionRedirectPage />} />
 
-          {/* 공통 레이아웃 */}
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<MainPage />} />
-          </Route>
-          <Route element={<ShareLinkLayout />}>
-            <Route
-              path="share-link/workspace/share"
-              element={<SharedWorkspacePage />}
-            />
-            <Route
-              path="share-link/category/share"
-              element={<SharedCategoryPage />}
-            />
-          </Route>
-          <Route element={<SearchLayout />}>
-            <Route path="search/result" element={<SearchResultPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            {/* 공통 레이아웃 */}
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<MainPage />} />
+            </Route>
+            <Route element={<ShareLinkLayout />}>
+              <Route
+                path="share-link/workspace/share"
+                element={<SharedWorkspacePage />}
+              />
+              <Route
+                path="share-link/category/share"
+                element={<SharedCategoryPage />}
+              />
+            </Route>
+            <Route element={<SearchLayout />}>
+              <Route path="search/result" element={<SearchResultPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Suspense>
     </div>
   );
 };
