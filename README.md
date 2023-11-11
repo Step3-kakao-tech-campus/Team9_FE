@@ -63,6 +63,12 @@
 테스트를 하실떄 아래 테스트 시나리오를 참고해주시면 감사하겠습니다.<br><br>
 [테스트 시나리오](https://www.notion.so/04a226ff46b6469186e05694ed916726)
 
+## 아키텍쳐
+<img src="https://github.com/Step3-kakao-tech-campus/Team9_BE/assets/89145559/355174f3-dd9e-4317-b932-27d0cda2bf0a" width="90%"/>
+
+## ERD 
+![image](https://github.com/Step3-kakao-tech-campus/Team9_BE/assets/89145559/72351fa5-3b74-4991-bba7-01b96392809b)
+
 ## 주요 기능
 
 |        기능        |                                                        화면                                                        |                              설명                              |
