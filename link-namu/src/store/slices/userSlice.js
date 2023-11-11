@@ -18,6 +18,9 @@ const userSlice = createSlice({
           path: "/",
           // httpOnly: true,
         });
+        cookies.save("accessToken", state.accessToken, {
+          path: "/",
+        });
       }
     },
   },
