@@ -4,6 +4,8 @@
 
 링크 통합 관리 서비스 **링크나무** 입니다.
 
+<br>
+
 ## 목차
 
 > - [👋 프로젝트 소개](#프로젝트-소개)
@@ -21,6 +23,8 @@
 > - [🔗 관련 링크](#관련-링크)
 > - [🔒 라이선스](#라이선스)
 
+<br>
+
 ## 프로젝트 소개
 
 | 내용          | 설명                                                              |
@@ -28,6 +32,8 @@
 | 프로젝트 이름 | 링크나무                                                          |
 | 한줄 소개     | 다양한 곳에 분산되어 있는 링크를 통합해 관리 및 공유해주는 사이트 |
 | 개발 기간     | 2023.09 - 2023.11                                                 |
+
+<br>
 
 ## 기획 의도
 
@@ -44,6 +50,8 @@
 따라서, 저희는 **노션, 구글 독스, 카카오톡 등 다양한 소스에서 링크를 가져와 한 곳에서 통합적으로 관리**할 수 있는 기능을 제공합니다.
 이러한 다양한 소스에서의 링크를 링크나무를 통해 통합 관리함으로써 사용자들은 불필요한 중복 작업을 피하고, 한눈에 모든 링크를 확인할 수 있는 편의성을 경험할 수 있을 것입니다.
 
+<br>
+
 ## 팀원 소개
 
 카카오 테크 캠퍼스 1기 부산대 9조 프론트엔드
@@ -54,20 +62,30 @@
 |          [김성현](https://github.com/SeonghyeonKim)          |          [이다빈](https://github.com/dabinchiii)          |
 | <img src="https://github.com/SeonghyeonKim.png" width="100"> | <img src="https://github.com/dabinchiii.png" width="100"> |
 
+<br>
+
 ## 배포 링크
 
 - https://k3f12e8e83a24a.user-app.krampoline.com
+
+<br>
 
 ## 테스트 가이드
 
 테스트를 하실떄 아래 테스트 시나리오를 참고해주시면 감사하겠습니다.<br><br>
 [테스트 시나리오](https://www.notion.so/04a226ff46b6469186e05694ed916726)
 
+<br>
+
 ## 아키텍쳐
 <img src="https://github.com/Step3-kakao-tech-campus/Team9_BE/assets/89145559/355174f3-dd9e-4317-b932-27d0cda2bf0a" width="90%"/>
 
+<br>
+
 ## ERD 
 ![image](https://github.com/Step3-kakao-tech-campus/Team9_BE/assets/89145559/72351fa5-3b74-4991-bba7-01b96392809b)
+
+<br>
 
 ## 주요 기능
 
@@ -81,12 +99,16 @@
 |  공유 링크로 저장  | <img src="https://github.com/ikyeong/Team9_BE/assets/103908923/792f0431-b729-40a8-9a9d-e562e69868c6" width="70%" > | 공유 링크를 통해 다른 유저의 워크스페이스/카테고리를 저장한다. |
 |    북마크 검색     | <img src="https://github.com/ikyeong/Team9_BE/assets/103908923/1683d704-3b56-4913-a898-e36fc03de50b" width="70%" > |        검색창을 통해 원하는 키워드의 북마크를 검색한다.        |
 
+<br>
+
 ## 기술 스택
 
 <img src="https://img.shields.io/badge/Javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white" alt="Javascript badge"/>
 <img src="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white" alt="React badge"/>
     <img src="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=redux&logoColor=white" alt="Redux badge"/>
     <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?&style=for-the-badge&logo=tailwind%20css&logoColor=white" alt="Tailwind CSS badge" />
+
+<br>
 
 ## 코딩 컨벤션
 
@@ -157,6 +179,9 @@
 
 ```
 
+<br>
+
+
 ## 관련 링크
 
 - [링크나무 팀 노션](https://www.notion.so/taeho1234/9-c9956e710af447b4b0aa1197fc4cf76f)
@@ -170,8 +195,11 @@
 
 ---
 
+<br>
+
 ## 라이선스
 
+```
 The MIT License (MIT)
 
 Copyright (c) <year> <copyright holders>
@@ -181,6 +209,9 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+<br>
 
 <details>
     <summary><h2>카카오 테크 캠퍼스 3단계 진행 보드</h2></summary>
