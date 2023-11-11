@@ -40,6 +40,11 @@ const SearchResultTemplate = ({
           const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
           return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
         },
+        onSuccess: (res) => {
+          console.log("search res", res);
+          const status = res.status;
+          console.log(status);
+        },
       }
     );
 
