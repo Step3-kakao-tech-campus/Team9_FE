@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { logo192 } from "../constants/public_image";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
-  const logo = `${process.env.PUBLIC_URL}/logo192.png`;
 
   return (
     <div className="h-screen flex items-center bg-[#496f54]">
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
           className="mx-auto p-3 flex items-center gap-x-2 rounded border border-black text-xl"
           onClick={() => navigate("/")}
         >
-          <img src={logo} className="w-5 h-5" alt="logo" />
+          <img src={logo192} className="w-5 h-5" alt="logo" />
           LinkNamu 홈으로 이동
         </button>
       </div>
