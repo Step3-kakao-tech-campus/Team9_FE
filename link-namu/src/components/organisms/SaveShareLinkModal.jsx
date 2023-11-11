@@ -105,7 +105,7 @@ const SaveShareLinkModal = () => {
         .then((res) => {
           console.log(res);
 
-          if (res?.status !== 200) {
+          if (res.status !== 200) {
             throw new Error(res.data?.error?.message);
           }
 
@@ -123,11 +123,12 @@ const SaveShareLinkModal = () => {
         .then((res) => {
           console.log(res);
 
-          if (res?.statue !== 200) {
+          if (res.status !== 200) {
             throw new Error(res.data?.error?.message);
           }
 
-          alert("추가되었습니다.");
+          console.log("dddddddddddddd");
+          printToast("추가되었습니다.", "success");
           refetchData();
           closeModal();
         })
