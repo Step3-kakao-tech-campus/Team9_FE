@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { stringToTags } from "../../utils/stringToTags";
 
 import SearchInputText from "./SearchInputText";
 import SearchInputLabel from "./SearchInputLabel";
@@ -11,12 +12,9 @@ const DetailSearchBox = ({ value, changeHandler, clickHandler, isOpen }) => {
   const [workspaceNameText, setWorkspaceNameText] = useState("");
   const [tagText, setTagText] = useState("");
 
-  const getTagList = (text) => {
-    return text.split(/\s+/).filter((tag) => tag.trim() !== "");
-  };
   const renderHashtags = () => {
     if (tagText.length === 0) return null;
-    const words = tagText.split(/\s+/); // 공백을 기준으로 단어 분리
+    const words = stringToTags(tagText);
     return words.map((word, index) => (
       <span key={index} className="text-blue-500 mr-1">
         <Tag name={word} />
@@ -36,7 +34,7 @@ const DetailSearchBox = ({ value, changeHandler, clickHandler, isOpen }) => {
       bookmarkDescription: bookmarkDescText.trim(),
       bookmarkLink: bookmarkLinkText.trim(),
       workspaceName: workspaceNameText.trim(),
-      tags: getTagList(tagText.trim()), // 태그는 배열로 받도록 변경
+      tags: stringToTags(tagText),
     });
   }, [
     bookmarkNameText,
