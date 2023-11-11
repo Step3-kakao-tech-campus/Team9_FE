@@ -5,6 +5,7 @@ import SearchResultTemplate from "../components/templates/SearchResultTemplate";
 import Searchbar from "../components/atoms/Searchbar";
 import Loader from "../components/atoms/Loader";
 import DetailSearchBox from "../components/atoms/DetailSearchBox";
+import { printToast } from "../utils/toast";
 
 const SearchResultPage = () => {
   const navigate = useNavigate();
@@ -34,8 +35,16 @@ const SearchResultPage = () => {
     return data;
   };
   const searchDetail = () => {
+    const data = getData();
+
+    console.log("상세 검색 데이터", data);
+    if (!data.bookmarkName && (!data.tags || data.tags?.length === 0)) {
+      printToast("검색할 북마크 제목 또는 태그를 입력해주세요.", "error");
+      return;
+    }
+
     navigate("/search/result", {
-      state: getData(),
+      state: data,
     });
   };
 
@@ -47,7 +56,7 @@ const SearchResultPage = () => {
   }, [detailSearchValue]);
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <div className="mx-auto my-5">
         <Searchbar
           detailSearchButtonHandler={() => {
