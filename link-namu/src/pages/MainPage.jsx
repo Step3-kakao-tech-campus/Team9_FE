@@ -9,9 +9,11 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { workspaceData, isLoading, isError } = useWorkspaceList();
 
+  /*
   if (!cookies.load("refreshToken")) {
     navigate("/signin");
   }
+  */
 
   return (
     <div>

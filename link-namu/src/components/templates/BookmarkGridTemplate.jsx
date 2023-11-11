@@ -9,6 +9,7 @@ import Breadcrumbs from "../atoms/Breadcrumbs";
 import { useWorkspaceName } from "../../hooks/useWorkspaceName";
 import { useCategoryName } from "../../hooks/useCategoryName";
 import FirstPage from "../../pages/FirstPage";
+import FirstAccessPage from "../../pages/FirstAccessPage";
 
 const BookmarkGridTemplate = () => {
   const location = useLocation();
@@ -97,7 +98,11 @@ const BookmarkGridTemplate = () => {
         />
       )}
       {currCategoryId === null ? (
-        <FirstPage />
+        accessToken ? (
+          <FirstAccessPage />
+        ) : (
+          <FirstPage />
+        )
       ) : (
         <BookmarkGrid
           bookmarkList={bookmarkList}
