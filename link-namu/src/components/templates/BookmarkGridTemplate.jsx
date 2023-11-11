@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getAccessToken } from "../../store";
 import { useLocation, useNavigate } from "react-router-dom";
+import cookies from "react-cookies";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
@@ -19,6 +20,8 @@ const BookmarkGridTemplate = () => {
   const accessToken = getAccessToken();
   const getWorkspaceName = useWorkspaceName();
   const getCategoryName = useCategoryName();
+
+  const refreshToken = cookies.load("refreshToken");
 
   const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
     useInfiniteQuery(
@@ -109,7 +112,7 @@ const BookmarkGridTemplate = () => {
           />
         )}
         {currCategoryId === null ? (
-          accessToken ? (
+          refreshToken ? (
             <FirstAccessPage />
           ) : (
             <FirstPage />
