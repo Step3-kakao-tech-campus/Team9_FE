@@ -17,7 +17,7 @@ const FirstAccessPage = () => {
   return (
     <div className="flex flex-col items-center">
       <h1 className="m-4 text-3xl">최근 추가한 북마크</h1>
-      <SharedBookmarkGrid bookmarkList={bookmarkList} />;
+      <SharedBookmarkGrid bookmarkList={bookmarkList} />
     </div>
   );
 };
