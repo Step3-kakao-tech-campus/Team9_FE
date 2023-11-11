@@ -97,7 +97,7 @@ const BookmarkGridTemplate = () => {
 
   return (
     <div className="w-full mx-auto flex justify-center">
-      <div className="w-auto mx-auto">
+      <div className="w-auto mx-auto px-10">
         {currCategoryId && (
           <Breadcrumbs
             workspaceName={getWorkspaceName(currWorkspaceId)}

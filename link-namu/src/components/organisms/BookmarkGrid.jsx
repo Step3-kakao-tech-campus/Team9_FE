@@ -110,7 +110,7 @@ const BookmarkGrid = ({ bookmarkList, categoryId, handleRefetch }) => {
       <Droppable droppableId="grid" direction="horizontal">
         {(provided, snapshot) => (
           <div
-            className="grid grid-cols-3 p-10 gap-x-5 gap-y-10 justify-items-center"
+            className="grid grid-cols-3 gap-x-5 gap-y-10 justify-items-center"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
