@@ -14,7 +14,7 @@ const MODAL_TYPES = {
   WorkspaceRenameModal: "WorkspaceRenameModal",
   BookmarkDeleteModal: "BookmarkDeleteModal",
   BookmarkEditModal: "BookmarkEditModal",
-  BookmarkImageEditModal: "BookmarkImageEditModal",
+  BookmarkImageUpdateModal: "BookmarkImageUpdateModal",
 };
 
 export default MODAL_TYPES;

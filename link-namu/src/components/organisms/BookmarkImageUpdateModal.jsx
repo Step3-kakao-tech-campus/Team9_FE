@@ -40,7 +40,7 @@ const BookmarkImageUpdateModal = () => {
         const msg = "변경되었습니다.";
         console.log(msg);
         printToast(msg, "success");
-        // TODO: 데이터 refetch
+        modalData.handleRefetch();
         closeModal();
       })
       .catch((err) => {

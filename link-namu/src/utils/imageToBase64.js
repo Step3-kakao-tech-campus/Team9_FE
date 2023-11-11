@@ -8,7 +8,8 @@ const imageToBase64 = (file, callback) => {
 
   reader.onloadend = () => {
     const base64Data = reader.result;
-    callback(base64Data);
+    const imageData = base64Data.split(";base64,").pop();
+    callback(imageData);
   };
 
   reader.readAsDataURL(file);
