@@ -124,20 +124,50 @@ const BookmarkAddModal = () => {
     createBookmark(bookmarkData)
       .then((res) => {
         console.log("북마크 추가", res);
-        if (res.status === 200) {
-          const msg = "북마크가 추가되었습니다 !";
-          printToast(msg, "success");
-          modalData.handleRefetch();
-          console.log(msg);
-          closeModal();
-        } else {
-          throw new Error(res.data?.error?.message);
+
+        if (res.status !== 200) {
+          const error = res.data?.error;
+          console.error(error.message);
+          throw new Error(error.errorCode);
         }
+
+        const msg = "북마크가 추가되었습니다 !";
+        console.log(msg);
+        printToast(msg, "success");
+
+        modalData.handleRefetch();
+        closeModal();
       })
       .catch((err) => {
-        const msg = `$[북마크 추가 에러] ${err.message}`;
-        printToast(msg, "error");
-        console.log(msg);
+        console.error("ERROR_CODE: ", err.message);
+        switch (err.message) {
+          case "24000":
+            printToast("카테고리에 이미 존재하는 링크입니다.", "error");
+            break;
+          case "24030":
+            printToast("접근 권한이 없습니다.", "error");
+            break;
+          case "34040":
+            printToast("카테고리가 존재하지 않습니다.", "error");
+            break;
+          case "04004":
+            printToast("이미지 데이터 변환 중 문제가 발생하였습니다.", "error");
+            break;
+          case "04005":
+            printToast("유효하지 않은 이미지입니다.", "error");
+            break;
+          case "04006":
+            printToast("이미지가 손상되거나 읽을 수 없는 형식입니다.", "error");
+            break;
+          case "04007":
+            printToast("이미지 URL이 유효하지 않습니다.", "error");
+            break;
+          case "04008":
+            printToast("이미지가 잘못된 형식입니다.", "error");
+            break;
+          default:
+            printToast("북마크 생성에 실패했습니다.");
+        }
       });
   };
 
