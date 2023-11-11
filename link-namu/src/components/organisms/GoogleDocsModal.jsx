@@ -29,7 +29,7 @@ const GoogleDocsModal = () => {
 
   const handleGoogleDocsRegistration = () => {
     if (!pageLink) {
-      printToast("구글 문서 페이지 URL을 입력해주세요.");
+      printToast("구글 문서 페이지 URL을 입력해주세요.", "error");
       return;
     }
 
@@ -44,7 +44,7 @@ const GoogleDocsModal = () => {
 
         const msg = "[구글 DOCS 연동] 페이지가 등록되었습니다.";
         console.log(msg);
-        printToast(msg);
+        printToast(msg, "success");
         refetchData();
         closeModal();
       })

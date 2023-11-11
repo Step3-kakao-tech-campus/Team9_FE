@@ -5,6 +5,7 @@ import Searchbar from "../atoms/Searchbar";
 import LogoutButton from "./LogoutButton";
 import { useEffect, useState } from "react";
 import LoginButton from "./LoginButton";
+import { logo192 } from "../../constants/public_image";
 
 const GNB = ({ setState }) => {
   const navigate = useNavigate();
@@ -35,9 +36,10 @@ const GNB = ({ setState }) => {
               </button>
               <button
                 onClick={() => navigate("/")}
-                className="px-4 text-center"
+                className="px-4 flex gap-x-2 items-center"
               >
-                <span className="text-base font-medium">🎄 LinkNamu</span>
+                <img src={logo192} alt="logo" className="w-5 h-5" />
+                <span className="text-lg font-medium">LinkNamu</span>
               </button>
             </div>
             <Searchbar
