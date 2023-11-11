@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { logo192 } from "../../constants/public_image";
 
-const DefaultGNB = () => {
 const DefaultGNB = ({ children }) => {
   const navigate = useNavigate();
 
