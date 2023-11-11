@@ -90,28 +90,30 @@ const BookmarkGridTemplate = () => {
   });
 
   return (
-    <div>
-      {currCategoryId && (
-        <Breadcrumbs
-          workspaceName={getWorkspaceName(currWorkspaceId)}
-          categoryName={getCategoryName(currCategoryId)}
-        />
-      )}
-      {currCategoryId === null ? (
-        accessToken ? (
-          <FirstAccessPage />
+    <div className="w-full mx-auto flex justify-center">
+      <div className="w-auto mx-auto">
+        {currCategoryId && (
+          <Breadcrumbs
+            workspaceName={getWorkspaceName(currWorkspaceId)}
+            categoryName={getCategoryName(currCategoryId)}
+          />
+        )}
+        {currCategoryId === null ? (
+          accessToken ? (
+            <FirstAccessPage />
+          ) : (
+            <FirstPage />
+          )
         ) : (
-          <FirstPage />
-        )
-      ) : (
-        <BookmarkGrid
-          bookmarkList={bookmarkList}
-          categoryId={currCategoryId}
-          handleRefetch={refetchData}
-        />
-      )}
-      <div ref={bottomObserver} style={{ height: "20px" }}>
-        {isFetching && "Loading more..."}
+          <BookmarkGrid
+            bookmarkList={bookmarkList}
+            categoryId={currCategoryId}
+            handleRefetch={refetchData}
+          />
+        )}
+        <div ref={bottomObserver} style={{ height: "20px" }}>
+          {isFetching && "Loading more..."}
+        </div>
       </div>
     </div>
   );
