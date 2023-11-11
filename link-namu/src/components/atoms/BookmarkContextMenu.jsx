@@ -38,6 +38,7 @@ const BookmarkContextMenu = ({
       data: { bookmarkId: bookmarkId, handleRefetch: handleRefetch },
     });
   };
+  
   return (
     <div
       className="fixed z-50 bg-white border rounded shadow-md context-menu"
