@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getWorkspaceFromEncodedId } from "../apis/share";
 import SharedCategoryCard from "../components/atoms/SharedCategoryCard";
+import { useNavigate } from "react-router-dom";
 
 const SharedWorkspacePage = () => {
+  const navigate = useNavigate();
   const [encodedId, setEncodedId] = useState(null);
   const [workspaceName, setWorkspaceName] = useState("");
   const [categoryList, setCategoryList] = useState([]);
@@ -16,13 +18,21 @@ const SharedWorkspacePage = () => {
   useEffect(() => {
     if (!encodedId) return;
 
-    getWorkspaceFromEncodedId({ encodedWorkspaceId: encodedId }).then((res) => {
-      console.log("res", res);
+    getWorkspaceFromEncodedId({ encodedWorkspaceId: encodedId })
+      .then((res) => {
+        console.log("res", res);
 
-      const data = res?.data?.response;
-      setWorkspaceName(data.workSpaceName);
-      setCategoryList(data.sharedCategoryList);
-    });
+        if (res.status === 404) {
+          navigate("/notfound");
+        }
+        if (res.status !== 200) {
+          // TODO: 에러 처리
+        }
+        const data = res?.data?.response;
+        setWorkspaceName(data.workSpaceName);
+        setCategoryList(data.sharedCategoryList);
+      })
+      .catch((err) => {});
   }, [encodedId]);
 
   return (
