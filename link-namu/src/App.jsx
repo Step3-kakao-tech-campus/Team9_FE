@@ -19,6 +19,7 @@ import NotionRedirectPage from "./pages/NotionRedirectPage";
 import SharedCategoryPage from "./pages/SharedCategoryPage";
 import SharedWorkspacePage from "./pages/SharedWorkspacePage";
 import SearchResultPage from "./pages/SearchResultPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             {/* 단독 레이아웃 */}
+            <Route path="*" element={<NotFoundPage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="notion/redirect" element={<NotionRedirectPage />} />
 
