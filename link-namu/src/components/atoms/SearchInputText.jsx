@@ -17,7 +17,7 @@ const SearchInputText = ({ id, placeholder, value, changeHandler }) => {
         setText(e.target.value);
         changeHandler(e.target.value);
       }}
-      className=""
+      className="inline-block p-3 border"
     />
   );
 };

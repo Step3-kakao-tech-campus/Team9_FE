@@ -5,14 +5,14 @@ import SearchInputText from "./SearchInputText";
 import SearchInputLabel from "./SearchInputLabel";
 import Tag from "./Tag";
 
-const DetailSearchBox = ({ value, changeHandler, clickHandler, isOpen }) => {
+const DetailSearchBox = ({ changeHandler, clickHandler, isOpen }) => {
   const [bookmarkNameText, setBookmarkNameText] = useState("");
   const [bookmarkDescText, setBookmarkDescText] = useState("");
   const [bookmarkLinkText, setBookmarkLinkText] = useState("");
   const [workspaceNameText, setWorkspaceNameText] = useState("");
   const [tagText, setTagText] = useState("");
 
-  const renderHashtags = () => {
+  const renderTags = () => {
     if (tagText.length === 0) return null;
     const words = stringToTags(tagText);
     return words.map((word, index) => (
@@ -49,57 +49,60 @@ const DetailSearchBox = ({ value, changeHandler, clickHandler, isOpen }) => {
     <div
       className={`${
         isOpen ? "h-[350px] border" : "h-0"
-      } duration-500 overflow-hidden flex flex-col`}
+      } w-full duration-500 overflow-hidden flex flex-col`}
     >
-      <div className="flex-1 flex flex-col">
-        <div>
-          <SearchInputLabel htmlFor="bookmarkNameInput">
-            북마크 제목
-          </SearchInputLabel>
-          <SearchInputText
-            id="bookmarkNameInput"
-            value={bookmarkNameText}
-            changeHandler={setBookmarkNameText}
-          />
-        </div>
-        <div>
-          <SearchInputLabel htmlFor="bookmarkDescriptionInput">
-            북마크 설명
-          </SearchInputLabel>
-          <SearchInputText
-            id="bookmarkDescriptionInput"
-            value={bookmarkDescText}
-            changeHandler={setBookmarkDescText}
-          />
-        </div>
-        <div>
-          <SearchInputLabel htmlFor="workspaceNameInput">
-            워크스페이스 이름
-          </SearchInputLabel>
-          <SearchInputText
-            id="workspaceNameInput"
-            value={workspaceNameText}
-            changeHandler={setWorkspaceNameText}
-          />
-        </div>
-        <div>
-          <SearchInputLabel htmlFor="bookmarkLinkInput">
-            북마크 링크
-          </SearchInputLabel>
-          <SearchInputText
-            id="bookmarkLinkInput"
-            value={bookmarkLinkText}
-            changeHandler={setBookmarkLinkText}
-          />
-        </div>
-        <div>
-          <SearchInputLabel>태그</SearchInputLabel>
-          <SearchInputText
-            id="tagInput"
-            value={tagText}
-            changeHandler={setTagText}
-          />
-          <div className="">{renderHashtags()}</div>
+      <div>
+        <div className="flex">
+          {/* label 영역 */}
+          <div className="w-[30%]">
+            <SearchInputLabel htmlFor="bookmarkNameInput">
+              북마크 제목
+            </SearchInputLabel>
+            <SearchInputLabel htmlFor="bookmarkDescriptionInput">
+              북마크 설명
+            </SearchInputLabel>
+            <SearchInputLabel htmlFor="workspaceNameInput">
+              워크스페이스 이름
+            </SearchInputLabel>
+            <SearchInputLabel htmlFor="bookmarkLinkInput">
+              북마크 링크
+            </SearchInputLabel>
+            <SearchInputLabel htmlFor="tagInput">태그</SearchInputLabel>
+          </div>
+          {/* input 영역 */}
+          <div className="w-[70%] flex flex-col">
+            <SearchInputText
+              id="bookmarkNameInput"
+              value={bookmarkNameText}
+              placeholder="북마크 제목 키워드"
+              changeHandler={setBookmarkNameText}
+            />
+            <SearchInputText
+              id="bookmarkDescriptionInput"
+              value={bookmarkDescText}
+              placeholder="북마크 설명 키워드"
+              changeHandler={setBookmarkDescText}
+            />
+            <SearchInputText
+              id="workspaceNameInput"
+              value={workspaceNameText}
+              placeholder="워크스페이스 이름 키워드"
+              changeHandler={setWorkspaceNameText}
+            />
+            <SearchInputText
+              id="bookmarkLinkInput"
+              value={bookmarkLinkText}
+              placeholder="북마크 링크 키워드"
+              changeHandler={setBookmarkLinkText}
+            />
+            <SearchInputText
+              id="tagInput"
+              value={tagText}
+              placeholder="태그는 공백으로 구분됩니다."
+              changeHandler={setTagText}
+            />
+            {/* <div className="">{renderTags()}</div> */}
+          </div>
         </div>
       </div>
       <div className="flex items-center justify-between p-3">
