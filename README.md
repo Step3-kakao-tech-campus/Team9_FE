@@ -4,6 +4,8 @@
 
 링크 통합 관리 서비스 **링크나무** 입니다.
 
+[링크나무 확장 프로그램](https://drive.google.com/file/d/1iwSv59p86HshQfgus8OnizHIfnoVFAk_/view?usp=sharing)
+
 <br>
 
 ## 목차
@@ -66,7 +68,7 @@
 
 ## 배포 링크
 
-- https://k3f12e8e83a24a.user-app.krampoline.com
+- https://kc709aacd7d14a.user-app.krampoline.com
 
 <br>
 
