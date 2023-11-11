@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { logo192 } from "../../constants/public_image";
 
 const DefaultGNB = () => {
+const DefaultGNB = ({ children }) => {
   const navigate = useNavigate();
 
   return (
@@ -18,6 +19,7 @@ const DefaultGNB = () => {
                 <span className="text-lg font-medium">LinkNamu</span>
               </button>
             </div>
+            {children}
           </div>
         </div>
       </header>
