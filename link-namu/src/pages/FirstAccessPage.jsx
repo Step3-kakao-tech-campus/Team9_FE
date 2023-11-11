@@ -12,7 +12,7 @@ const FirstAccessPage = () => {
         setBookmarkList(res.data.response);
       }
     });
-  }, [bookmarkList]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
