@@ -3,8 +3,10 @@ import { useInfiniteQuery } from "react-query";
 import { getCategoryFromEncodedId } from "../../apis/share";
 
 import SharedBookmarkGrid from "../organisms/SharedBookmarkGrid";
+import { useNavigate } from "react-router-dom";
 
 const SharedCategoryPageTemplate = ({ encodedId }) => {
+  const navigate = useNavigate();
   const [categoryName, setCategoryName] = useState("");
 
   // 카테고리 이름 가져오기
@@ -12,6 +14,9 @@ const SharedCategoryPageTemplate = ({ encodedId }) => {
     getCategoryFromEncodedId({
       encodedCategoryId: encodedId,
     }).then((res) => {
+      if (res.status === 404) {
+        navigate("/notfound");
+      }
       setCategoryName(res?.data?.response?.categoryName);
     });
   }, []);

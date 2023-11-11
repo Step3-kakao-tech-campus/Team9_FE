@@ -38,7 +38,7 @@ const NotionModal = () => {
           throw new Error(res.data?.error?.message);
         }
         const msg = "연동되었습니다.";
-        printToast(msg);
+        printToast(msg, "success");
         refetchData();
         closeModal();
       })

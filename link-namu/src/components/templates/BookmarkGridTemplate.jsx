@@ -2,7 +2,7 @@ import { getCategoryList } from "../../apis/category";
 import { useEffect, useRef, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getAccessToken } from "../../store";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
@@ -12,6 +12,7 @@ import FirstPage from "../../pages/FirstPage";
 import FirstAccessPage from "../../pages/FirstAccessPage";
 
 const BookmarkGridTemplate = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [currWorkspaceId, setCurrWorkspaceId] = useState(null);
   const [currCategoryId, setCurrCategoryId] = useState(null);
@@ -31,6 +32,15 @@ const BookmarkGridTemplate = () => {
           const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
           const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
           return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
+        },
+        onSuccess: (res) => {
+          const status = res.pages[0]?.status;
+
+          if (status === 404) {
+            navigate("/notfound");
+          } else if (status === 403) {
+            navigate("/forbidden");
+          }
         },
       }
     );
@@ -91,7 +101,7 @@ const BookmarkGridTemplate = () => {
 
   return (
     <div className="w-full mx-auto flex justify-center">
-      <div className="w-auto mx-auto">
+      <div className="w-auto mx-auto px-10">
         {currCategoryId && (
           <Breadcrumbs
             workspaceName={getWorkspaceName(currWorkspaceId)}

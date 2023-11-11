@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { logo192 } from "../constants/public_image";
 
-const NotFoundPage = () => {
+const ForbiddenPage = () => {
   const navigate = useNavigate();
 
   return (
     <div className="h-screen flex items-center bg-[#496f54]">
       <div className="w-[600px] h-[500px] mx-auto py-20 flex flex-col justify-around rounded-xl border text-center bg-white">
         <div>
-          <h1 className="text-[250%] font-bold">404 Not Found</h1>
-          <p>잘못된 주소입니다.</p>
+          <h1 className="text-[250%] font-bold">403 Forbidden</h1>
+          <p>접근 권한이 없습니다.</p>
         </div>
         <button
           className="mx-auto p-3 flex items-center gap-x-2 rounded border border-black text-xl"
@@ -23,4 +23,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default ForbiddenPage;

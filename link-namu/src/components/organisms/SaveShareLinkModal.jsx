@@ -32,7 +32,7 @@ const SaveShareLinkModal = () => {
       return;
     }
     console.log(shareLink);
-    const type = extractCode(shareLink)?.type;
+    const type = extractType(shareLink);
 
     if (type === LINK_TYPE.CATEGORY) {
       setIsCategoryShareLink(true);
@@ -40,6 +40,17 @@ const SaveShareLinkModal = () => {
       setIsCategoryShareLink(false);
     }
   }, [shareLink]);
+
+  const extractType = (url) => {
+    const query = url.split("?").pop();
+    if (query.startsWith(LINK_TYPE.WORKSPACE)) {
+      return LINK_TYPE.WORKSPACE;
+    }
+    if (query.startsWith(LINK_TYPE.CATEGORY)) {
+      return LINK_TYPE.CATEGORY;
+    }
+    return null;
+  };
 
   const extractCode = (url) => {
     try {
@@ -70,13 +81,13 @@ const SaveShareLinkModal = () => {
 
   const saveShareLink = () => {
     if (!shareLink) {
-      printToast("공유 링크를 입력해주세요.");
+      printToast("공유 링크를 입력해주세요.", "error");
       return;
     }
     const data = extractCode(shareLink);
     console.log("추출 코드", data);
     if (!data.type || !data.encodedId) {
-      printToast("링크 분석 중 오류가 발생하였습니다.");
+      printToast("링크 분석 중 오류가 발생하였습니다.", "error");
       return;
     }
     console.log("type: ", data.type);
@@ -94,7 +105,7 @@ const SaveShareLinkModal = () => {
         .then((res) => {
           console.log(res);
 
-          if (res?.status !== 200) {
+          if (res.status !== 200) {
             throw new Error(res.data?.error?.message);
           }
 
@@ -112,11 +123,12 @@ const SaveShareLinkModal = () => {
         .then((res) => {
           console.log(res);
 
-          if (res?.statue !== 200) {
+          if (res.status !== 200) {
             throw new Error(res.data?.error?.message);
           }
 
-          alert("추가되었습니다.");
+          console.log("dddddddddddddd");
+          printToast("추가되었습니다.", "success");
           refetchData();
           closeModal();
         })

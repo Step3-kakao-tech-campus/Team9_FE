@@ -166,7 +166,7 @@ const BookmarkAddModal = () => {
             printToast("이미지가 잘못된 형식입니다.", "error");
             break;
           default:
-            printToast("북마크 생성에 실패했습니다.");
+            printToast("북마크 생성에 실패했습니다.", "error");
         }
       });
   };

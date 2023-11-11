@@ -20,6 +20,7 @@ import SharedCategoryPage from "./pages/SharedCategoryPage";
 import SharedWorkspacePage from "./pages/SharedWorkspacePage";
 import SearchResultPage from "./pages/SearchResultPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ForbiddenPage from "./pages/ForbiddenPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="*" element={<NotFoundPage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="notion/redirect" element={<NotionRedirectPage />} />
+            <Route path="forbidden" element={<ForbiddenPage />} />
 
             {/* 공통 레이아웃 */}
             <Route element={<MainLayout />}>
