@@ -1,5 +1,8 @@
 const stringToTags = (tagText) => {
-  const words = tagText.trim().split(/\s+/);
+  const trimmedText = tagText.trim();
+  if (trimmedText === "") return [];
+
+  const words = trimmedText.split(/\s+/);
   return words;
 };
 
