@@ -20,6 +20,7 @@
 > - [📁 파일 구조](#파일-구조)
 > - [🖥️ 기술 스택](#기술-스택)
 > - [🏗️ 코딩 컨벤션](#코딩-컨벤션)
+> - [🛠 Dependency](#Dependency)
 > - [🔗 관련 링크](#관련-링크)
 > - [🔒 라이선스](#라이선스)
 
@@ -103,10 +104,12 @@
 
 ## 기술 스택
 
-<img src="https://img.shields.io/badge/Javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white" alt="Javascript badge"/>
-<img src="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white" alt="React badge"/>
-    <img src="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=redux&logoColor=white" alt="Redux badge"/>
-    <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?&style=for-the-badge&logo=tailwind%20css&logoColor=white" alt="Tailwind CSS badge" />
+<p>
+  <img src="https://img.shields.io/badge/Javascript-F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=white" alt="Javascript badge"/>
+  <img src="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white" alt="React badge"/>
+  <img src="https://img.shields.io/badge/Redux-764ABC.svg?&style=for-the-badge&logo=redux&logoColor=white" alt="Redux badge"/>
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?&style=for-the-badge&logo=tailwind%20css&logoColor=white" alt="Tailwind CSS badge" />
+</p>
 
 <br>
 
