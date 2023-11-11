@@ -42,7 +42,7 @@ const NonDraggableCard = ({
       </div>
 
       {/* 꼬리 영역 */}
-      <div className="px-2 py-2">
+      <div className="px-2 py-2 overflow-hidden w-[90%]">
         {/* 태그 영역 */}
         <span className="flex w-full">
           {tags.map((tag, index) => (
