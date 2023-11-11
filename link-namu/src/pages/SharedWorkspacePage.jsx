@@ -24,6 +24,8 @@ const SharedWorkspacePage = () => {
 
         if (res.status === 404) {
           navigate("/notfound");
+        } else if (res.status === 403) {
+          navigate("/forbidden");
         }
         if (res.status !== 200) {
           // TODO: 에러 처리

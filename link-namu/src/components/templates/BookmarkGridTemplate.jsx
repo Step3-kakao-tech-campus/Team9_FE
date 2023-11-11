@@ -34,8 +34,12 @@ const BookmarkGridTemplate = () => {
           return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
         },
         onSuccess: (res) => {
-          if (res.pages[0]?.status === 404) {
+          const status = res.pages[0]?.status;
+
+          if (status === 404) {
             navigate("/notfound");
+          } else if (status === 403) {
+            navigate("/forbidden");
           }
         },
       }
