@@ -70,13 +70,13 @@ const SaveShareLinkModal = () => {
 
   const saveShareLink = () => {
     if (!shareLink) {
-      printToast("공유 링크를 입력해주세요.");
+      printToast("공유 링크를 입력해주세요.", "error");
       return;
     }
     const data = extractCode(shareLink);
     console.log("추출 코드", data);
     if (!data.type || !data.encodedId) {
-      printToast("링크 분석 중 오류가 발생하였습니다.");
+      printToast("링크 분석 중 오류가 발생하였습니다.", "error");
       return;
     }
     console.log("type: ", data.type);

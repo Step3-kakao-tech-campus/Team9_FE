@@ -19,7 +19,7 @@ const CategoryRenameModal = () => {
 
   const handleRenameCategory = () => {
     if (!newName) {
-      printToast("변경할 이름을 입력해주세요.");
+      printToast("변경할 이름을 입력해주세요.", "error");
       return;
     }
 
@@ -33,7 +33,7 @@ const CategoryRenameModal = () => {
           throw new Error(res?.data?.error?.message);
         }
 
-        printToast("변경되었습니다.");
+        printToast("변경되었습니다.", "success");
         console.log("[카테고리 수정] 변경되었습니다.");
         refetchData();
         closeModal();
@@ -41,7 +41,7 @@ const CategoryRenameModal = () => {
       .catch((err) => {
         const msg = "[카테고리 수정] " + err.message;
         console.log(msg);
-        printToast(msg);
+        printToast(msg, "error");
       });
   };
 
