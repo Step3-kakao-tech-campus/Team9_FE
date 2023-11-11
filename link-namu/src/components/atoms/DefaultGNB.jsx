@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { logo192 } from "../../constants/public_image";
 
 const DefaultGNB = () => {
   const navigate = useNavigate();
@@ -11,9 +12,10 @@ const DefaultGNB = () => {
             <div className="flex items-center">
               <button
                 onClick={() => navigate("/")}
-                className="px-4 text-center"
+                className="px-4 flex gap-x-2 items-center"
               >
-                <span className="text-base font-medium">🎄 LinkNamu</span>
+                <img src={logo192} alt="logo" className="w-5 h-5" />
+                <span className="text-lg font-medium">LinkNamu</span>
               </button>
             </div>
           </div>
