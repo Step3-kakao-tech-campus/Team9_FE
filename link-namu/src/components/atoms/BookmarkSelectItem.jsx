@@ -29,11 +29,11 @@ const BookmarkSelectItem = ({
   useEffect(() => {
     setData({
       bookmarkName: bookmarkName,
-      categoryId: categoryId,
+      // categoryId: categoryId,
       link: url,
       imageUrl: imageUrl,
     });
-  }, [bookmarkName, categoryId]);
+  }, [bookmarkName]);
 
   return (
     <div
@@ -41,7 +41,7 @@ const BookmarkSelectItem = ({
         checked ? "bg-[#ecf8fc]" : "bg-[#ffffff]"
       }`}
     >
-      <div className="h-24 w-32 overflow-hidden flex items-center justify-center rounded-xl border bg-white hover:translate-x-14 hover:translate-y-10 hover:scale-[2]">
+      <div className="h-20 w-32 overflow-hidden flex items-center justify-center rounded-xl border bg-white hover:translate-x-14 hover:translate-y-10 hover:scale-[2]">
         <img
           src={imageUrl !== "" ? imageUrl : default_image}
           alt={`thumbnail of ${bookmarkName}`}
@@ -50,28 +50,32 @@ const BookmarkSelectItem = ({
       </div>
       <div className="grow">
         <input
-          className="block w-full border"
+          className="block w-full border mb-3"
           value={bookmarkName}
-          disabled={`${!checked ? "disabled" : ""}`}
+          // disabled={`${!checked ? "disabled" : ""}`}
           onChange={(e) => setBookmarkName(e.target.value)}
         />
-        <input readOnly defaultValue={url} className="w-full border-b" />
+        <input
+          readOnly
+          defaultValue={url}
+          className="w-full border bg-transparent"
+        />
       </div>
-      <div className="w-[200px]">
+      {/* <div className="w-[200px]">
         <WorkspaceSeleceBox
           value={workspaceId}
           changeHandler={setWorkspaceId}
           isSlimType={true}
-          disabled={!checked}
+          // disabled={!checked}
         />
         <CategorySelectBox
           workspaceId={workspaceId}
           value={categoryId}
           changeHandler={setCategoryId}
           isSlimType={true}
-          disabled={!checked}
+          // disabled={!checked}
         />
-      </div>
+      </div> */}
       <div className="px-5">
         <Checkbox id={id} checked={checked} onChange={handleCheckedChange} />
       </div>
