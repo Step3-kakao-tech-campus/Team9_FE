@@ -32,7 +32,7 @@ const SaveShareLinkModal = () => {
       return;
     }
     console.log(shareLink);
-    const type = extractCode(shareLink)?.type;
+    const type = extractType(shareLink);
 
     if (type === LINK_TYPE.CATEGORY) {
       setIsCategoryShareLink(true);
@@ -40,6 +40,17 @@ const SaveShareLinkModal = () => {
       setIsCategoryShareLink(false);
     }
   }, [shareLink]);
+
+  const extractType = (url) => {
+    const query = url.split("?").pop();
+    if (query.startsWith(LINK_TYPE.WORKSPACE)) {
+      return LINK_TYPE.WORKSPACE;
+    }
+    if (query.startsWith(LINK_TYPE.CATEGORY)) {
+      return LINK_TYPE.CATEGORY;
+    }
+    return null;
+  };
 
   const extractCode = (url) => {
     try {
