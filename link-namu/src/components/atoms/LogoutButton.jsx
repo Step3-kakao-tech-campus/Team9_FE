@@ -7,6 +7,7 @@ const LogoutButton = () => {
       .then((res) => {
         console.log(res);
         cookies.remove("refreshToken", { path: "/" });
+        cookies.remove("accessToken", { path: "/" });
         window.location.reload();
       })
       .catch((err) => console.log(err));
