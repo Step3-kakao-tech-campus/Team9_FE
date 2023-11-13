@@ -72,7 +72,7 @@ const FirstAccessPage = () => {
   const bookmarkList = [];
   data?.pages?.forEach(page => {
     if (page) {
-      page.data?.response?.forEach(data => {
+      page.data?.response?.bookmarkContents?.forEach(data => {
         bookmarkList.push(data);
       });
     }
