@@ -100,8 +100,8 @@ const Card = ({
               <div className="mb-2 overflow-hidden text-xl font-bold break-all text-ellipsis whitespace-nowrap">
                 {title}
               </div>
-              <p className="overflow-hidden text-base text-gray-700 break-all text-ellipsis whitespace-nowrap">
-                {description}
+              <p className="overflow-hidden text-sm text-gray-700 break-all text-ellipsis whitespace-normal">
+                <div className="line-clamp-2">{description}</div>
               </p>
             </div>
 

@@ -41,6 +41,7 @@ const Menubar = ({ isOpen }) => {
                         key={index}
                         workspaceId={workspace.workspaceId}
                         workspaceName={workspace.workspaceName}
+                        linkProvider={workspace.linkProvider}
                         categories={workspace.categoryList}
                       />
                     );
