@@ -44,6 +44,19 @@ export const updateBookmark = ({ bookmarkId, bookmarkName, description }) => {
 };
 
 /**
+ * 북마크 이미지 수정
+ * @param {Object} params
+ * @param {number} params.bookmarkId - 북마크 ID
+ * @param {string} params.imageUrl - base64로 변환한 이미지 또는 이미지 URL
+ * @returns
+ */
+export const updateBookmarkImage = ({ bookmarkId, imageUrl }) => {
+  return instance.post(`/api/bookmark/image/update/${bookmarkId}`, {
+    imageUrl: imageUrl,
+  });
+};
+
+/**
  * 북마크 이동
  * @param {array, number} param0
  * @returns
@@ -57,10 +70,45 @@ export const moveBookmark = ({ bookmarkIdList, toCategoryId }) => {
 
 /**
  * 북마크 조회
- * @param {string, string} param0
+ * @param {Object} params
+ * @param {number} params.bookmarkId - 조회할 북마크 ID
  * @returns
  */
-// export const searchBookmark = ({ search = "", tag }) => {
-//   const query = `?search=${search}${tag && `tag=${tag}`}`;
-//   return instance.get("/api/bookmark/search" + query);
-// };
+export const getBookmark = ({ bookmarkId }) => {
+  return instance.get(`/api/bookmark/${bookmarkId}`);
+};
+
+/**
+ * 북마크 검색
+ * @param {Object} params
+ * @param {string} params.bookmarkName - 북마크 이름에서 검색할 키워드
+ * @param {string} params.bookmarkLink - 북마크 링크에서 검색할 키워드
+ * @param {string} params.bookmarkDescription - 북마크 설명에서 검색할 키워드
+ * @param {string} params.workspaceName - 워크스페이스 이름에서 검색할 키워드
+ * @param {string[]} params.tags - 검색할 태그
+ * @returns
+ */
+export const searchBookmark = ({
+  bookmarkName = null,
+  bookmarkLink = null,
+  bookmarkDescription = null,
+  workspaceName = null,
+  tags = null,
+  page = 0,
+}) => {
+  return instance.post(`/api/bookmark/search?page=${page}`, {
+    bookmarkName: bookmarkName,
+    bookmarkLink: bookmarkLink,
+    bookmarkDescription: bookmarkDescription,
+    workspaceName: workspaceName,
+    tags: tags,
+  });
+};
+
+/**
+ * 최근 등록한 북마크 리스트 조회
+ * @returns
+ */
+export const recentBoookmark = ({ page = 0 }) => {
+  return instance.get(`/api/bookmark/list?page=${page}`);
+};

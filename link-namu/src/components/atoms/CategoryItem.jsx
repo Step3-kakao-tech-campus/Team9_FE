@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { setCurrCategory } from "../../store/slices/bookmarkSlice";
 import CategoryContextMenu from "./CategoryContextMenu";
@@ -16,6 +17,7 @@ const CategoryItem = ({
   categoryName = "하위 카테고리",
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currCategoryId = useSelector((state) => {
     return state.bookmark.currCategoryId;
   });
@@ -72,7 +74,7 @@ const CategoryItem = ({
           categoryId === currCategoryId && "bg-[#f6f6f6]"
         } hover:bg-[#f6f6f6]`}
         onClick={() => {
-          window.location.href = `${window.location.origin}?workspace=${workspaceId}&category=${categoryId}`;
+          navigate(`?workspace=${workspaceId}&category=${categoryId}`);
         }}
         onContextMenu={openContextMenu}
       >

@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { useCloseModal } from "../../hooks/useCloseModal";
 import { useModalData } from "../../hooks/useModalData";
 import { createBookmark } from "../../apis/bookmark";
+import { stringToTags } from "../../utils/stringToTags";
 
 import MultiStepModalBase from "./MultiStepModalBase";
 import ModalTitle from "../atoms/ModalTitle";
 import ModalBox from "../atoms/ModalBox";
 import ModalSubtitle from "../atoms/ModalSubtitle";
 import ModalTextInput from "../atoms/ModalTextInput";
-import CategorySelectBox from "../atoms/CategorySelectBox";
-import WorkspaceSeleceBox from "../atoms/WorkspaceSelectBox";
 import { printToast } from "../../utils/toast";
+import Checkbox from "../atoms/Checkbox";
+import BookmarkImageSelect from "../molecules/BookmarkImageSelect";
 
 const BookmarkAddModal = () => {
   const closeModal = useCloseModal();
@@ -21,6 +22,8 @@ const BookmarkAddModal = () => {
   const [bookmarkName, setBookmarkName] = useState("");
   const [bookmarkDescription, setBookmarkDescription] = useState("");
   const [tagInput, setTagInput] = useState("");
+  const [allowImage, setAllowImage] = useState(false);
+  const [imageData, setImageData] = useState();
 
   useEffect(() => {
     if (!modalData) return;
@@ -38,7 +41,7 @@ const BookmarkAddModal = () => {
           <ModalTextInput
             changeHandler={setBookmarkLink}
             value={bookmarkLink}
-            placeholder="Link here..."
+            placeholder="https://..."
           />
         </div>
         <div>
@@ -72,18 +75,37 @@ const BookmarkAddModal = () => {
             placeholder="태그1 태그2"
           />
         </div>
+        <div>
+          <ModalSubtitle>
+            이미지 선택
+            <span className="inline-block px-3">
+              <Checkbox
+                checked={allowImage}
+                onChange={() => setAllowImage((prev) => !prev)}
+              />
+            </span>
+            (미선택 시 링크의 썸네일이 추가됩니다.)
+          </ModalSubtitle>
+          {allowImage && <BookmarkImageSelect onChange={setImageData} />}
+        </div>
       </ModalBox>
     </>
   );
 
   const addBookmark = () => {
+    const imageUrl = allowImage ? imageData.value : null;
+    var testBookmarkLink = bookmarkLink;
+    if (testBookmarkLink.substring(0, 4) !== "http") {
+      testBookmarkLink = "http://" + testBookmarkLink;
+    }
+
     const bookmarkData = {
       bookmarkName: bookmarkName,
-      bookmarkLink: bookmarkLink,
+      bookmarkLink: testBookmarkLink,
       bookmarkDescription: bookmarkDescription,
       categoryId: categoryId,
-      imageUrl: null,
-      tags: tagInput.split(" "),
+      imageUrl: imageUrl,
+      tags: stringToTags(tagInput),
     };
 
     console.log(bookmarkData);
@@ -106,19 +128,50 @@ const BookmarkAddModal = () => {
     createBookmark(bookmarkData)
       .then((res) => {
         console.log("북마크 추가", res);
-        if (res.status === 200) {
-          const msg = "북마크가 추가되었습니다 !";
-          printToast(msg, "success");
-          console.log(msg);
-          closeModal();
-        } else {
-          throw new Error(res.data?.error?.message);
+
+        if (res.status !== 200) {
+          const error = res.data?.error;
+          console.error(error.message);
+          throw new Error(error.errorCode);
         }
+
+        const msg = "북마크가 추가되었습니다 !";
+        console.log(msg);
+        printToast(msg, "success");
+
+        modalData.handleRefetch();
+        closeModal();
       })
       .catch((err) => {
-        const msg = `$[북마크 추가 에러] ${err.message}`;
-        printToast(msg, "error");
-        console.log(msg);
+        console.error("ERROR_CODE: ", err.message);
+        switch (err.message) {
+          case "24000":
+            printToast("카테고리에 이미 존재하는 링크입니다.", "error");
+            break;
+          case "24030":
+            printToast("접근 권한이 없습니다.", "error");
+            break;
+          case "34040":
+            printToast("카테고리가 존재하지 않습니다.", "error");
+            break;
+          case "04004":
+            printToast("이미지 데이터 변환 중 문제가 발생하였습니다.", "error");
+            break;
+          case "04005":
+            printToast("유효하지 않은 이미지입니다.", "error");
+            break;
+          case "04006":
+            printToast("이미지가 손상되거나 읽을 수 없는 형식입니다.", "error");
+            break;
+          case "04007":
+            printToast("이미지 URL이 유효하지 않습니다.", "error");
+            break;
+          case "04008":
+            printToast("이미지가 잘못된 형식입니다.", "error");
+            break;
+          default:
+            printToast("북마크 생성에 실패했습니다.", "error");
+        }
       });
   };
 

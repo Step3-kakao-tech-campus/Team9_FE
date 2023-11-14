@@ -13,7 +13,7 @@ const SidebarTile = ({ src, alt, padding = true, onClick }) => {
       } w-[60px] h-[60px] ml-[-1px] border-t border-[#c6c6c6] cursor-pointer`}
       onClick={onClick}
     >
-      <img className="w-full h-full" src={src} alt={alt} />
+      <img className="w-full h-full hover:opacity-50" src={src} alt={alt} />
     </div>
   );
 };

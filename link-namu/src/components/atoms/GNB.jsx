@@ -1,8 +1,21 @@
+import { useNavigate } from "react-router-dom";
+import cookies from "react-cookies";
 import dehaze from "../../assets/dehaze.png";
 import Searchbar from "../atoms/Searchbar";
 import LogoutButton from "./LogoutButton";
+import { useEffect, useState } from "react";
+import LoginButton from "./LoginButton";
+import { logo192 } from "../../constants/public_image";
 
 const GNB = ({ setState }) => {
+  const navigate = useNavigate();
+  const [isCookie, setIsCookie] = useState(false);
+
+  useEffect(() => {
+    if (!cookies.load("refreshToken")) setIsCookie(false);
+    else setIsCookie(true);
+  }, []);
+
   return (
     <>
       <header className="m-0 p-0">
@@ -22,14 +35,19 @@ const GNB = ({ setState }) => {
                 </div>
               </button>
               <button
-                onClick={() => (window.location.href = "/")}
-                className="px-4 text-center"
+                onClick={() => navigate("/")}
+                className="px-4 flex gap-x-2 items-center"
               >
-                <span className="text-base font-medium">🎄 LinkNamu</span>
+                <img src={logo192} alt="logo" className="w-5 h-5" />
+                <span className="text-lg font-medium">LinkNamu</span>
               </button>
             </div>
-            {/* <Searchbar /> */}
-            <LogoutButton />
+            <Searchbar
+              detailSearchButtonHandler={() => {
+                navigate("/search/result");
+              }}
+            />
+            {isCookie ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
       </header>

@@ -1,22 +1,27 @@
 import { getCategoryList } from "../../apis/category";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getAccessToken } from "../../store";
+import { useLocation, useNavigate } from "react-router-dom";
+import cookies from "react-cookies";
 
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
 import { useWorkspaceName } from "../../hooks/useWorkspaceName";
 import { useCategoryName } from "../../hooks/useCategoryName";
+import FirstPage from "../../pages/FirstPage";
+import FirstAccessPage from "../../pages/FirstAccessPage";
 
 const BookmarkGridTemplate = () => {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const currWorkspaceId = urlParams.get("workspace");
-  const currCategoryId = urlParams.get("category");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [currWorkspaceId, setCurrWorkspaceId] = useState(null);
+  const [currCategoryId, setCurrCategoryId] = useState(null);
   const accessToken = getAccessToken();
   const getWorkspaceName = useWorkspaceName();
   const getCategoryName = useCategoryName();
 
+  const refreshToken = cookies.load("refreshToken");
 
   const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
     useInfiniteQuery(
@@ -31,18 +36,36 @@ const BookmarkGridTemplate = () => {
           const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
           return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
         },
+        onSuccess: (res) => {
+          const status = res.pages[0]?.status;
+
+          if (status === 404) {
+            navigate("/notfound");
+          } else if (status === 403) {
+            navigate("/forbidden");
+          }
+        },
       }
     );
 
   const refetchData = async () => {
     await refetch();
   };
-
+  useEffect(() => {
+    const queryString = location.search;
+    const urlParams = new URLSearchParams(queryString);
+    setCurrWorkspaceId(urlParams.get("workspace"));
+    setCurrCategoryId(urlParams.get("category"));
+  }, [location.search]);
   useEffect(() => {
     if (accessToken) {
       refetchData();
     }
   }, [accessToken]);
+  useEffect(() => {
+    console.log("workspace", currWorkspaceId, "category", currCategoryId);
+    refetch();
+  }, [currCategoryId]);
 
   const bottomObserver = useRef();
   const options = {
@@ -80,16 +103,30 @@ const BookmarkGridTemplate = () => {
   });
 
   return (
-    <div>
-      {currCategoryId && (
-        <Breadcrumbs
-          workspaceName={getWorkspaceName(currWorkspaceId)}
-          categoryName={getCategoryName(currCategoryId)}
-        />
-      )}
-      <BookmarkGrid bookmarkList={bookmarkList} categoryId={currCategoryId} />
-      <div ref={bottomObserver} style={{ height: "20px" }}>
-        {isFetching && "Loading more..."}
+    <div className="w-full mx-auto flex justify-center">
+      <div className="w-auto mx-auto px-10">
+        {currCategoryId && (
+          <Breadcrumbs
+            workspaceName={getWorkspaceName(currWorkspaceId)}
+            categoryName={getCategoryName(currCategoryId)}
+          />
+        )}
+        {currCategoryId === null ? (
+          refreshToken ? (
+            <FirstAccessPage />
+          ) : (
+            <FirstPage />
+          )
+        ) : (
+          <BookmarkGrid
+            bookmarkList={bookmarkList}
+            categoryId={currCategoryId}
+            handleRefetch={refetchData}
+          />
+        )}
+        <div ref={bottomObserver} style={{ height: "20px" }}>
+          {isFetching && "Loading more..."}
+        </div>
       </div>
     </div>
   );

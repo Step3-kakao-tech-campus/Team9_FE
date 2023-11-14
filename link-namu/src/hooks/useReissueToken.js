@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { reissue } from "../apis/user";
 import { setToken } from "../store/slices/userSlice";
 import cookies from "react-cookies";
+import { useNavigate } from "react-router-dom";
 
 const useReissueToken = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => {
     return state.user.accessToken;
@@ -12,7 +14,7 @@ const useReissueToken = () => {
   return ({ changeState }) => {
     if (!accessToken) {
       if (!cookies.load("refreshToken")) {
-        window.location.href = "/signin";
+        navigate("/signin");
       }
 
       reissue()

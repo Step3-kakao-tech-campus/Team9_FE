@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 const LoginButton = () => {
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    window.location.href = "/signin";
+    navigate("/signin");
   };
   return (
     <button className="" onClick={handleLogin}>

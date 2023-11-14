@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAccessToken } from "../store";
+import cookies from "react-cookies";
 import { printToast } from "../utils/toast";
 
 export const instance = axios.create({
@@ -10,7 +10,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const accessToken = getAccessToken();
+  const accessToken = cookies.load("accessToken");
   if (accessToken) {
     config.headers["Authorization"] = "Bearer " + accessToken;
   }
@@ -19,10 +19,10 @@ instance.interceptors.request.use((config) => {
 
 // middleware
 instance.interceptors.response.use(
-  (response) => {
+  response => {
     return response;
   },
-  (error) => {
+  error => {
     console.log("error", error);
     const status = error?.response?.status;
 

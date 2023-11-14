@@ -12,6 +12,9 @@ const MODAL_TYPES = {
   SaveShareLinkModal: "SaveShareLinkModal",
   CategoryRenameModal: "CategoryRenameModal",
   WorkspaceRenameModal: "WorkspaceRenameModal",
+  BookmarkDeleteModal: "BookmarkDeleteModal",
+  BookmarkEditModal: "BookmarkEditModal",
+  BookmarkImageUpdateModal: "BookmarkImageUpdateModal",
 };
 
 export default MODAL_TYPES;

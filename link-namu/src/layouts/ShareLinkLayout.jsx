@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import SharedPageGNB from "../components/atoms/SharedPageGNB";
+import DefaultGNB from "../components/atoms/DefaultGNB";
 
 const ShareLinkLayout = () => {
   return (
@@ -14,7 +14,7 @@ const ShareLinkLayout = () => {
           </Scrollbars>
         </div>
       </div>
-      <SharedPageGNB />
+      <DefaultGNB />
     </>
   );
 };

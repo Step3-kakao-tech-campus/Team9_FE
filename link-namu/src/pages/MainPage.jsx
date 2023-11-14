@@ -1,17 +1,17 @@
-import cookies from "react-cookies";
-import BookmarkGridTemplate from "../components/templates/BookmarkGridTemplate";
 import { useWorkspaceList } from "../hooks/useWorkspaceList";
+import { Suspense } from "react";
+
+import BookmarkGridTemplate from "../components/templates/BookmarkGridTemplate";
+import Loader from "../components/atoms/Loader";
 
 const MainPage = () => {
   const { workspaceData, isLoading, isError } = useWorkspaceList();
 
-  if (!cookies.load("refreshToken")) {
-    window.location.href = "/signin";
-  }
-
   return (
     <div>
-      <BookmarkGridTemplate />
+      <Suspense fallback={<Loader />}>
+        <BookmarkGridTemplate />
+      </Suspense>
     </div>
   );
 };

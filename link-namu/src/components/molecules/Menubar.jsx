@@ -2,9 +2,10 @@ import WorkspaceItem from "../atoms/WorkspaceItem";
 import { useSelector } from "react-redux";
 import { getWorkspaceList } from "../../store/slices/workspaceSlice";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useOpenModal } from "../../hooks/useOpenModal";
 import MODAL_TYPES from "../../constants/modal_types";
+import Loader from "../atoms/Loader";
 
 const Menubar = ({ isOpen }) => {
   const openModal = useOpenModal();
@@ -30,21 +31,24 @@ const Menubar = ({ isOpen }) => {
           >
             MAIN
           </span>
-          <Scrollbars thumbSize={100} autoHide>
-            <div className="h-[500px] max-h-[500px]">
-              {workspaceList &&
-                workspaceList.map((workspace, index) => {
-                  return (
-                    <WorkspaceItem
-                      key={index}
-                      workspaceId={workspace.workspaceId}
-                      workspaceName={workspace.workspaceName}
-                      categories={workspace.categoryList}
-                    />
-                  );
-                })}
-            </div>
-          </Scrollbars>
+          <Suspense fallback={<Loader />}>
+            <Scrollbars thumbSize={100} autoHide>
+              <div className="h-[500px] max-h-[500px]">
+                {workspaceList &&
+                  workspaceList.map((workspace, index) => {
+                    return (
+                      <WorkspaceItem
+                        key={index}
+                        workspaceId={workspace.workspaceId}
+                        workspaceName={workspace.workspaceName}
+                        linkProvider={workspace.linkProvider}
+                        categories={workspace.categoryList}
+                      />
+                    );
+                  })}
+              </div>
+            </Scrollbars>
+          </Suspense>
         </div>
         <div className="">
           <button
