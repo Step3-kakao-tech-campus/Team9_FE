@@ -38,7 +38,7 @@ const TemporaryStorage = ({ isOpen }) => {
           src={x}
           alt="close"
           aria-label="임시보관함 닫기"
-          className="hover:opacity-50"
+          className="w-4 hover:opacity-50"
         />
       </div>
       <div>
@@ -59,6 +59,7 @@ const TemporaryStorage = ({ isOpen }) => {
                       key={bookmark.id}
                       id={bookmark.id}
                       title={bookmark.title}
+                      setCardList={setCardList}
                     />
                   );
                 })}
