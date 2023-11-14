@@ -1,6 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { isModalOpen } from "./store/slices/modalSlice";
 import Loader from "./components/atoms/Loader";
 
 // layouts
@@ -21,12 +23,16 @@ import ForbiddenPage from "./pages/ForbiddenPage";
 import FirstPage from "./pages/FirstPage";
 
 const App = () => {
+  const isModalOpenState = useSelector(isModalOpen);
   useEffect(() => {
     console.log("app");
   }, []);
+  useEffect(() => {
+    console.log("app 컴포넌트의 aria-hidden", isModalOpenState);
+  }, [isModalOpenState]);
 
   return (
-    <div className="App">
+    <div aria-hidden={isModalOpenState} className="App">
       <Suspense fallback={<Loader />}>
         <BrowserRouter>
           <Routes>
