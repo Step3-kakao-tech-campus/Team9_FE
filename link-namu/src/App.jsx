@@ -1,13 +1,13 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, useEffect } from "react";
-import { useReissueToken } from "./hooks/useReissueToken";
 import Loader from "./components/atoms/Loader";
 
 // layouts
 import MainLayout from "./layouts/MainLayout";
 import ShareLinkLayout from "./layouts/ShareLinkLayout";
 import SearchLayout from "./layouts/SearchLayout";
+import FirstLayout from "./layouts/FirstLayout";
 
 // pages
 import MainPage from "./pages/MainPage";
@@ -18,19 +18,11 @@ import SharedWorkspacePage from "./pages/SharedWorkspacePage";
 import SearchResultPage from "./pages/SearchResultPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ForbiddenPage from "./pages/ForbiddenPage";
+import FirstPage from "./pages/FirstPage";
 
 const App = () => {
-  const reissueToken = useReissueToken();
-
   useEffect(() => {
     console.log("app");
-    reissueToken(); // 토큰 재발급
-
-    // 토큰을 15분마다 재발급
-    const refreshTokenTimer = setInterval(reissueToken, 15 * 60 * 1000);
-    // const refreshTokenTimer = setInterval(reissueToken, 15 * 1000); // test) 15초마다
-
-    return () => clearInterval(refreshTokenTimer);
   }, []);
 
   return (
@@ -45,6 +37,9 @@ const App = () => {
             <Route path="forbidden" element={<ForbiddenPage />} />
 
             {/* 공통 레이아웃 */}
+            <Route element={<FirstLayout />}>
+              <Route path="first" element={<FirstPage />} />
+            </Route>
             <Route element={<MainLayout />}>
               <Route path="/" element={<MainPage />} />
             </Route>

@@ -1,27 +1,18 @@
 import { getCategoryList } from "../../apis/category";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getAccessToken } from "../../store";
-import { useLocation, useNavigate } from "react-router-dom";
-import cookies from "react-cookies";
-
+import { useNavigate } from "react-router-dom";
 import BookmarkGrid from "../organisms/BookmarkGrid";
 import Breadcrumbs from "../atoms/Breadcrumbs";
 import { useWorkspaceName } from "../../hooks/useWorkspaceName";
 import { useCategoryName } from "../../hooks/useCategoryName";
-import FirstPage from "../../pages/FirstPage";
-import FirstAccessPage from "../../pages/FirstAccessPage";
 
-const BookmarkGridTemplate = () => {
+const BookmarkGridTemplate = ({ currWorkspaceId, currCategoryId }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [currWorkspaceId, setCurrWorkspaceId] = useState(null);
-  const [currCategoryId, setCurrCategoryId] = useState(null);
   const accessToken = getAccessToken();
   const getWorkspaceName = useWorkspaceName();
   const getCategoryName = useCategoryName();
-
-  const refreshToken = cookies.load("refreshToken");
 
   const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
     useInfiniteQuery(
@@ -43,6 +34,8 @@ const BookmarkGridTemplate = () => {
             navigate("/notfound");
           } else if (status === 403) {
             navigate("/forbidden");
+          } else if (status === 401) {
+            navigate("/");
           }
         },
       }
@@ -51,15 +44,9 @@ const BookmarkGridTemplate = () => {
   const refetchData = async () => {
     await refetch();
   };
+
   useEffect(() => {
-    const queryString = location.search;
-    const urlParams = new URLSearchParams(queryString);
-    setCurrWorkspaceId(urlParams.get("workspace"));
-    setCurrCategoryId(urlParams.get("category"));
-  }, [location.search]);
-  useEffect(() => {
-    if (accessToken) {
-      refetchData();
+    if (!accessToken) {
     }
   }, [accessToken]);
   useEffect(() => {
@@ -111,19 +98,11 @@ const BookmarkGridTemplate = () => {
             categoryName={getCategoryName(currCategoryId)}
           />
         )}
-        {currCategoryId === null ? (
-          refreshToken ? (
-            <FirstAccessPage />
-          ) : (
-            <FirstPage />
-          )
-        ) : (
-          <BookmarkGrid
-            bookmarkList={bookmarkList}
-            categoryId={currCategoryId}
-            handleRefetch={refetchData}
-          />
-        )}
+        <BookmarkGrid
+          bookmarkList={bookmarkList}
+          categoryId={currCategoryId}
+          handleRefetch={refetchData}
+        />
         <div ref={bottomObserver} style={{ height: "20px" }}>
           {isFetching && "Loading more..."}
         </div>

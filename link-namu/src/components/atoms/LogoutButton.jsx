@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../apis/user";
-import cookies from "react-cookies";
+import { removeTokens } from "../../utils/auth";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
@@ -9,10 +9,9 @@ const LogoutButton = () => {
     logout()
       .then((res) => {
         console.log(res);
-        cookies.remove("refreshToken", { path: "/" });
-        cookies.remove("accessToken", { path: "/" });
-        navigate("/");
-        window.location.reload();
+
+        removeTokens();
+        navigate("/first");
       })
       .catch((err) => console.log(err));
   };
