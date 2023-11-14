@@ -29,7 +29,7 @@ const TemporaryStorage = ({ isOpen }) => {
 
   return (
     <div
-      className={`fixed top-[56px] right-[60px] bottom-0 flex flex-col w-80 border-l bg-slate-200 ${
+      className={`fixed top-[56px] right-[60px] bottom-0 flex flex-col w-80 border-l bg-slate-50 shadow-2xl ${
         isOpen || isContents ? `opacity-1 z-50` : `opacity-0 z-0`
       }`}
     >
