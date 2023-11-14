@@ -4,7 +4,7 @@ const Loader = () => {
   const color = "gray";
 
   return (
-    <div className={loaderStyle}>
+    <div className={loaderStyle} title="로딩 중">
       <svg
         version="1.1"
         id="loader-1"
