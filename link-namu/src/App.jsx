@@ -1,10 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Suspense, useEffect, useState } from "react";
-import cookies from "react-cookies";
-import { reissue } from "./apis/user";
-import { setToken } from "./store/slices/userSlice";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { useReissueToken } from "./hooks/useReissueToken";
 import Loader from "./components/atoms/Loader";
 
 // layouts
@@ -23,35 +20,15 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ForbiddenPage from "./pages/ForbiddenPage";
 
 const App = () => {
-  const dispatch = useDispatch();
+  const reissueToken = useReissueToken();
 
   useEffect(() => {
     console.log("app");
-    const refreshToken = () => {
-      const refreshToken = cookies.load("refreshToken");
-      if (!refreshToken) return;
-
-      reissue()
-        .then((res) => {
-          const accessToken = res.data?.response?.accessToken.split(" ")[1];
-          const newRefreshToken = res.data?.response?.refreshToken;
-
-          dispatch(
-            setToken({
-              accessToken: accessToken,
-              refreshToken: newRefreshToken,
-            })
-          );
-          console.log("토큰이 재발급되었습니다.", accessToken);
-        })
-        .catch((err) => console.log(err));
-    };
-
-    refreshToken(); // 최초에 재발급 한 번
+    reissueToken(); // 토큰 재발급
 
     // 토큰을 15분마다 재발급
-    const refreshTokenTimer = setInterval(refreshToken, 15 * 60 * 1000);
-    // const refreshTokenTimer = setInterval(refreshToken, 15 * 1000); // text) 15초마다
+    const refreshTokenTimer = setInterval(reissueToken, 15 * 60 * 1000);
+    // const refreshTokenTimer = setInterval(reissueToken, 15 * 1000); // test) 15초마다
 
     return () => clearInterval(refreshTokenTimer);
   }, []);
