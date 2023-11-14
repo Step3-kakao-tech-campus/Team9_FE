@@ -52,6 +52,7 @@ const Menubar = ({ isOpen }) => {
         </div>
         <div className="">
           <button
+            title="워크스페이스 추가하기"
             onClick={() =>
               openModal({
                 modalType: MODAL_TYPES.WorkspaceAddModal,

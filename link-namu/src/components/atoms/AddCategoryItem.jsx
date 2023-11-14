@@ -7,6 +7,7 @@ const AddCategoryItem = ({ workspaceId }) => {
   return (
     <div>
       <button
+        title="카테고리 추가하기"
         className={`w-full px-3 py-2 grid grid-cols-[1fr,16px] gap-x3 border border-white hover:font-bold`}
         onClick={() =>
           openModal({
