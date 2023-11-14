@@ -5,9 +5,10 @@
  * @param {bool} padding - 패딩 여부
  * @returns
  */
-const SidebarTile = ({ src, alt, padding = true, onClick }) => {
+const SidebarTile = ({ src, alt, title, padding = true, onClick }) => {
   return (
     <button
+      title={title}
       className={`${
         padding && "p-[10px]"
       } w-[60px] h-[60px] ml-[-1px] border-t border-[#c6c6c6]`}
