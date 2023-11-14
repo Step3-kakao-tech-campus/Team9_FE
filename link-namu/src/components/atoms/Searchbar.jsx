@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DetailSearchBox from "./DetailSearchBox";
 import magnifier from "../../assets/magnifier.png";
 import xIcon from "../../assets/x.png";
+import { printToast } from "../../utils/toast";
 
 /**
  * 검색창 컴포넌트
@@ -33,6 +34,11 @@ const Searchbar = ({ detailSearchButtonHandler }) => {
   };
 
   const searchText = () => {
+    if (!text) {
+      printToast("검색할 키워드를 입력해주세요.", "error");
+      return;
+    }
+
     navigate(`/search/result`, {
       state: {
         bookmarkName: text,
