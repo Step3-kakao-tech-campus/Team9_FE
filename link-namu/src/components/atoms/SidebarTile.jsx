@@ -7,14 +7,14 @@
  */
 const SidebarTile = ({ src, alt, padding = true, onClick }) => {
   return (
-    <div
+    <button
       className={`${
         padding && "p-[10px]"
-      } w-[60px] h-[60px] ml-[-1px] border-t border-[#c6c6c6] cursor-pointer`}
+      } w-[60px] h-[60px] ml-[-1px] border-t border-[#c6c6c6]`}
       onClick={onClick}
     >
       <img className="w-full h-full hover:opacity-50" src={src} alt={alt} />
-    </div>
+    </button>
   );
 };
 

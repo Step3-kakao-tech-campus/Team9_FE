@@ -6,8 +6,8 @@ const AddCard = ({ categoryId, handleRefetch }) => {
   const openModal = useOpenModal();
 
   return (
-    <div
-      className={`transform flex flex-col bg-white border-2 rounded-md shadow-md w-72 h-80 hover:bg-gray-100 hover:border hover:border-gray-300 hover:shadow-lg hover:cursor-pointer`}
+    <button
+      className={`transform flex flex-col bg-white border-2 rounded-md shadow-md w-72 h-80 hover:bg-gray-100 hover:border hover:border-gray-300 hover:shadow-lg`}
       onClick={() =>
         openModal({
           modalType: MODAL_TYPES.BookmarkAddModal,
@@ -25,7 +25,7 @@ const AddCard = ({ categoryId, handleRefetch }) => {
           북마크 추가하기
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
