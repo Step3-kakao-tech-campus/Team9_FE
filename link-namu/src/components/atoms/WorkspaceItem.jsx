@@ -4,6 +4,8 @@ import CategoryContainer from "./CategoryContainer";
 import WorkspaceContextMenu from "./WorkspaceContextMenu";
 
 import homeIcon from "../../assets/home.png";
+import notionIcon from "../../assets/notion_logo.png";
+import googleIcon from "../../assets/google_logo.png";
 import chevron_up from "../../assets/chevron_up.png";
 
 /**
@@ -16,6 +18,7 @@ import chevron_up from "../../assets/chevron_up.png";
 const WorkspaceItem = ({
   workspaceId,
   workspaceName = "워크스페이스",
+  linkProvider,
   categories,
 }) => {
   const [opened, setOpened] = useState(false);
@@ -74,7 +77,13 @@ const WorkspaceItem = ({
         }}
         onContextMenu={handleContextMenu}
       >
-        <img className="w-[20px] h-[20px]" src={icon} alt="" />
+        {linkProvider === "NOTION" ? (
+          <img className="w-[20px] h-[20px]" src={notionIcon} alt="" />
+        ) : linkProvider === "GOOGLE_DOCS" ? (
+          <img className="w-[20px] h-[20px]" src={googleIcon} alt="" />
+        ) : (
+          <img className="w-[20px] h-[20px]" src={icon} alt="" />
+        )}
         <span className="text-[#5c5e64] text-sm leading-5 truncate">
           {workspaceName}
         </span>

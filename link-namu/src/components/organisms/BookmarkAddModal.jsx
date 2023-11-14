@@ -41,7 +41,7 @@ const BookmarkAddModal = () => {
           <ModalTextInput
             changeHandler={setBookmarkLink}
             value={bookmarkLink}
-            placeholder="Link here..."
+            placeholder="https://..."
           />
         </div>
         <div>
@@ -94,10 +94,14 @@ const BookmarkAddModal = () => {
 
   const addBookmark = () => {
     const imageUrl = allowImage ? imageData.value : null;
+    var testBookmarkLink = bookmarkLink;
+    if (testBookmarkLink.substring(0, 4) !== "http") {
+      testBookmarkLink = "http://" + testBookmarkLink;
+    }
 
     const bookmarkData = {
       bookmarkName: bookmarkName,
-      bookmarkLink: bookmarkLink,
+      bookmarkLink: testBookmarkLink,
       bookmarkDescription: bookmarkDescription,
       categoryId: categoryId,
       imageUrl: imageUrl,
