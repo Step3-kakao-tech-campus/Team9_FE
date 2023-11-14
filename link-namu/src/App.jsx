@@ -1,16 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Suspense, useEffect, useState } from "react";
-import cookies from "react-cookies";
-import { reissue } from "./apis/user";
-import { setToken } from "./store/slices/userSlice";
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Suspense, useEffect } from "react";
 import Loader from "./components/atoms/Loader";
 
 // layouts
 import MainLayout from "./layouts/MainLayout";
 import ShareLinkLayout from "./layouts/ShareLinkLayout";
 import SearchLayout from "./layouts/SearchLayout";
+import FirstLayout from "./layouts/FirstLayout";
 
 // pages
 import MainPage from "./pages/MainPage";
@@ -21,39 +18,11 @@ import SharedWorkspacePage from "./pages/SharedWorkspacePage";
 import SearchResultPage from "./pages/SearchResultPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ForbiddenPage from "./pages/ForbiddenPage";
+import FirstPage from "./pages/FirstPage";
 
 const App = () => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
     console.log("app");
-    const refreshToken = () => {
-      const refreshToken = cookies.load("refreshToken");
-      if (!refreshToken) return;
-
-      reissue()
-        .then((res) => {
-          const accessToken = res.data?.response?.accessToken.split(" ")[1];
-          const newRefreshToken = res.data?.response?.refreshToken;
-
-          dispatch(
-            setToken({
-              accessToken: accessToken,
-              refreshToken: newRefreshToken,
-            })
-          );
-          console.log("토큰이 재발급되었습니다.", accessToken);
-        })
-        .catch((err) => console.log(err));
-    };
-
-    refreshToken(); // 최초에 재발급 한 번
-
-    // 토큰을 15분마다 재발급
-    const refreshTokenTimer = setInterval(refreshToken, 15 * 60 * 1000);
-    // const refreshTokenTimer = setInterval(refreshToken, 15 * 1000); // text) 15초마다
-
-    return () => clearInterval(refreshTokenTimer);
   }, []);
 
   return (
@@ -68,6 +37,9 @@ const App = () => {
             <Route path="forbidden" element={<ForbiddenPage />} />
 
             {/* 공통 레이아웃 */}
+            <Route element={<FirstLayout />}>
+              <Route path="first" element={<FirstPage />} />
+            </Route>
             <Route element={<MainLayout />}>
               <Route path="/" element={<MainPage />} />
             </Route>

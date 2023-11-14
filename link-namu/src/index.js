@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { printToast } from "./utils/toast";
 
-const queryErrorHandler = error => {
+const queryErrorHandler = (error) => {
   console.log("queryErrorHandler", error);
   printToast("불러오기에 실패했습니다.", "error");
 };

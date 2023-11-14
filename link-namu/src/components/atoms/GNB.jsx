@@ -1,20 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import cookies from "react-cookies";
 import dehaze from "../../assets/dehaze.png";
 import Searchbar from "../atoms/Searchbar";
 import LogoutButton from "./LogoutButton";
-import { useEffect, useState } from "react";
 import LoginButton from "./LoginButton";
 import { logo192 } from "../../constants/public_image";
+import { getRefreshToken } from "../../utils/auth";
 
 const GNB = ({ setState }) => {
   const navigate = useNavigate();
-  const [isCookie, setIsCookie] = useState(false);
-
-  useEffect(() => {
-    if (!cookies.load("refreshToken")) setIsCookie(false);
-    else setIsCookie(true);
-  }, []);
+  const refreshToken = getRefreshToken();
 
   return (
     <>
@@ -47,7 +41,7 @@ const GNB = ({ setState }) => {
                 navigate("/search/result");
               }}
             />
-            {isCookie ? <LogoutButton /> : <LoginButton />}
+            {refreshToken ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
       </header>
