@@ -49,6 +49,7 @@ const WorkspaceAddModal = () => {
           <ModalTextInput
             value={workspaceName}
             changeHandler={setWorkspaceName}
+            placeholder="생성할 워크스페이스의 이름을 입력해주세요."
           />
         </div>
       </ModalBox>

@@ -70,7 +70,7 @@ const WorkspaceItem = ({
         />
       )}
       <button
-        title={workspaceName}
+        title={"워크스페이스 - " + workspaceName}
         className={`w-full text-left px-3 py-[10px] grid grid-cols-[20px,1fr,16px] gap-x-3 rounded-lg cursor-pointer hover:bg-[#f6f6f6]`}
         onClick={() => {
           setOpened(!opened);

@@ -10,6 +10,7 @@ const SharedBookmarkGrid = ({ bookmarkList }) => {
           bookmarkList.map((bookmark) => {
             return (
               <NonDraggableCard
+                key={bookmark.bookmarkId}
                 imageUrl={bookmark.imageUrl}
                 imageAlt={bookmark.url}
                 url={bookmark.url}

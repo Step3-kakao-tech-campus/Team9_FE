@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { printToast } from "../../utils/toast";
 
-import DetailSearchBox from "./DetailSearchBox";
 import magnifier from "../../assets/magnifier.png";
 import xIcon from "../../assets/x.png";
-import { printToast } from "../../utils/toast";
 
 /**
  * 검색창 컴포넌트
@@ -39,15 +38,16 @@ const Searchbar = ({ detailSearchButtonHandler }) => {
       return;
     }
 
-    navigate(`/search/result`, {
+    navigate("/search/result", {
       state: {
         bookmarkName: text,
       },
     });
   };
+
   return (
     <>
-      <div className="flex gap-x-2">
+      <div title="검색창" className="flex gap-x-2">
         <div
           className={`w-[550px] h-[40px] pl-5 py-[10px] flex items-center border rounded-[50px] shadow-md ${
             isFocused && "shadow-[#729076]"

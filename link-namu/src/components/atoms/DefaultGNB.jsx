@@ -1,14 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { logo192 } from "../../constants/public_image";
 
-const DefaultGNB = ({ children }) => {
+import LoginButton from "./LoginButton";
+
+const DefaultGNB = ({ showLoginButton = false }) => {
   const navigate = useNavigate();
 
   return (
     <>
       <header className="m-0 p-0">
         <div className="fixed left-0 right-0 top-0 z-11000 border-b bg-white">
-          <div className="w-full h-[56px] mx-auto px-5 flex items-center justify-center">
+          <div className="w-full h-[56px] mx-auto px-5 flex items-center justify-between">
+            {showLoginButton && <div></div>}
             <div className="flex items-center">
               <button
                 onClick={() => navigate("/")}
@@ -18,7 +21,7 @@ const DefaultGNB = ({ children }) => {
                 <span className="text-lg font-medium">LinkNamu</span>
               </button>
             </div>
-            {children}
+            {showLoginButton && <LoginButton />}
           </div>
         </div>
       </header>

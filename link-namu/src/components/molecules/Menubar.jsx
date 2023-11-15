@@ -52,12 +52,13 @@ const Menubar = ({ isOpen }) => {
         </div>
         <div className="">
           <button
+            title="워크스페이스 추가하기"
             onClick={() =>
               openModal({
                 modalType: MODAL_TYPES.WorkspaceAddModal,
               })
             }
-            className="block w-[75%] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md overflow-hidden"
+            className="block w-[75%] h-[36px] mx-auto my-5 border border-[#d9d9d9] rounded-md overflow-hidden hover:bg-[#f6f6f6]"
           >
             <span className="whitespace-nowrap">워크스페이스 추가</span>
           </button>
