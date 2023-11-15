@@ -56,12 +56,18 @@ const BookmarkGrid = ({ bookmarkList, categoryId, handleRefetch }) => {
 
         // 북마크 이동 (서버)
         moveBookmark({ bookmarkIdList: [id], toCategoryId: categoryId })
-          .then((res) => {
+          .then(res => {
+            if (res.status !== 200) {
+              const error = res.data?.error;
+              console.error(error.message);
+              throw new Error(error.errorCode);
+            }
+
             handleRefetch();
             printToast("이동에 성공했습니다.", "success");
           })
-          .catch((err) => {
-            switch (err.errorCode) {
+          .catch(err => {
+            switch (err.message) {
               case "24000":
                 printToast("해당 북마크가 이미 존재합니다.", "error");
                 break;
