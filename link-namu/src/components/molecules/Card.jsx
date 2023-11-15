@@ -102,14 +102,13 @@ const Card = ({
 
             {/* 내용 영역 */}
             <div className="px-4 py-2">
-              <div
-                title={title}
+              <p
                 className={`mb-2 overflow-hidden font-bold break-all text-md text-ellipsis whitespace-nowrap ${
-                  isHover && `overflow-normal text-clip`
+                  isHover && `overflow-normal text-clip whitespace-break-spaces`
                 }`}
               >
                 {title}
-              </div>
+              </p>
               <hr />
               <p
                 title={description}
