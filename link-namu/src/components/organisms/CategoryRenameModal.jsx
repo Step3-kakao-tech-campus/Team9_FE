@@ -55,7 +55,11 @@ const CategoryRenameModal = () => {
       <ModalBox>
         <div>
           <ModalSubTitle>변경할 이름</ModalSubTitle>
-          <ModalTextInput value={newName} changeHandler={setNewName} />
+          <ModalTextInput
+            value={newName}
+            changeHandler={setNewName}
+            placeholder="카테고리의 변경할 이름을 입력해주세요."
+          />
         </div>
       </ModalBox>
     </SingleStepModalBase>

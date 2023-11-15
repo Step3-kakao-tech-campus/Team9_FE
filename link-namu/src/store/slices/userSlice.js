@@ -1,31 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import cookies from "react-cookies";
+import { getRefreshToken, getAccessToken } from "../../utils/auth";
 
 const initialState = {
-  accessToken: null,
-  refreshToken: cookies.load("refreshToken"),
+  refreshToken: getRefreshToken(),
+  accessToken: getAccessToken(),
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setToken: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
-      if (state.refreshToken) {
-        cookies.save("refreshToken", state.refreshToken, {
-          path: "/",
-          // httpOnly: true,
-        });
-        cookies.save("accessToken", state.accessToken, {
-          path: "/",
-        });
-      }
+    refresh: (state) => {
+      state.refreshToken = getRefreshToken();
+      state.accessToken = getAccessToken();
     },
   },
 });
 
-export const { setToken } = userSlice.actions;
+export const { refresh } = userSlice.actions;
 
 export default userSlice.reducer;

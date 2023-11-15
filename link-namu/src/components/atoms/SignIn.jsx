@@ -2,8 +2,9 @@ import logoGoogle from "../../assets/google_logo.png";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { login } from "../../apis/user";
-import { setToken } from "../../store/slices/userSlice";
+import { refresh } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import { saveTokensToCookie } from "../../utils/auth";
 
 import { logo192 } from "../../constants/public_image";
 
@@ -17,16 +18,13 @@ const SignIn = () => {
 
       login({ google_token }).then((res) => {
         console.log(res);
+
         const accessToken = res.data?.response?.accessToken.split(" ")[1];
         const refreshToken = res.data?.response?.refreshToken;
-        dispatch(
-          setToken({
-            accessToken: accessToken,
-            refreshToken: refreshToken,
-          })
-        );
-        console.log("access token:", accessToken);
-        console.log("refresh token:", refreshToken);
+
+        saveTokensToCookie({ refreshToken, accessToken });
+        dispatch(refresh());
+
         navigate("/");
       });
     },
