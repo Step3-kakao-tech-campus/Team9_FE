@@ -6,7 +6,7 @@ const Tag = ({ name, isHover = false }) => {
   return (
     <span
       title={name}
-      className={`block px-1 py-1 text-sm font-semibold text-gray-500 mr-2 text-ellipsis overflow-hidden max-w-[80%] break-all whitespace-nowrap
+      className={`block border border-gray-100 bg-gray-100 rounded-full px-2 py-1 text-sm font-semibold text-gray-500 mr-2 text-ellipsis overflow-hidden max-w-[80%] break-all whitespace-nowrap
       ${
         isHover &&
         `overflow-normal text-clip whitespace-normal min-w-fit flex flex-wrap`

@@ -69,7 +69,7 @@ const CategoryItem = ({
         />
       )}
       <button
-        title={categoryName}
+        title={"카테고리 - " + categoryName}
         className={`w-full pl-3 py-2 grid grid-cols-[1fr,16px] gap-x3 rounded-lg text-left ${
           categoryId === currCategoryId && "bg-[#f6f6f6]"
         } hover:bg-[#f6f6f6]`}

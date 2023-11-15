@@ -47,7 +47,7 @@ const Searchbar = ({ detailSearchButtonHandler }) => {
 
   return (
     <>
-      <div className="flex gap-x-2">
+      <div title="검색창" className="flex gap-x-2">
         <div
           className={`w-[550px] h-[40px] pl-5 py-[10px] flex items-center border rounded-[50px] shadow-md ${
             isFocused && "shadow-[#729076]"

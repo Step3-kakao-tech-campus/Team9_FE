@@ -23,6 +23,8 @@ const fixedPositionCenter =
 const ModalBase = ({ size = "md", titleName = "제목", children }) => {
   return (
     <div
+      role="dialog"
+      aria-modal={true}
       className={`${fixedPositionCenter} ${modalSize[size]} z-50 mx-auto overflow-y-auto bg-white rounded shadow-lg`}
     >
       <ModalBox>{children}</ModalBox>

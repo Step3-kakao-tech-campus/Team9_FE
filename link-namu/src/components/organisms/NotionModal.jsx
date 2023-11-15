@@ -136,7 +136,10 @@ const NotionModal = () => {
         </div>
         <div>
           <ModalSubtitle>노션 페이지 링크</ModalSubtitle>
-          <ModalTextInput changeHandler={setNotionPageLink} />
+          <ModalTextInput
+            changeHandler={setNotionPageLink}
+            placeholder="노션 페이지의 링크를 입력해주세요."
+          />
         </div>
       </ModalBox>
     </>

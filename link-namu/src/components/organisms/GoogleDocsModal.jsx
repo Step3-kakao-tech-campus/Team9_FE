@@ -65,7 +65,11 @@ const GoogleDocsModal = () => {
       <ModalBox>
         <div>
           <ModalSubTitle>구글 문서 페이지 URL</ModalSubTitle>
-          <ModalTextInput value={pageLink} changeHandler={setPageLink} />
+          <ModalTextInput
+            value={pageLink}
+            changeHandler={setPageLink}
+            placeholder="구글 문서의 페이지 URL을 입력해주세요."
+          />
         </div>
       </ModalBox>
     </SingleStepModalBase>

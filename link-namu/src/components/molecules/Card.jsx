@@ -30,7 +30,7 @@ const Card = ({
     left: 0,
   });
 
-  const handleContextMenu = event => {
+  const handleContextMenu = (event) => {
     event.preventDefault();
     setContextMenuPosition({ top: event.clientY, left: event.clientX });
     setContextMenuVisible(true);
@@ -40,7 +40,7 @@ const Card = ({
     setContextMenuVisible(false);
   };
 
-  const handleContextMenuAction = action => {
+  const handleContextMenuAction = (action) => {
     console.log("Selected action:", action);
     closeContextMenu();
   };
@@ -77,8 +77,9 @@ const Card = ({
         />
       )}
       <Draggable key={bookmarkId} draggableId={dragId} index={1}>
-        {provided => (
+        {(provided) => (
           <div
+            title={url}
             className={`transform bg-white border-2 rounded-md shadow-md w-72 h-80 
               ${
                 isHover &&
@@ -102,6 +103,7 @@ const Card = ({
             {/* 내용 영역 */}
             <div className="px-4 py-2">
               <div
+                title={title}
                 className={`mb-2 overflow-hidden font-bold break-all text-md text-ellipsis whitespace-nowrap ${
                   isHover && `overflow-normal text-clip`
                 }`}
@@ -110,6 +112,7 @@ const Card = ({
               </div>
               <hr />
               <p
+                title={description}
                 className={`mt-2 overflow-hidden text-sm text-gray-700 break-all whitespace-normal text-ellipsis line-clamp-2 
               ${isHover && `overflow-normal line-clamp-none text-clip`}`}
               >

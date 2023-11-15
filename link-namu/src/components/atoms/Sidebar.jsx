@@ -23,22 +23,26 @@ const Sidebar = () => {
       >
         <SidebarTile
           src={logoNotion}
-          alt="notion import"
+          title="노션 페이지 연동하기"
+          alt="노션 페이지 연동하기"
           onClick={() => openModal({ modalType: MODAL_TYPES.NotionModal })}
         />
         <SidebarTile
           src={logoGoogle}
-          alt="google import "
+          title="구글 문서 연동하기"
+          alt="구글 문서 연동하기"
           onClick={() => openModal({ modalType: MODAL_TYPES.GoogleDocsModal })}
         />
         <SidebarTile
           src={logoKakao}
-          alt="kakaotalk import "
+          title="카카오톡 나에게 보내기 파일 연동하기"
+          alt="카카오톡 나에게 보내기 파일 연동하기"
           onClick={() => openModal({ modalType: MODAL_TYPES.KakaoModal })}
         />
         <SidebarTile
           src={addBookmark}
-          alt="share link import"
+          title="공유 링크로 가져오기"
+          alt="공유 링크로 가져오기"
           padding={false}
           onClick={() =>
             openModal({ modalType: MODAL_TYPES.SaveShareLinkModal })
