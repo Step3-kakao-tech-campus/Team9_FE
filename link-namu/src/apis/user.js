@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import cookies from "react-cookies";
+import { getRefreshToken } from "../utils/auth";
 
 /**
  * 구글 소셜 로그인
@@ -22,7 +22,7 @@ export const login = ({ google_token }) => {
  * @returns
  */
 export const logout = () => {
-  const refreshToken = cookies.load("refreshToken");
+  const refreshToken = getRefreshToken();
   return instance.post("/api/auth/logout", { refreshToken: refreshToken });
 };
 
@@ -32,7 +32,7 @@ export const logout = () => {
  * @returns
  */
 export const reissue = () => {
-  const refreshToken = cookies.load("refreshToken");
+  const refreshToken = getRefreshToken();
   if (!refreshToken) {
     console.log("reissue: refresh token이 존재하지 않습니다.");
     return;

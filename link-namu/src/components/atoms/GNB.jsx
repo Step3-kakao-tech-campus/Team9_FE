@@ -1,20 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import cookies from "react-cookies";
 import dehaze from "../../assets/dehaze.png";
 import Searchbar from "../atoms/Searchbar";
 import LogoutButton from "./LogoutButton";
-import { useEffect, useState } from "react";
 import LoginButton from "./LoginButton";
 import { logo192 } from "../../constants/public_image";
+import { getRefreshToken } from "../../utils/auth";
 
 const GNB = ({ setState }) => {
   const navigate = useNavigate();
-  const [isCookie, setIsCookie] = useState(false);
-
-  useEffect(() => {
-    if (!cookies.load("refreshToken")) setIsCookie(false);
-    else setIsCookie(true);
-  }, []);
+  const refreshToken = getRefreshToken();
 
   return (
     <>
@@ -23,18 +17,20 @@ const GNB = ({ setState }) => {
           <div className="w-full h-[56px] mx-auto px-4 flex items-center justify-between">
             <div className="flex items-center">
               <button
+                title="메뉴바 열기/닫기"
                 className="w-[46px] h-[46px] rounded-[60px] shadow-md bg-white hover:bg-[#d9d9d9] duration-300"
                 onClick={setState}
               >
                 <div className="w-[30px] h-[30px] m-2">
                   <img
                     src={dehaze}
-                    alt="open menubar button"
+                    alt="메뉴바 열기/닫기 버튼"
                     className="w-full h-full"
                   />
                 </div>
               </button>
               <button
+                title="LinkNamu 홈으로 이동"
                 onClick={() => navigate("/")}
                 className="px-4 flex gap-x-2 items-center"
               >
@@ -47,7 +43,7 @@ const GNB = ({ setState }) => {
                 navigate("/search/result");
               }}
             />
-            {isCookie ? <LogoutButton /> : <LoginButton />}
+            {refreshToken ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
       </header>

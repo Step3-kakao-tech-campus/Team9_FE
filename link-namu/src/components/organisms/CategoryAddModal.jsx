@@ -58,6 +58,7 @@ const CategoryAddModal = ({ data }) => {
           <ModalTextInput
             value={categoryName}
             changeHandler={setCategoryName}
+            placeholder="생성할 카테고리의 이름을 입력해주세요."
           />
         </div>
       </ModalBox>
