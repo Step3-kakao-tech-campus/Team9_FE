@@ -1,40 +1,46 @@
-import cookies from "react-cookies";
+import { useWorkspaceList } from "../hooks/useWorkspaceList";
+import { Suspense, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getRefreshToken } from "../utils/auth";
+import { removeTokens } from "../utils/auth";
+import { useLocation } from "react-router-dom";
+
 import BookmarkGridTemplate from "../components/templates/BookmarkGridTemplate";
-import { useDispatch, useSelector } from "react-redux";
-import { reissue } from "../apis/user";
-import { setToken } from "../store/slices/userSlice";
+import RecentBookmarkGridTemplate from "../components/templates/RecentBookmarkGridTemplate";
+import Loader from "../components/atoms/Loader";
 
 const MainPage = () => {
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state) => {
-    return state.user.accessToken;
-  });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { workspaceData, isLoading, isError } = useWorkspaceList();
+  const [currWorkspaceId, setCurrWorkspaceId] = useState(null);
+  const [currCategoryId, setCurrCategoryId] = useState(null);
 
-  if (!accessToken) {
-    if (!cookies.load("refreshToken")) {
-      window.location.href = "/signin";
-      return;
-    }
+  useEffect(() => {
+    const queryString = location.search;
+    const urlParams = new URLSearchParams(queryString);
+    setCurrWorkspaceId(urlParams.get("workspace"));
+    setCurrCategoryId(urlParams.get("category"));
+  }, [location.search]);
 
-    reissue()
-      .then((res) => {
-        const accessToken = res.data?.response?.accessToken.split(" ")[1];
-        const refreshToken = res.data?.response?.refreshToken;
-
-        dispatch(
-          setToken({
-            accessToken: accessToken,
-            refreshToken: refreshToken,
-          })
-        );
-        console.log("토큰이 재발급되었습니다.", accessToken);
-      })
-      .catch((err) => console.log(err));
+  console.log("main page");
+  if (!getRefreshToken()) {
+    removeTokens();
+    navigate("/signin");
   }
 
   return (
     <div>
-      <BookmarkGridTemplate />
+      <Suspense fallback={<Loader />}>
+        {currCategoryId ? (
+          <BookmarkGridTemplate
+            currWorkspaceId={currWorkspaceId}
+            currCategoryId={currCategoryId}
+          />
+        ) : (
+          <RecentBookmarkGridTemplate />
+        )}
+      </Suspense>
     </div>
   );
 };

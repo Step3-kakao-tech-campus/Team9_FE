@@ -1,36 +1,58 @@
 import { getCategoryList } from "../../apis/category";
-import { useEffect, useRef, useState, startTransition } from "react";
+import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
-import { useSelector } from "react-redux";
-
+import { getAccessToken } from "../../store";
+import { useNavigate } from "react-router-dom";
 import BookmarkGrid from "../organisms/BookmarkGrid";
+import Breadcrumbs from "../atoms/Breadcrumbs";
+import { useWorkspaceName } from "../../hooks/useWorkspaceName";
+import { useCategoryName } from "../../hooks/useCategoryName";
 
-const BookmarkGridTemplate = () => {
-  const currCategoryId = useSelector((state) => {
-    return state.bookmark.currCategoryId;
-  });
-  const currCategoryName = useSelector((state) => {
-    return state.bookmark.currCategoryName;
-  });
-  const [categoryId, setCategoryId] = useState(currCategoryId);
+const BookmarkGridTemplate = ({ currWorkspaceId, currCategoryId }) => {
+  const navigate = useNavigate();
+  const accessToken = getAccessToken();
+  const getWorkspaceName = useWorkspaceName();
+  const getCategoryName = useCategoryName();
+
+  const { data, fetchNextPage, hasNextPage, isFetching, refetch } =
+    useInfiniteQuery(
+      ["bookmarkList", currCategoryId],
+      ({ pageParam = 0 }) =>
+        getCategoryList({ categoryId: currCategoryId, page: pageParam }),
+      {
+        getNextPageParam: (lastPage) => {
+          if (!lastPage) return undefined;
+          // console.log("lastPage", lastPage);
+          const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
+          const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
+          return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
+        },
+        onSuccess: (res) => {
+          const status = res.pages[0]?.status;
+
+          if (status === 404) {
+            navigate("/notfound");
+          } else if (status === 403) {
+            navigate("/forbidden");
+          } else if (status === 401) {
+            navigate("/");
+          }
+        },
+      }
+    );
+
+  const refetchData = async () => {
+    await refetch();
+  };
+
   useEffect(() => {
-    setCategoryId(currCategoryId);
-  }, [currCategoryId]);
-
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery(
-    ["bookmarkList", categoryId],
-    ({ pageParam = 0 }) =>
-      getCategoryList({ categoryId: currCategoryId, page: pageParam }),
-    {
-      getNextPageParam: (lastPage) => {
-        if (!lastPage) return undefined;
-        console.log("lastPage", lastPage);
-        const currentPage = lastPage.data?.response?.pageInfo?.currentPage;
-        const totalPages = lastPage.data?.response?.pageInfo?.totalPages;
-        return currentPage < totalPages - 1 ? currentPage + 1 : undefined;
-      },
+    if (!accessToken) {
     }
-  );
+  }, [accessToken]);
+  useEffect(() => {
+    console.log("workspace", currWorkspaceId, "category", currCategoryId);
+    refetch();
+  }, [currCategoryId]);
 
   const bottomObserver = useRef();
   const options = {
@@ -68,13 +90,22 @@ const BookmarkGridTemplate = () => {
   });
 
   return (
-    <div>
-      <h1 className="text-[40px] text-center">{`현재 카테고리: ${currCategoryName} (ID: ${currCategoryId})`}</h1>
-      {bookmarkList.length !== 0 && (
-        <BookmarkGrid bookmarkList={bookmarkList} />
-      )}
-      <div ref={bottomObserver} style={{ height: "20px" }}>
-        {isFetching && "Loading more..."}
+    <div className="w-full mx-auto flex justify-center">
+      <div className="w-auto mx-auto px-10">
+        {currCategoryId && (
+          <Breadcrumbs
+            workspaceName={getWorkspaceName(currWorkspaceId)}
+            categoryName={getCategoryName(currCategoryId)}
+          />
+        )}
+        <BookmarkGrid
+          bookmarkList={bookmarkList}
+          categoryId={currCategoryId}
+          handleRefetch={refetchData}
+        />
+        <div ref={bottomObserver} style={{ height: "20px" }}>
+          {isFetching && "Loading more..."}
+        </div>
       </div>
     </div>
   );
