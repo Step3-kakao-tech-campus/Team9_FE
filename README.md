@@ -66,9 +66,86 @@
 
 <br>
 
-## 배포 링크
+## 배포 링크 (현재 이용 불가)
 
 - https://kc709aacd7d14a.user-app.krampoline.com
+
+1. **공유**
+
+우클릭 워크스페이스 공유
+
+생성된 공유 링크를 복사 버튼으로 복사
+
+주소창에 복사한 워크스페이스 공유 링크 입력
+카테고리로 이동
+![공유 워크스페이스 링크](https://github.com/user-attachments/assets/7171d7e4-c433-4ad6-867b-a9b4d0326521)
+
+
+우클릭 카테고리 공유
+
+생성된 공유 링크를 복사 버튼으로 복사
+
+주소창에 복사한 카테고리 공유 링크 입력
+
+카테고리로 이동
+![공유 카테고리 링크](https://github.com/user-attachments/assets/bb081f76-2b32-49e6-b5c0-e5a5e75a7ac6)
+
+
+2. **드래그**
+
+북마크 카드를 드래그하여 임시보관함에 넣기
+
+임시보관함에서 그리드로 드래그
+
+임시보관함 카드 제거
+![드래그](https://github.com/user-attachments/assets/def0f679-8e93-49f8-a76e-0d5a12f3d90f)
+
+
+3. **연동 표시**
+
+카카오 연동
+
+파일 선택 버튼으로 파일 선택
+
+드래그앤드롭으로 파일 선택
+
+다음 버튼 클릭
+
+일부 링크 선택
+
+썸네일에 마우스 올려 확대되는 기능 확인
+
+워크스페이스, 카테고리 선택
+
+추가 버튼
+![카카오 연동](https://github.com/user-attachments/assets/1e7db771-8bf4-497e-980a-a2a76532c36d)
+
+
+구글 Docs 연동
+![구글 연동](https://github.com/user-attachments/assets/37b3ae94-72f7-44d5-91b4-61ff37c27a11)
+
+
+Notion 연동
+![노션 연동](https://github.com/user-attachments/assets/f22838e3-83b1-4a73-9e72-42fcfdfcbfec)
+
+
+4. **우클릭 컨텍스트 메뉴**
+![워크스페이스 우클릭](https://github.com/user-attachments/assets/9358b41a-3dd2-437c-90a5-9dfa6231cae0)
+![카테고리 우클릭](https://github.com/user-attachments/assets/1fbc7051-d25f-45ff-a91e-6b1740cec998)
+![북마크 우클릭](https://github.com/user-attachments/assets/9970ff28-f31f-4513-8d49-b1be18040ec7)
+
+
+5. **모달창**
+![모달창](https://github.com/user-attachments/assets/9bd5b6ec-6bef-4ea1-aab6-2c5412249e83)
+
+
+6. **북마크 구조화**
+![북마크 구조](https://github.com/user-attachments/assets/9d018adf-6a81-474a-8a2e-eacd9ce549b2)
+
+
+7. **검색 시스템**
+![검색](https://github.com/user-attachments/assets/c0e87cdd-55e0-49f4-a6dd-7612dcb5d894)
+
 
 <br>
 
